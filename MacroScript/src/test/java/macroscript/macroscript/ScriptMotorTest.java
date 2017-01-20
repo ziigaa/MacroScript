@@ -43,8 +43,8 @@ public class ScriptMotorTest {
     @Test
     public void testSplitIntoLines() {
         System.out.println("splitIntoLines");
-        String splittable = "";
-        ScriptMotor instance = null;
+        String splittable = "omg\nlines!";
+        ScriptMotor instance = new ScriptMotor("this\nis\nmy\nscript");
         instance.splitIntoLines(splittable);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
@@ -56,7 +56,7 @@ public class ScriptMotorTest {
     @Test
     public void testRunScript() {
         System.out.println("runScript");
-        ScriptMotor instance = null;
+        ScriptMotor instance = new ScriptMotor("this\nis\nmy\nscript");
         instance.runScript();
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
@@ -68,8 +68,8 @@ public class ScriptMotorTest {
     @Test
     public void testExecuteCommand() {
         System.out.println("executeCommand");
-        String commandLine = "";
-        ScriptMotor instance = null;
+        String commandLine = "if asd";
+        ScriptMotor instance = new ScriptMotor("this\nis\nmy\nscript");
         instance.executeCommand(commandLine);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");

@@ -59,7 +59,7 @@ public class frmMainTest {
     public void testGetColorUnderCursor() throws Exception {
         System.out.println("getColorUnderCursor");
         frmMain instance = new frmMain();
-        Color expResult = null;
+        Color expResult = new Color(0,0,0);
         Color result = instance.getColorUnderCursor();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -73,7 +73,7 @@ public class frmMainTest {
     public void testGetColorHexUnderCursor() throws Exception {
         System.out.println("getColorHexUnderCursor");
         frmMain instance = new frmMain();
-        String expResult = "";
+        String expResult = "#000000";
         String result = instance.getColorHexUnderCursor();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
