@@ -5,6 +5,7 @@
  */
 package macroscript.macroscript;
 
+import macroscript.macroscript.MacroScript;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,22 +18,22 @@ import static org.junit.Assert.*;
  * @author Joonas <>
  */
 public class MacroScriptTest {
-    
+
     public MacroScriptTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -41,9 +42,21 @@ public class MacroScriptTest {
     public void testSomeMethod() {
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
-        if (1==1) {
-            
+        if (1 == 1) {
+
         }
     }
-    
+
+    /**
+     * Test of main method, of class MacroScript.
+     */
+    @Test
+    public void testMain() {
+        System.out.println("main");
+//        String[] args = null;
+//        MacroScript.main(args);
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }
+
 }
