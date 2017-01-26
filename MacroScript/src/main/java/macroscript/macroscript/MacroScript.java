@@ -53,7 +53,6 @@ public class MacroScript {
         },
                 0, // run first occurrence immediately
                 100);  // run every 100ms
-        System.out.println("goes here");
     }
 
 }

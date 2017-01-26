@@ -29,12 +29,13 @@ public class frmMain extends javax.swing.JFrame {
     /**
      * Creates new form frmMain
      */
+    private boolean colorPickerActive = false;
+    private ScriptMotor motor;
+
     public frmMain() {
         initComponents();
         this.colorPickerActive = false;
     }
-
-    public boolean colorPickerActive = false;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -161,6 +162,11 @@ public class frmMain extends javax.swing.JFrame {
         mnuScript.add(mnuRunToMemory);
 
         mnuRun.setText("Run Script");
+        mnuRun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuRunActionPerformed(evt);
+            }
+        });
         mnuScript.add(mnuRun);
 
         mnuMenuBar.add(mnuScript);
@@ -296,6 +302,15 @@ public class frmMain extends javax.swing.JFrame {
         this.colorPickerActive = true;
         lblColor.setOpaque(true);
     }//GEN-LAST:event_lblPickColorMouseClicked
+
+    private void mnuRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRunActionPerformed
+        try {
+            // TODO add your handling code here:
+            this.motor = new ScriptMotor(this.txtScript.getText());
+        } catch (AWTException ex) {
+            Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_mnuRunActionPerformed
 
     private String toHexString(final int input) {
         String out = Integer.toHexString(input);

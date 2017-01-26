@@ -5,6 +5,7 @@
  */
 package macroscript.macroscript;
 
+import java.awt.AWTException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -41,7 +42,7 @@ public class ScriptMotorTest {
      * Test of splitIntoLines method, of class ScriptMotor.
      */
     @Test
-    public void testSplitIntoLines() {
+    public void testSplitIntoLines() throws AWTException {
         System.out.println("splitIntoLines");
         String splittable = "omg\nlines!";
         ScriptMotor instance = new ScriptMotor("this\nis\nmy\nscript");
@@ -54,7 +55,7 @@ public class ScriptMotorTest {
      * Test of runScript method, of class ScriptMotor.
      */
     @Test
-    public void testRunScript() {
+    public void testRunScript() throws AWTException {
         System.out.println("runScript");
         ScriptMotor instance = new ScriptMotor("this\nis\nmy\nscript");
         instance.runScript();
@@ -66,7 +67,7 @@ public class ScriptMotorTest {
      * Test of executeCommand method, of class ScriptMotor.
      */
     @Test
-    public void testExecuteCommand() {
+    public void testExecuteCommand() throws AWTException {
         System.out.println("executeCommand");
         String commandLine = "if asd";
         ScriptMotor instance = new ScriptMotor("this\nis\nmy\nscript");
