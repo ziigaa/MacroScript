@@ -7,6 +7,7 @@ package macroscript.macroscript;
 
 import java.awt.AWTException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,24 +17,29 @@ import java.util.logging.Logger;
  */
 public class ScriptMotor {
 
-    private String currentCommand;
+    //private String currentCommand;
     private String theScript;
     private String lines[];
     private String command[];
     private int currentLine;
     private int lineCount;
-    private ArrayList scriptVariables;
-    private ArrayList scriptVariableValues;
+    private ArrayList<String> scriptVariables;
+    private ArrayList<Integer> scriptVariableValues;
+    private HashMap<String, Integer> theGoTos;
     //private ArrayList scriptVariableType;
     //private boolean stopPressed;
-    private MouseOperator mouseOperation;
-    private KeyboardOperator keyboardOperation;
+    private final MouseOperator mouseOperation;
+    private final KeyboardOperator keyboardOperation;
 
     public ScriptMotor(String inputScript) throws AWTException {
         this.theScript = inputScript;
-        this.currentCommand = "";
+        //this.currentCommand = "";
         this.currentLine = 0;
         this.lineCount = 0;
+        this.theGoTos.clear();
+        this.scriptVariables = new ArrayList<String>();
+        this.scriptVariableValues = new ArrayList<Integer>();
+        this.theGoTos = new HashMap<String, Integer>();
         this.mouseOperation = new MouseOperator();
         this.keyboardOperation = new KeyboardOperator();
         runScript();
@@ -44,8 +50,13 @@ public class ScriptMotor {
     }
 
     public void runScript() {
+        
+        this.scriptVariableValues.clear();
+        this.scriptVariables.clear();
+        this.theGoTos.clear();
+        
         splitIntoLines(this.theScript);
-
+        
         this.lineCount = 0;
         for (int i = 0; i < this.lines.length; i++) {
             if (this.lines[i] != null) {
@@ -66,6 +77,7 @@ public class ScriptMotor {
         char firstChar = inExecution.charAt(0);
 
         if (firstChar == '@') {
+            this.theGoTos.put(inExecution.substring(1, inExecution.length()), this.currentLine);
             return;
         }
 
@@ -73,6 +85,7 @@ public class ScriptMotor {
             case "if":
                 break;
             case "goto":
+                this.currentLine = this.theGoTos.get(this.command[1]);
                 break;
             case "sleep": {
                 try {
@@ -88,8 +101,9 @@ public class ScriptMotor {
                 if (scriptVariables.contains(this.command[1])) {
                     //Anna errööör
                 } else {
-                    scriptVariables.add(this.command[1]);
-                    scriptVariableValues.add("");
+                    String splByEq[] = this.command[1].split("=");
+                    scriptVariables.add(splByEq[0]);
+                    scriptVariableValues.add(Integer.parseInt(splByEq[1]));
                 }
                 break;
             case "mouseLeftDown":

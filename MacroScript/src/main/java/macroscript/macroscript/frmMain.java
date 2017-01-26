@@ -242,6 +242,10 @@ public class frmMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mnuNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuNewActionPerformed
+        askForSave();
+    }//GEN-LAST:event_mnuNewActionPerformed
+
+    private void askForSave() {
         int dialogButton = JOptionPane.YES_NO_OPTION;
         int dialogResult = JOptionPane.showConfirmDialog(null, "Would you like to save your current script first?", "Save first?", dialogButton);
         if (dialogResult == JOptionPane.YES_OPTION) {
@@ -249,9 +253,9 @@ public class frmMain extends javax.swing.JFrame {
         } else if (dialogResult == JOptionPane.NO_OPTION) {
             txtScript.setText("");
         }
-    }//GEN-LAST:event_mnuNewActionPerformed
-
+    }
     private void mnuExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuExitActionPerformed
+        askForSave();
         System.exit(0);
     }//GEN-LAST:event_mnuExitActionPerformed
 
