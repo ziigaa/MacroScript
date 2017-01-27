@@ -1,2 +1,1 @@
-# MacroScript
-# asd
+Skriptattava ohjelma, joka liikuttelee hirtä ja painelee nappeja käyttäjän antamilla spekseillä
