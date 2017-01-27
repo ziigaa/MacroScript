@@ -21,6 +21,8 @@ public class KeyboardOperator {
 
     private Robot bot;
     private boolean isHuman = false;
+    private boolean keyFunctionDown = false;
+    private boolean keyFunctionUp = false;
     //private boolean errorMade = false;
 
     //KeyboardOperator.type("yo noob");
@@ -42,11 +44,13 @@ public class KeyboardOperator {
 //        this.isHuman = false;
 //    }
     public void keyDown(char theKey) {
-        bot.keyPress(theKey);
+        this.keyFunctionDown = true;
+         getChar(theKey);
     }
 
     public void keyUp(char theKey) {
-        bot.keyRelease(theKey);
+        keyFunctionUp = true;
+        getChar(theKey);
     }
 
     public void type(CharSequence characters, boolean isHuman) {
@@ -372,10 +376,16 @@ public class KeyboardOperator {
     }
 
     private void prepareToType(int... keyCodes) {
-        if (this.isHuman == false) {
+        if (this.isHuman == false && this.keyFunctionDown == false) {
             doType(keyCodes, 0, keyCodes.length);
-        } else {
+        } else if (this.keyFunctionDown == false && this.isHuman==true){
             doHumanType(keyCodes, 0, keyCodes.length);
+        } else if (this.isHuman == false && this.keyFunctionDown == true) {
+            bot.keyPress(keyCodes[0]);
+            this.keyFunctionDown = false;
+        } else if (this.isHuman == false && this.keyFunctionUp == true) {
+            bot.keyRelease(keyCodes[0]);
+            this.keyFunctionDown = false;
         }
     }
 

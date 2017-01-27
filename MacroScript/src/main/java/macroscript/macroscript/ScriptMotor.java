@@ -37,9 +37,9 @@ public class ScriptMotor {
         this.currentLine = 0;
         this.lineCount = 0;
         this.theGoTos.clear();
-        this.scriptVariables = new ArrayList<String>();
-        this.scriptVariableValues = new ArrayList<Integer>();
-        this.theGoTos = new HashMap<String, Integer>();
+        this.scriptVariables = new ArrayList<>();
+        this.scriptVariableValues = new ArrayList<>();
+        this.theGoTos = new HashMap<>();
         this.mouseOperation = new MouseOperator();
         this.keyboardOperation = new KeyboardOperator();
         runScript();
@@ -158,6 +158,7 @@ public class ScriptMotor {
                     String splittedByEqual[];
                     splittedByEqual = commandLine.split("=");
                     if (this.scriptVariables.contains(splittedByEqual[0])) {
+                        //laskutoimitusten varalta laita if splittedByEqual[1] ei ole int jne...
                         int varIndex = scriptVariables.indexOf(splittedByEqual[0]);
                         scriptVariables.set(varIndex, splittedByEqual[1]);
                     } else {
