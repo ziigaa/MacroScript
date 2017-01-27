@@ -1,4 +1,4 @@
-Tuntiraportti
+﻿Tuntiraportti
 --------0h---------
 -GUI
 -Save
@@ -21,3 +21,12 @@ Tuntiraportti
 -Kansiorakenteen ja valmiiden tiedostojen luominen reposirotioon
 
 --------18h---------
+
+-Luokka MouseOperator (funktioilla leftDown, leftUp, leftClick, leftHumanClick, rightDown, rightUp, rightClick, rightHumanClick, setMousePosition, moveMouseSmooth(aloitettu, hakee nyt ainoastaan kursorin sijainnin)).
+-Luokka KeyboardOperator (ilman ääkkösiä, tosin tutkimusta on tehty) (funktioilla keyDown, keyUp, type, getChar, prepareToType, doType, doHumanType)
+-Luokka ScriptMotor (funktioilla splitIntoLines, runScript, executeCommand)
+--executeCommand metodin toiminnallisuudet tähän mennessä: goto, sleep, int, mouseLeftDown, mouseLeftUp, mouseRightDown, mouseRightUp, setMousePos, mouseLeftClick, mouseRightClick, mouseHumanLeftClick, mouseHumanRightClick, keyDown, keyUp, type, typeHuman)
+---sisältää tällä hetkellä myös testikomennon mm, joka ei tee mitään.
+---sisältää myös int-tyyppisen muuttujan arvon asettamisen.
+
+--------30h---------
