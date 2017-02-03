@@ -128,7 +128,7 @@ public class ScriptMotor {
                 mouseOperation.moveMouseSmooth(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]));
                 break;
             case "moveMouseHuman":
-                mouseOperation.moveMouseHuman(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]));
+                //mouseOperation.moveMouseHuman(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]));
                 break;
             case "mouseLeftClick":
                 mouseOperation.leftClick();
