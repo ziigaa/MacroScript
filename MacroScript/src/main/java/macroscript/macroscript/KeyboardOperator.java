@@ -45,7 +45,7 @@ public class KeyboardOperator {
 //    }
     public void keyDown(char theKey) {
         this.keyFunctionDown = true;
-         getChar(theKey);
+        getChar(theKey);
     }
 
     public void keyUp(char theKey) {
@@ -378,7 +378,7 @@ public class KeyboardOperator {
     private void prepareToType(int... keyCodes) {
         if (this.isHuman == false && this.keyFunctionDown == false) {
             doType(keyCodes, 0, keyCodes.length);
-        } else if (this.keyFunctionDown == false && this.isHuman==true){
+        } else if (this.keyFunctionDown == false && this.isHuman == true) {
             doHumanType(keyCodes, 0, keyCodes.length);
         } else if (this.isHuman == false && this.keyFunctionDown == true) {
             bot.keyPress(keyCodes[0]);
@@ -428,6 +428,5 @@ public class KeyboardOperator {
         bot.keyRelease(keyCodes[offset]);
 
     }
-
 
 }

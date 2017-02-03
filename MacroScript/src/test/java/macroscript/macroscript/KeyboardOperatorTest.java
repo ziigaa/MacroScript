@@ -53,6 +53,7 @@ public class KeyboardOperatorTest {
 
     /**
      * Test of keyUp method, of class KeyboardOperator.
+     * @throws java.awt.AWTException
      */
     @Test
     public void testKeyUp() throws AWTException {
@@ -70,7 +71,7 @@ public class KeyboardOperatorTest {
     @Test
     public void testType() throws AWTException {
         System.out.println("type");
-        CharSequence characters = null;
+        CharSequence characters = "a";
         boolean isHuman = false;
         KeyboardOperator instance = new KeyboardOperator();
         instance.type(characters, isHuman);

@@ -36,6 +36,7 @@ public class ScriptMotor {
         //this.currentCommand = "";
         this.currentLine = 0;
         this.lineCount = 0;
+        this.theGoTos = new HashMap<>();
         this.theGoTos.clear();
         this.scriptVariables = new ArrayList<>();
         this.scriptVariableValues = new ArrayList<>();
@@ -50,13 +51,13 @@ public class ScriptMotor {
     }
 
     public void runScript() {
-        
+
         this.scriptVariableValues.clear();
         this.scriptVariables.clear();
         this.theGoTos.clear();
-        
+
         splitIntoLines(this.theScript);
-        
+
         this.lineCount = 0;
         for (int i = 0; i < this.lines.length; i++) {
             if (this.lines[i] != null) {
@@ -124,8 +125,10 @@ public class ScriptMotor {
                 mouseOperation.setMousePosition(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]));
                 break;
             case "moveMouseSmooth":
+                mouseOperation.moveMouseSmooth(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]));
                 break;
             case "moveMouseHuman":
+                mouseOperation.moveMouseHuman(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]));
                 break;
             case "mouseLeftClick":
                 mouseOperation.leftClick();

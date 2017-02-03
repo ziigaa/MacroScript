@@ -69,7 +69,7 @@ public class ScriptMotorTest {
     @Test
     public void testExecuteCommand() throws AWTException {
         System.out.println("executeCommand");
-        String commandLine = "if asd";
+        String commandLine = "int i=1";
         ScriptMotor instance = new ScriptMotor("this\nis\nmy\nscript");
         instance.executeCommand(commandLine);
         // TODO review the generated test code and remove the default call to fail.
