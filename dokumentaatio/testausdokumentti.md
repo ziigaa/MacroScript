@@ -4,13 +4,17 @@ Scanning for projects...
 Building MacroScript 1.0
 ------------------------------------------------------------------------
 
+--- maven-clean-plugin:2.4.1:clean (default-clean) @ MacroScript ---
+Deleting C:\Users\ZiiGaa\MacroScript\MacroScript\target
+
 --- maven-resources-plugin:2.5:resources (default-resources) @ MacroScript ---
 [debug] execute contextualize
 Using 'UTF-8' encoding to copy filtered resources.
 Copying 1 resource
 
 --- maven-compiler-plugin:3.3:compile (default-compile) @ MacroScript ---
-Nothing to compile - all classes are up to date
+Changes detected - recompiling the module!
+Compiling 5 source files to C:\Users\ZiiGaa\MacroScript\MacroScript\target\classes
 
 --- maven-resources-plugin:2.5:testResources (default-testResources) @ MacroScript ---
 [debug] execute contextualize
@@ -18,7 +22,8 @@ Using 'UTF-8' encoding to copy filtered resources.
 skip non existing resourceDirectory C:\Users\ZiiGaa\MacroScript\MacroScript\src\test\resources
 
 --- maven-compiler-plugin:3.3:testCompile (default-testCompile) @ MacroScript ---
-Nothing to compile - all classes are up to date
+Changes detected - recompiling the module!
+Compiling 5 source files to C:\Users\ZiiGaa\MacroScript\MacroScript\target\test-classes
 
 --- maven-surefire-plugin:2.10:test (default-test) @ MacroScript ---
 Surefire report directory: C:\Users\ZiiGaa\MacroScript\MacroScript\target\surefire-reports
@@ -31,30 +36,36 @@ getColorHexUnderCursor
 loadFile
 main
 getColorUnderCursor
-Exception in thread "AWT-EventQueue-0" java.lang.ClassCastException: javax.swing.plaf.nimbus.DerivedColor$UIResource cannot be cast to java.awt.Font
-	at javax.swing.plaf.nimbus.NimbusStyle.getFontForState(NimbusStyle.java:573)
-	at javax.swing.plaf.synth.SynthStyle.installDefaults(SynthStyle.java:933)
-	at javax.swing.plaf.nimbus.NimbusStyle.installDefaults(NimbusStyle.java:231)
-	at javax.swing.plaf.synth.SynthStyle.installDefaults(SynthStyle.java:916)
-	at javax.swing.plaf.synth.SynthLookAndFeel.updateStyle(SynthLookAndFeel.java:265)
-	at javax.swing.plaf.synth.SynthPanelUI.updateStyle(SynthPanelUI.java:117)
-	at javax.swing.plaf.synth.SynthPanelUI.installDefaults(SynthPanelUI.java:100)
-	at javax.swing.plaf.basic.BasicPanelUI.installUI(BasicPanelUI.java:56)
-	at javax.swing.plaf.synth.SynthPanelUI.installUI(SynthPanelUI.java:62)
+Exception in thread "AWT-EventQueue-0" java.lang.ClassCastException: javax.swing.plaf.FontUIResource cannot be cast to java.lang.Boolean
+	at javax.swing.AbstractButton.setUIProperty(AbstractButton.java:2249)
+	at javax.swing.LookAndFeel.installProperty(LookAndFeel.java:280)
+	at javax.swing.plaf.synth.SynthButtonUI.updateStyle(SynthButtonUI.java:99)
+	at javax.swing.plaf.synth.SynthButtonUI.installDefaults(SynthButtonUI.java:62)
+	at javax.swing.plaf.synth.SynthArrowButton$SynthArrowButtonUI.installDefaults(SynthArrowButton.java:68)
+	at javax.swing.plaf.basic.BasicButtonUI.installUI(BasicButtonUI.java:88)
 	at javax.swing.JComponent.setUI(JComponent.java:663)
-	at javax.swing.JPanel.setUI(JPanel.java:153)
-	at javax.swing.JPanel.updateUI(JPanel.java:126)
-	at javax.swing.JPanel.<init>(JPanel.java:86)
-	at javax.swing.JPanel.<init>(JPanel.java:109)
-	at javax.swing.JPanel.<init>(JPanel.java:117)
-	at javax.swing.JRootPane.createContentPane(JRootPane.java:521)
-	at javax.swing.JRootPane.<init>(JRootPane.java:368)
-	at javax.swing.JFrame.createRootPane(JFrame.java:278)
-	at javax.swing.JFrame.frameInit(JFrame.java:259)
-	at javax.swing.JFrame.<init>(JFrame.java:182)
-	at macroscript.macroscript.frmMain.initComponents(frmMain.java:48)
-	at macroscript.macroscript.frmMain.<init>(frmMain.java:33)
-	at macroscript.macroscript.frmMain$7.run(frmMain.java:419)
+	at javax.swing.AbstractButton.setUI(AbstractButton.java:1810)
+	at javax.swing.plaf.synth.SynthArrowButton.updateUI(SynthArrowButton.java:51)
+	at javax.swing.AbstractButton.init(AbstractButton.java:2176)
+	at javax.swing.JButton.<init>(JButton.java:137)
+	at javax.swing.JButton.<init>(JButton.java:91)
+	at javax.swing.plaf.synth.SynthArrowButton.<init>(SynthArrowButton.java:40)
+	at javax.swing.plaf.synth.SynthScrollBarUI$1.<init>(SynthScrollBarUI.java:376)
+	at javax.swing.plaf.synth.SynthScrollBarUI.createDecreaseButton(SynthScrollBarUI.java:376)
+	at javax.swing.plaf.basic.BasicScrollBarUI.installComponents(BasicScrollBarUI.java:252)
+	at javax.swing.plaf.basic.BasicScrollBarUI.installUI(BasicScrollBarUI.java:173)
+	at javax.swing.JComponent.setUI(JComponent.java:663)
+	at javax.swing.JScrollBar.setUI(JScrollBar.java:207)
+	at javax.swing.JScrollBar.updateUI(JScrollBar.java:227)
+	at javax.swing.JScrollBar.<init>(JScrollBar.java:161)
+	at javax.swing.JScrollBar.<init>(JScrollBar.java:176)
+	at javax.swing.JScrollPane$ScrollBar.<init>(JScrollPane.java:718)
+	at javax.swing.JScrollPane.createHorizontalScrollBar(JScrollPane.java:814)
+	at javax.swing.JScrollPane.<init>(JScrollPane.java:300)
+	at javax.swing.JScrollPane.<init>(JScrollPane.java:351)
+	at macroscript.macroscript.frmMain.initComponents(frmMain.java:50)
+	at macroscript.macroscript.frmMain.<init>(frmMain.java:36)
+	at macroscript.macroscript.frmMain$8.run(frmMain.java:438)
 	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
 	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:744)
 	at java.awt.EventQueue.access$400(EventQueue.java:97)
@@ -72,10 +83,28 @@ Exception in thread "AWT-EventQueue-0" java.lang.ClassCastException: javax.swing
 getColorPickerActive
 setColors
 saveAs
-Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.246 sec
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.84 sec
+Running macroscript.macroscript.KeyboardOperatorTest
+keyDown
+keyUp
+type
+getChar
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec
 Running macroscript.macroscript.MacroScriptTest
 main
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec
+Running macroscript.macroscript.MouseOperatorTest
+rightClick
+leftClick
+leftDown
+rightHumanClick
+moveMouseSmooth
+rightDown
+leftHumanClick
+rightUp
+leftUp
+setMousePosition
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.163 sec
 Running macroscript.macroscript.ScriptMotorTest
 executeCommand
 runScript
@@ -84,12 +113,19 @@ Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec
 
 Results :
 
-Tests run: 12, Failures: 0, Errors: 0, Skipped: 0
+Tests run: 26, Failures: 0, Errors: 0, Skipped: 0
 
+
+--- maven-jar-plugin:2.3.2:jar (default-jar) @ MacroScript ---
+Building jar: C:\Users\ZiiGaa\MacroScript\MacroScript\target\MacroScript-1.0.jar
+
+--- maven-install-plugin:2.3.1:install (default-install) @ MacroScript ---
+Installing C:\Users\ZiiGaa\MacroScript\MacroScript\target\MacroScript-1.0.jar to C:\Users\ZiiGaa\.m2\repository\macroscript\macroscript\MacroScript\1.0\MacroScript-1.0.jar
+Installing C:\Users\ZiiGaa\MacroScript\MacroScript\pom.xml to C:\Users\ZiiGaa\.m2\repository\macroscript\macroscript\MacroScript\1.0\MacroScript-1.0.pom
 ------------------------------------------------------------------------
 BUILD SUCCESS
 ------------------------------------------------------------------------
-Total time: 5.604s
-Finished at: Fri Jan 20 22:31:00 EET 2017
-Final Memory: 9M/155M
+Total time: 23.874s
+Finished at: Sat Feb 04 00:03:54 EET 2017
+Final Memory: 14M/107M
 ------------------------------------------------------------------------
