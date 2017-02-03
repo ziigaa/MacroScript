@@ -61,6 +61,7 @@ Skriptin toiminnallisuudet tähän mennessä:
   Esim. type asdasd
  -typeHuman (kirjoittaa tekstin imitoiden ihmistä, paitsi ettei paina vääriä nappeja)
   Esim. typeHuman asdasd
-
+ -moveMouseSmooth (liikuttaa hiiren kursorin suorinta reittiä pikseli kerrallaan annettuihin koordinaatteihin)
+  Esim. moveMouseSmooth 1 1
 sisältää tällä hetkellä myös testikomennon mm, joka ei tee mitään.
 Virheiden käsittely on olematonta, joten jos ei kaikki mene täysin oikein, tapahtuu outoja asioita.
