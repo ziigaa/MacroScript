@@ -30,3 +30,8 @@
 ---sisältää myös int-tyyppisen muuttujan arvon asettamisen.
 
 --------30h---------
+
+-moveMouseSmooth MouseOperatoriin
+-moveMouseHuman (kesken.........) MouseOperatoriin
+
+-------35h----------
