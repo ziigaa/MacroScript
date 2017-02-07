@@ -40,6 +40,7 @@ public class MouseOperatorTest {
 
     /**
      * Test of leftDown method, of class MouseOperator.
+     * @throws java.awt.AWTException
      */
     @Test
     public void testLeftDown() throws AWTException {
@@ -52,6 +53,7 @@ public class MouseOperatorTest {
 
     /**
      * Test of leftUp method, of class MouseOperator.
+     * @throws java.awt.AWTException
      */
     @Test
     public void testLeftUp() throws AWTException {
@@ -64,6 +66,7 @@ public class MouseOperatorTest {
 
     /**
      * Test of leftClick method, of class MouseOperator.
+     * @throws java.awt.AWTException
      */
     @Test
     public void testLeftClick() throws AWTException {
@@ -76,6 +79,7 @@ public class MouseOperatorTest {
 
     /**
      * Test of rightDown method, of class MouseOperator.
+     * @throws java.awt.AWTException
      */
     @Test
     public void testRightDown() throws AWTException {
@@ -88,6 +92,7 @@ public class MouseOperatorTest {
 
     /**
      * Test of rightUp method, of class MouseOperator.
+     * @throws java.awt.AWTException
      */
     @Test
     public void testRightUp() throws AWTException {
@@ -100,6 +105,7 @@ public class MouseOperatorTest {
 
     /**
      * Test of leftHumanClick method, of class MouseOperator.
+     * @throws java.awt.AWTException
      */
     @Test
     public void testLeftHumanClick() throws AWTException {
@@ -112,6 +118,7 @@ public class MouseOperatorTest {
 
     /**
      * Test of rightClick method, of class MouseOperator.
+     * @throws java.awt.AWTException
      */
     @Test
     public void testRightClick() throws AWTException {
@@ -124,6 +131,7 @@ public class MouseOperatorTest {
 
     /**
      * Test of rightHumanClick method, of class MouseOperator.
+     * @throws java.awt.AWTException
      */
     @Test
     public void testRightHumanClick() throws AWTException {
@@ -136,6 +144,7 @@ public class MouseOperatorTest {
 
     /**
      * Test of setMousePosition method, of class MouseOperator.
+     * @throws java.awt.AWTException
      */
     @Test
     public void testSetMousePosition() throws AWTException {
@@ -150,6 +159,7 @@ public class MouseOperatorTest {
 
     /**
      * Test of moveMouseSmooth method, of class MouseOperator.
+     * @throws java.awt.AWTException
      */
     @Test
     public void testMoveMouseSmooth() throws AWTException {
@@ -157,9 +167,26 @@ public class MouseOperatorTest {
         int x = 0;
         int y = 0;
         MouseOperator instance = new MouseOperator();
-        instance.moveMouseSmooth(x, y);
+        instance.moveMouseSmooth(x, y, 1);
         // TODO review the generated test code and remove the default call to fail.
         ////fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of moveMouseHuman method, of class MouseOperator.
+     * @throws java.awt.AWTException
+     */
+    @Test
+    public void testMoveMouseHuman() throws AWTException {
+        System.out.println("moveMouseHuman");
+        int x = 0;
+        int y = 0;
+        int steps = 0;
+        int arch = 0;
+        MouseOperator instance = new MouseOperator();
+        instance.moveMouseHuman(x, y, steps, arch);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
     
 }

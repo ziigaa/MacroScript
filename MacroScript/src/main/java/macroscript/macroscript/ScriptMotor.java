@@ -46,7 +46,7 @@ public class ScriptMotor {
         this.theGoTos = new HashMap<>();
         this.mouseOperation = new MouseOperator();
         this.keyboardOperation = new KeyboardOperator();
-        this.colorOperation = new ColorOperator(this.colorPalette);
+        this.colorOperation = new ColorOperator();
         runScript();
     }
 
@@ -59,6 +59,7 @@ public class ScriptMotor {
         this.scriptVariableValues.clear();
         this.scriptVariables.clear();
         this.theGoTos.clear();
+        this.colorPalette.clear();
 
         splitIntoLines(this.theScript);
 

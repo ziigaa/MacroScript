@@ -83,13 +83,58 @@ public class KeyboardOperatorTest {
      * Test of getChar method, of class KeyboardOperator.
      */
     @Test
-    public void testGetChar() throws AWTException {
-        System.out.println("getChar");
-        char character = ' ';
+    public void typeChar() throws AWTException {
+        System.out.println("typeChar");
+        char toType = ' ';
         KeyboardOperator instance = new KeyboardOperator();
-        instance.getChar(character);
+        instance.typeChar(toType, false, false, false, false);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of pressEnter method, of class KeyboardOperator.
+     * @throws java.awt.AWTException
+     */
+    @Test
+    public void testPressEnter() throws AWTException {
+        System.out.println("pressEnter");
+        boolean isHuman = false;
+        KeyboardOperator instance = new KeyboardOperator();
+        instance.pressEnter(isHuman);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of typeChar method, of class KeyboardOperator.
+     * @throws java.awt.AWTException
+     */
+    @Test
+    public void testTypeChar() throws AWTException {
+        System.out.println("typeChar");
+        char charToType = ' ';
+        boolean isHuman = false;
+        boolean onlyDown = false;
+        boolean onlyUp = false;
+        boolean shiftNeeded = false;
+        KeyboardOperator instance = new KeyboardOperator();
+        instance.typeChar(charToType, isHuman, onlyDown, onlyUp, shiftNeeded);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of doRndSleep method, of class KeyboardOperator.
+     * @throws java.awt.AWTException
+     */
+    @Test
+    public void testDoRndSleep() throws AWTException {
+        System.out.println("doRndSleep");
+        KeyboardOperator instance = new KeyboardOperator();
+        instance.doRndSleep();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
     
 }
