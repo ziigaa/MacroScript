@@ -25,11 +25,13 @@ public class ScriptMotor {
     private int lineCount;
     private ArrayList<String> scriptVariables;
     private ArrayList<Integer> scriptVariableValues;
+    private ArrayList<String> colorPalette;
     private HashMap<String, Integer> theGoTos;
     //private ArrayList scriptVariableType;
     //private boolean stopPressed;
     private final MouseOperator mouseOperation;
     private final KeyboardOperator keyboardOperation;
+    private ColorOperator colorOperation;
 
     public ScriptMotor(String inputScript) throws AWTException {
         this.theScript = inputScript;
@@ -40,9 +42,11 @@ public class ScriptMotor {
         this.theGoTos.clear();
         this.scriptVariables = new ArrayList<>();
         this.scriptVariableValues = new ArrayList<>();
+        this.colorPalette = new ArrayList<>();
         this.theGoTos = new HashMap<>();
         this.mouseOperation = new MouseOperator();
         this.keyboardOperation = new KeyboardOperator();
+        this.colorOperation = new ColorOperator(this.colorPalette);
         runScript();
     }
 
@@ -83,7 +87,23 @@ public class ScriptMotor {
         }
 
         switch (inExecution) {
-            case "if":
+            case "if"://todo: if findcolor bla bla bla keyup, keydown, type, humantype, keypress, setmousepos, movemousesmooth, movemousehuman
+                try {
+                    String splitByEq[] = this.command[1].split("=");
+                    if (scriptVariables.contains(splitByEq[0])) {
+                        if (scriptVariableValues.get(scriptVariables.indexOf(splitByEq[0])) == Integer.parseInt(splitByEq[1])) {
+                            if ("goto".equals(this.command[2])) {
+                                this.currentLine = this.theGoTos.get(this.command[3]);
+                            } else {
+                                //error, koska ei goto
+                            }
+                        }
+                    } else {
+                        //error, koska muuttujaa ei ole
+                    }
+                } catch (Exception ex) {
+                    //error, if-lausetta yritetään käyttää määrittelemättömässä tarkoituksessa
+                }
                 break;
             case "goto":
                 this.currentLine = this.theGoTos.get(this.command[1]);
@@ -97,10 +117,20 @@ public class ScriptMotor {
             }
             break;
             case "colorPalette":
+                this.colorPalette.clear();
+                for (String tmp : this.command) {
+                    if (!"colorPalette".equals(tmp)) {
+                        if (tmp.length() == 7 && tmp.charAt(0) == '#') {
+                            this.colorPalette.add(tmp);
+                        } else {
+                            //error, koska ei väri tai ei hex muodossa
+                        }
+                    }
+                }
                 break;
             case "int":
-                if (scriptVariables.contains(this.command[1])) {
-                    //Anna errööör
+                if (!scriptVariables.contains(this.command[1])) {
+                    //Anna errööör, koska muuttujaa ei ole
                 } else {
                     String splByEq[] = this.command[1].split("=");
                     scriptVariables.add(splByEq[0]);
@@ -110,7 +140,7 @@ public class ScriptMotor {
             case "mouseLeftDown":
                 mouseOperation.leftDown();
                 break;
-            case "mm":
+//            case "mm":
             //keyboardOperation.typeString("äöå");
             case "mouseLeftUp":
                 mouseOperation.leftUp();
@@ -122,13 +152,16 @@ public class ScriptMotor {
                 mouseOperation.rightUp();
                 break;
             case "setMousePos":
+                //todo: mahdollisuus välittää coords findcolorien avulla
                 mouseOperation.setMousePosition(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]));
                 break;
             case "moveMouseSmooth":
-                mouseOperation.moveMouseSmooth(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]));
+                //todo: mahdollisuus välittää coords findcolorien avulla
+                mouseOperation.moveMouseSmooth(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]), 3);
                 break;
             case "moveMouseHuman":
-                //mouseOperation.moveMouseHuman(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]));
+                //todo: mahdollisuus välittää coords findcolorien avulla
+                mouseOperation.moveMouseHuman(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]), 50, 50);
                 break;
             case "mouseLeftClick":
                 mouseOperation.leftClick();
@@ -154,8 +187,10 @@ public class ScriptMotor {
             case "typeHuman":
                 keyboardOperation.type(commandLine.substring(10), true);
                 break;
-            case "findColorOnScreen":
-                break;
+//            case "findColor":
+//                break;
+//            case "findColorStartingFrom":
+//                break;
             default:
                 try {
                     String splittedByEqual[];

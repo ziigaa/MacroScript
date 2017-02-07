@@ -6,12 +6,16 @@
 package macroscript.macroscript;
 
 import java.awt.AWTException;
+import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.PointerInfo;
 import java.awt.Polygon;
 import java.awt.Robot;
+import java.awt.Toolkit;
 import java.awt.event.InputEvent;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -121,12 +125,12 @@ public class MouseOperator {
         bot.mouseMove(x, y);
     }
 
-    public void moveMouseSmooth(int x, int y) {
+    public void moveMouseSmooth(int x, int y, int delay) {
         PointerInfo pointInfo = MouseInfo.getPointerInfo();
         Point pntNow = pointInfo.getLocation();
         int xNow = (int) pntNow.x;
         int yNow = (int) pntNow.y;
-        
+
         while (xNow != x || yNow != y) {
             if (yNow < y) {
                 yNow++;
@@ -141,13 +145,13 @@ public class MouseOperator {
                 xNow--;
             }
             try {
-                Thread.sleep(3);
+                Thread.sleep(delay);
             } catch (InterruptedException ex) {
                 Logger.getLogger(MouseOperator.class.getName()).log(Level.SEVERE, null, ex);
             }
             setMousePosition(xNow, yNow);
         }
-        
+
     }
 
     private Integer randBetween(int low, int high) {
@@ -155,64 +159,65 @@ public class MouseOperator {
         return r.nextInt(high - low) + low;
     }
 
-    public void moveMouseHuman(int x, int y, int range, int segs, int pointCount, int delay) {
-        double u, newCoord1, newCoord2, newCoord3, newCoord4;
-        Point[] firstPoints = new Point[pointCount + 2], finalPoints = new Point[0];
-        Point tmp = new Point(0, 0);
-        
-        int screenMinX = 0;
-        int screenMinY = 0;
-        
-        if (segs < 15) {
-            segs = 50;
+    public void moveMouseHuman(int x, int y, int steps, int arch) {
+        int targetX, targetY, tmpX, tmpY, negateX, negateY, delay;
+        double rnd1, rnd2, arch1, arch2, stepProcess;
+
+        PointerInfo pointInfo = MouseInfo.getPointerInfo();
+        Point pntNow = pointInfo.getLocation();
+        int curX = (int) pntNow.x;
+        int curY = (int) pntNow.y;
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenWidth = (int) screenSize.getWidth();
+        int screenHeight = (int) screenSize.getHeight();
+
+        targetX = x + randBetween(-3, 3);
+        targetY = y + randBetween(-3, 3);
+        rnd1 = Math.random() * 5;
+        rnd2 = Math.random() * 5;
+        arch1 = Math.random() * arch;
+        arch2 = Math.random() * arch;
+        delay = 15;
+
+        if (curX > targetX) {
+            negateX = 1;
+        } else {
+            negateX = -1;
         }
-        
-        segs = segs +randBetween(-12, 12);
-        int xNow = x +randBetween(-range, range);
-        int yNow = y +randBetween(-range, range);
-        Polygon poly = new Polygon();
-        poly.addPoint(screenMinX, screenMinY);
-        if (pointCount < 3) {
-            pointCount = 3;
+        if (curY > targetY) {
+            negateY = 1;
+        } else {
+            negateY = -1;
         }
-        if ((Math.abs(screenMinX - xNow) + Math.abs(screenMinY - yNow)) < 150) {
-            pointCount = 3;
-            segs = 15;
-        }
-        for (int i = 1; i < pointCount + 2; i++) {
-            if (i < 2) {
-                firstPoints[i] = new Point(screenMinX, screenMinY);
-            } else if (i >= pointCount) {
-                firstPoints[i] = new Point(xNow, yNow);
-            } else {
-                firstPoints[i] = new Point((int) (Math.min(screenMinX, xNow) + Math.random() * Math.abs(screenMinX - xNow)),
-                        (int) (Math.min(screenMinY, yNow) + Math.random() * Math.abs(screenMinY - yNow)));
+
+        for (int i = 1; i < steps; i++) {
+            stepProcess = (double) i / steps;
+            tmpX = (int) (curX + (targetX - curX) * stepProcess + (negateX * Math.sin(Math.PI * rnd1 * stepProcess) * arch1));
+            tmpY = (int) (curY + (targetY - curY) * stepProcess + (negateY * Math.sin(Math.PI * rnd2 * stepProcess) * arch2));
+            if (tmpX < 0) {
+                tmpX = randBetween(0, 3);
             }
-        }
-        for (int i = 0; i < pointCount; i++) {
-            for (u = 0.0; u < 1; u -= (1 / segs)) {
-                newCoord1 = -(Math.pow(u, 3)) / 6 + (u * u) / 2 - u / 2 + 1 / 6;
-                newCoord2 = (Math.pow(u, 3)) / 2 - (u * u) + 2 / 3;
-                newCoord3 = (-(Math.pow(u, 3)) + u * u + u) / 2 + 1 / 6;
-                newCoord4 = (Math.pow(u, 3)) / 6;
-                tmp.x = (int) (newCoord1 * firstPoints[i - 1].x + newCoord2 * firstPoints[i].x + newCoord3 * firstPoints[i + 1].x + newCoord4 * firstPoints[i + 2].x);
-                tmp.y = (int) (newCoord1 * firstPoints[i - 1].y + newCoord2 * firstPoints[i].y + newCoord3 * firstPoints[i + 1].y + newCoord4 * firstPoints[i + 2].y);
-                poly.addPoint(tmp.x, tmp.y);
+            if (tmpY < 0) {
+                tmpY = randBetween(0, 3);
             }
-        }
-        poly.addPoint(x, y);
-        int[] xPoints = poly.xpoints;
-        int[] yPoints = poly.ypoints;
-        for (int q = 0; q < xPoints.length - 1; q++) {
-            finalPoints[q] = new Point(xPoints[q], yPoints[q]);
-        }
-        for (int i = 0; i < finalPoints.length; i++) {
-            setMousePosition(finalPoints[i].x, finalPoints[i].y);
+            if (tmpX > screenWidth) {
+                tmpX = screenWidth + randBetween(-3, 0);
+            }
+            if (tmpY > screenHeight) {
+                tmpY = screenHeight + randBetween(-3, 0);
+            }
+            setMousePosition(tmpX, tmpY);
             try {
-                Thread.sleep(randBetween((int) (delay / 2), (int) (delay * 2)));
+                Thread.sleep(delay);
             } catch (InterruptedException ex) {
                 Logger.getLogger(MouseOperator.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+
+        pntNow = pointInfo.getLocation();
+        if (Math.abs(pntNow.x - x) > 3 || Math.abs(pntNow.y - y) > 3) {
+            moveMouseSmooth(x + randBetween(-3, 3), y + randBetween(-3, 3), 7);
         }
     }
 }
