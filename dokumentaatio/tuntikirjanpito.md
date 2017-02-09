@@ -1,8 +1,7 @@
 ### Tuntikirjanpito
 Päivä | Tunnit | Kuvaus
 --------------- | ----- | ------
-01.01.2016 | 1.5h | -GUI
--Save
+01.01.2016 | 1.5h | -GUI<br>-Save
 -Load
 -Hiiren position seuraaminen timerin avulla (yhden näytön sisältävissä järjestelmissä)
 -Värin tunnistaminen kursorin alta kun toiminto on aktivoitu, lopetus kun jFrame menettää fokuksensa
