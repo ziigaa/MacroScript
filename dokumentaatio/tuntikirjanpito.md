@@ -8,3 +8,4 @@ Päivä | Tunnit | Kuvaus
 03.02.2017 | 5h | -moveMouseSmooth MouseOperatoriin<br>-moveMouseHuman (kesken.........) MouseOperatoriin
 07.02.2017 | 6h | -Luokkakaavio<br>-Selvittely pit- ja checkstyle-raporttien oikein käytöstä<br>-Tuntikirjanpidon fiksaus luettavampaan muotoon<br>-ColorOperator.java (sisältäen metodit: findColorStartingFromPoint, findColorFromPaletteStartingFromPoint, findColor, findColorFromPalette, getColorPaletteAsRGB, hexToRGB<br>-KeyboardOperator uusiksi, kompaktimpaan muotoon, kaikki oleellinen toiminnallisuus säilytetty.<br>
 08.02.2017 | 6h | -if-komennon alkeellinen versio lisätty, moveMouseSmooth kokonaan toimintakunnossa, samoin moveMouseHuman.<br>-MouseOperator.java on myös saatettu vaadittuun pituuteen (max. 200 riviä).<br>-pit-raporttien asettaminen oikeaan kansioon githubissa.<br>-checkstyle-raporttien asettaminen oikeaan kansioon githubissa.
+10.02.2017 | 1h | -githubiin oikeita tiedostoja ym. säätäessä
