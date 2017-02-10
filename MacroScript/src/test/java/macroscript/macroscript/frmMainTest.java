@@ -18,22 +18,22 @@ import static org.junit.Assert.*;
  * @author Joonas <>
  */
 public class frmMainTest {
-    
+
     public frmMainTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -59,7 +59,7 @@ public class frmMainTest {
     public void testGetColorUnderCursor() throws Exception {
         System.out.println("getColorUnderCursor");
         frmMain instance = new frmMain();
-        Color expResult = new Color(0,0,0);
+        Color expResult = new Color(0, 0, 0);
         Color result = instance.getColorUnderCursor();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -127,5 +127,5 @@ public class frmMainTest {
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
-    
+
 }

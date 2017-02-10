@@ -28,9 +28,9 @@ public class MacroScript {
         frmMain mainWindow = new frmMain();
         mainWindow.setVisible(true);
 
-        Timer t = new Timer();
+        Timer tmrCursorPosition = new Timer();
 
-        t.scheduleAtFixedRate(
+        tmrCursorPosition.scheduleAtFixedRate(
                 new TimerTask() {
             public void run() {
                 //while (true) {

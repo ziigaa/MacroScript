@@ -21,22 +21,22 @@ import static org.junit.Assert.*;
  * @author Joonas <>
  */
 public class ColorOperatorTest {
-    
+
     public ColorOperatorTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -47,30 +47,33 @@ public class ColorOperatorTest {
     @Test
     public void testFindColorStartingFromPoint() {
         System.out.println("findColorStartingFromPoint");
-        Color color = null;
-        Point startingPoint = null;
-        Rectangle field = null;
+        Color color = Color.BLACK;
+        Point startingPoint = new Point(30, 30);
+        Rectangle field = new Rectangle(0, 0, 60, 60);
         ColorOperator instance = new ColorOperator();
-        Point expResult = null;
+        Point unexpResult = null;
         Point result = instance.findColorStartingFromPoint(color, startingPoint, field);
-        assertEquals(expResult, result);
+        assertNotSame(unexpResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
 
     /**
-     * Test of findColorFromPaletteStartingFromPoint method, of class ColorOperator.
+     * Test of findColorFromPaletteStartingFromPoint method, of class
+     * ColorOperator.
      */
     @Test
     public void testFindColorFromPaletteStartingFromPoint() {
         System.out.println("findColorFromPaletteStartingFromPoint");
-        ArrayList<String> colorPalette = null;
-        Point startingPoint = null;
-        Rectangle field = null;
+        ArrayList<String> colorPalette = new ArrayList<>();
+        colorPalette.add("#000000");
+        colorPalette.add("#ffffff");
+        Point startingPoint = new Point(30, 30);
+        Rectangle field = new Rectangle(0, 0, 60, 60);
         ColorOperator instance = new ColorOperator();
-        Point expResult = null;
+        Point unexpResult = null;
         Point result = instance.findColorFromPaletteStartingFromPoint(colorPalette, startingPoint, field);
-        assertEquals(expResult, result);
+        assertNotSame(unexpResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
@@ -81,12 +84,12 @@ public class ColorOperatorTest {
     @Test
     public void testFindColor() {
         System.out.println("findColor");
-        Color color = null;
-        Rectangle field = null;
+        Color color = Color.BLACK;
+        Rectangle field = new Rectangle(0, 0, 30, 30);
         ColorOperator instance = new ColorOperator();
-        Point expResult = null;
+        Point unexpResult = null;
         Point result = instance.findColor(color, field);
-        assertEquals(expResult, result);
+        assertNotSame(unexpResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
@@ -97,12 +100,14 @@ public class ColorOperatorTest {
     @Test
     public void testFindColorFromPalette() {
         System.out.println("findColorFromPalette");
-        ArrayList<String> colorPalette = null;
-        Rectangle field = null;
+        ArrayList<String> colorPalette = new ArrayList<>();
+        colorPalette.add("#000000");
+        colorPalette.add("#ffffff");
+        Rectangle field = new Rectangle(0, 0, 30, 30);
         ColorOperator instance = new ColorOperator();
-        Point expResult = null;
+        Point unexpResult = null;
         Point result = instance.findColorFromPalette(colorPalette, field);
-        assertEquals(expResult, result);
+        assertNotSame(unexpResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
@@ -113,13 +118,13 @@ public class ColorOperatorTest {
     @Test
     public void testHexToRGB() {
         System.out.println("hexToRGB");
-        String colorAsHex = "";
+        String colorAsHex = "#ffffff";
         ColorOperator instance = new ColorOperator();
-        Color expResult = null;
+        Color expResult = Color.BLACK;
         Color result = instance.hexToRGB(colorAsHex);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
-    
+
 }

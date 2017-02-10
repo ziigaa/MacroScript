@@ -10,12 +10,9 @@ import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.PointerInfo;
-import java.awt.Polygon;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.event.InputEvent;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,8 +50,17 @@ public class MouseOperator {
         bot.mouseRelease(InputEvent.BUTTON2_MASK);
     }
 
-    public void leftHumanClick() {
+    private void sleepDelay(int delay) {
+        long sInterval = (long) delay;
 
+        try {
+            Thread.sleep(sInterval);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MouseOperator.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void sleepRnd() {
         long sInterval = 10;
         Random rnd = new Random();
 
@@ -65,24 +71,16 @@ public class MouseOperator {
         } catch (InterruptedException ex) {
             Logger.getLogger(MouseOperator.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
 
-        sInterval = (long) rnd.nextInt(30);
+    public void leftHumanClick() {
+        sleepRnd();
         leftDown();
 
-        try {
-            Thread.sleep(sInterval);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(MouseOperator.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        sInterval = (long) rnd.nextInt(30);
+        sleepRnd();
         leftUp();
 
-        try {
-            Thread.sleep(sInterval);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(MouseOperator.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        sleepRnd();
     }
 
     public void rightClick() {
@@ -91,34 +89,13 @@ public class MouseOperator {
     }
 
     public void rightHumanClick() {
-        long sInterval = 10;
-        Random rnd = new Random();
-
-        sInterval = (long) rnd.nextInt(30);
-
-        try {
-            Thread.sleep(sInterval);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(MouseOperator.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        sInterval = (long) rnd.nextInt(30);
+        sleepRnd();
         rightDown();
 
-        try {
-            Thread.sleep(sInterval);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(MouseOperator.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        sInterval = (long) rnd.nextInt(30);
+        sleepRnd();
         rightUp();
 
-        try {
-            Thread.sleep(sInterval);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(MouseOperator.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        sleepRnd();
     }
 
     public void setMousePosition(int x, int y) {
@@ -144,11 +121,7 @@ public class MouseOperator {
             if (xNow > x) {
                 xNow--;
             }
-            try {
-                Thread.sleep(delay);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(MouseOperator.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            sleepDelay(delay);
             setMousePosition(xNow, yNow);
         }
 
@@ -208,11 +181,7 @@ public class MouseOperator {
                 tmpY = screenHeight + randBetween(-3, 0);
             }
             setMousePosition(tmpX, tmpY);
-            try {
-                Thread.sleep(delay);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(MouseOperator.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            sleepDelay(delay);
         }
 
         pntNow = pointInfo.getLocation();

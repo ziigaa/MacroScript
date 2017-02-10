@@ -68,6 +68,7 @@ public class ColorOperator {
 
     public Point findColorFromPaletteStartingFromPoint(ArrayList<String> colorPalette, Point startingPoint, Rectangle field) {
         try {
+
             Robot bot = new Robot();
             BufferedImage fieldCapture = bot.createScreenCapture(field);
             int x = (int) startingPoint.getX() - (int) field.getX();

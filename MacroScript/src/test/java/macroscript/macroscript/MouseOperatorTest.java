@@ -6,6 +6,9 @@
 package macroscript.macroscript;
 
 import java.awt.AWTException;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.PointerInfo;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,28 +21,29 @@ import static org.junit.Assert.*;
  * @author Joonas <>
  */
 public class MouseOperatorTest {
-    
+
     public MouseOperatorTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
 
     /**
      * Test of leftDown method, of class MouseOperator.
+     *
      * @throws java.awt.AWTException
      */
     @Test
@@ -53,6 +57,7 @@ public class MouseOperatorTest {
 
     /**
      * Test of leftUp method, of class MouseOperator.
+     *
      * @throws java.awt.AWTException
      */
     @Test
@@ -66,6 +71,7 @@ public class MouseOperatorTest {
 
     /**
      * Test of leftClick method, of class MouseOperator.
+     *
      * @throws java.awt.AWTException
      */
     @Test
@@ -79,6 +85,7 @@ public class MouseOperatorTest {
 
     /**
      * Test of rightDown method, of class MouseOperator.
+     *
      * @throws java.awt.AWTException
      */
     @Test
@@ -92,6 +99,7 @@ public class MouseOperatorTest {
 
     /**
      * Test of rightUp method, of class MouseOperator.
+     *
      * @throws java.awt.AWTException
      */
     @Test
@@ -105,6 +113,7 @@ public class MouseOperatorTest {
 
     /**
      * Test of leftHumanClick method, of class MouseOperator.
+     *
      * @throws java.awt.AWTException
      */
     @Test
@@ -118,6 +127,7 @@ public class MouseOperatorTest {
 
     /**
      * Test of rightClick method, of class MouseOperator.
+     *
      * @throws java.awt.AWTException
      */
     @Test
@@ -131,6 +141,7 @@ public class MouseOperatorTest {
 
     /**
      * Test of rightHumanClick method, of class MouseOperator.
+     *
      * @throws java.awt.AWTException
      */
     @Test
@@ -144,6 +155,7 @@ public class MouseOperatorTest {
 
     /**
      * Test of setMousePosition method, of class MouseOperator.
+     *
      * @throws java.awt.AWTException
      */
     @Test
@@ -159,6 +171,7 @@ public class MouseOperatorTest {
 
     /**
      * Test of moveMouseSmooth method, of class MouseOperator.
+     *
      * @throws java.awt.AWTException
      */
     @Test
@@ -168,25 +181,37 @@ public class MouseOperatorTest {
         int y = 0;
         MouseOperator instance = new MouseOperator();
         instance.moveMouseSmooth(x, y, 1);
+        PointerInfo pointInfo = MouseInfo.getPointerInfo();
+        Point pntNow = pointInfo.getLocation();
+        assertEquals(x, pntNow.x);
+        assertEquals(y, pntNow.y);
         // TODO review the generated test code and remove the default call to fail.
         ////fail("The test case is a prototype.");
     }
 
     /**
      * Test of moveMouseHuman method, of class MouseOperator.
+     *
      * @throws java.awt.AWTException
      */
     @Test
     public void testMoveMouseHuman() throws AWTException {
         System.out.println("moveMouseHuman");
-        int x = 0;
-        int y = 0;
-        int steps = 0;
-        int arch = 0;
+        int x = 50;
+        int y = 50;
+        int steps = 20;
+        int arch = 20;
         MouseOperator instance = new MouseOperator();
         instance.moveMouseHuman(x, y, steps, arch);
+        PointerInfo pointInfo = MouseInfo.getPointerInfo();
+        Point pntNow = pointInfo.getLocation();
+        if (Math.abs(pntNow.x - x) <= 3 && Math.abs(pntNow.y - y) <= 3) {
+            assertTrue(true);
+        } else {
+            fail("NOT close enough");
+        }
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
-    
+
 }

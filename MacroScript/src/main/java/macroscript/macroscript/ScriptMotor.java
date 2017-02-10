@@ -23,8 +23,7 @@ public class ScriptMotor {
     private String command[];
     private int currentLine;
     private int lineCount;
-    private ArrayList<String> scriptVariables;
-    private ArrayList<Integer> scriptVariableValues;
+    private HashMap<String, Integer> variablesAndValues;
     private ArrayList<String> colorPalette;
     private HashMap<String, Integer> theGoTos;
     //private ArrayList scriptVariableType;
@@ -32,6 +31,7 @@ public class ScriptMotor {
     private final MouseOperator mouseOperation;
     private final KeyboardOperator keyboardOperation;
     private ColorOperator colorOperation;
+    private IfHandler ifHandler;
 
     public ScriptMotor(String inputScript) throws AWTException {
         this.theScript = inputScript;
@@ -40,13 +40,13 @@ public class ScriptMotor {
         this.lineCount = 0;
         this.theGoTos = new HashMap<>();
         this.theGoTos.clear();
-        this.scriptVariables = new ArrayList<>();
-        this.scriptVariableValues = new ArrayList<>();
+        this.variablesAndValues = new HashMap<>();
         this.colorPalette = new ArrayList<>();
         this.theGoTos = new HashMap<>();
         this.mouseOperation = new MouseOperator();
         this.keyboardOperation = new KeyboardOperator();
         this.colorOperation = new ColorOperator();
+        this.ifHandler = new IfHandler(variablesAndValues);
         runScript();
     }
 
@@ -56,8 +56,7 @@ public class ScriptMotor {
 
     public void runScript() {
 
-        this.scriptVariableValues.clear();
-        this.scriptVariables.clear();
+        this.variablesAndValues.clear();
         this.theGoTos.clear();
         this.colorPalette.clear();
 
@@ -89,22 +88,7 @@ public class ScriptMotor {
 
         switch (inExecution) {
             case "if"://todo: if findcolor bla bla bla keyup, keydown, type, humantype, keypress, setmousepos, movemousesmooth, movemousehuman
-                try {
-                    String splitByEq[] = this.command[1].split("=");
-                    if (scriptVariables.contains(splitByEq[0])) {
-                        if (scriptVariableValues.get(scriptVariables.indexOf(splitByEq[0])) == Integer.parseInt(splitByEq[1])) {
-                            if ("goto".equals(this.command[2])) {
-                                this.currentLine = this.theGoTos.get(this.command[3]);
-                            } else {
-                                //error, koska ei goto
-                            }
-                        }
-                    } else {
-                        //error, koska muuttujaa ei ole
-                    }
-                } catch (Exception ex) {
-                    //error, if-lausetta yritetään käyttää määrittelemättömässä tarkoituksessa
-                }
+                executeCommand(ifHandler.handleIf(commandLine));
                 break;
             case "goto":
                 this.currentLine = this.theGoTos.get(this.command[1]);
@@ -130,19 +114,19 @@ public class ScriptMotor {
                 }
                 break;
             case "int":
-                if (!scriptVariables.contains(this.command[1])) {
-                    //Anna errööör, koska muuttujaa ei ole
+                if (variablesAndValues.containsKey(this.command[1])) {
+                    //Anna errööör, koska muuttuja on jo olemassa
                 } else {
                     String splByEq[] = this.command[1].split("=");
-                    scriptVariables.add(splByEq[0]);
-                    scriptVariableValues.add(Integer.parseInt(splByEq[1]));
+                    variablesAndValues.put(splByEq[0], Integer.parseInt(splByEq[1]));
                 }
                 break;
             case "mouseLeftDown":
                 mouseOperation.leftDown();
                 break;
-//            case "mm":
-            //keyboardOperation.typeString("äöå");
+            case "mm":
+
+            //mouseOperation.moveMouseCurvy(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]), 5, 20, 5, 15);
             case "mouseLeftUp":
                 mouseOperation.leftUp();
                 break;
@@ -196,15 +180,27 @@ public class ScriptMotor {
                 try {
                     String splittedByEqual[];
                     splittedByEqual = commandLine.split("=");
-                    if (this.scriptVariables.contains(splittedByEqual[0])) {
+                    if (this.variablesAndValues.containsKey(splittedByEqual[0])) {
                         //laskutoimitusten varalta laita if splittedByEqual[1] ei ole int jne...
-                        int varIndex = scriptVariables.indexOf(splittedByEqual[0]);
-                        scriptVariables.set(varIndex, splittedByEqual[1]);
+//                        int varIndex = scriptVariables.indexOf(splittedByEqual[0]);
+//                        scriptVariables.set(varIndex, splittedByEqual[1]);
+                        try {
+                            variablesAndValues.put(splittedByEqual[0], Integer.parseInt(splittedByEqual[1]));
+                        } catch (NumberFormatException e) {
+                            //ei oo numero
+                            if (variablesAndValues.containsKey(splittedByEqual[1])) {
+
+                            }
+                        } catch (NullPointerException e) {
+                            //ei ollu mitää O.O
+                        }
+
                     } else {
-                        //erröööööör
+
+                        //erröööööör, ei oo tehty muuttujaa
                     }
                 } catch (Exception e) {
-                    //errööööör
+                    //errööööör, ei voi splitata, joten tuntematon komento.
                 }
 
                 break;

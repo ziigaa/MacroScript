@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en_GB" lang="en_GB">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fi_FI" lang="fi_FI">
 <head><meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <title>MacroScript xref</title>
 <link type="text/css" rel="stylesheet" href="../../stylesheet.css" />
@@ -36,9 +36,9 @@
 <a class="jxr_linenumber" name="L28" href="#L28">28</a>          <a href="../../macroscript/macroscript/frmMain.html">frmMain</a> mainWindow = <strong class="jxr_keyword">new</strong> <a href="../../macroscript/macroscript/frmMain.html">frmMain</a>();
 <a class="jxr_linenumber" name="L29" href="#L29">29</a>          mainWindow.setVisible(<strong class="jxr_keyword">true</strong>);
 <a class="jxr_linenumber" name="L30" href="#L30">30</a>  
-<a class="jxr_linenumber" name="L31" href="#L31">31</a>          Timer t = <strong class="jxr_keyword">new</strong> Timer();
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>          Timer tmrCursorPosition = <strong class="jxr_keyword">new</strong> Timer();
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>  
-<a class="jxr_linenumber" name="L33" href="#L33">33</a>          t.scheduleAtFixedRate(
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>          tmrCursorPosition.scheduleAtFixedRate(
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>                  <strong class="jxr_keyword">new</strong> TimerTask() {
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>              <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> run() {
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>                  <em class="jxr_comment">//while (true) {</em>

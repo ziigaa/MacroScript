@@ -6,40 +6,44 @@
 package macroscript.macroscript;
 
 import java.awt.AWTException;
+import java.awt.Component;
+import java.awt.event.KeyEvent;
+import static java.awt.event.KeyEvent.VK_SPACE;
+import java.awt.event.KeyListener;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
  * @author Joonas <>
  */
 public class KeyboardOperatorTest {
-    
+
     public KeyboardOperatorTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
 
     /**
      * Test of keyDown method, of class KeyboardOperator.
+     * @throws java.awt.AWTException
      */
     @Test
     public void testKeyDown() throws AWTException {
@@ -53,6 +57,7 @@ public class KeyboardOperatorTest {
 
     /**
      * Test of keyUp method, of class KeyboardOperator.
+     *
      * @throws java.awt.AWTException
      */
     @Test
@@ -67,6 +72,7 @@ public class KeyboardOperatorTest {
 
     /**
      * Test of type method, of class KeyboardOperator.
+     * @throws java.awt.AWTException
      */
     @Test
     public void testType() throws AWTException {
@@ -80,20 +86,8 @@ public class KeyboardOperatorTest {
     }
 
     /**
-     * Test of getChar method, of class KeyboardOperator.
-     */
-    @Test
-    public void typeChar() throws AWTException {
-        System.out.println("typeChar");
-        char toType = ' ';
-        KeyboardOperator instance = new KeyboardOperator();
-        instance.typeChar(toType, false, false, false, false);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of pressEnter method, of class KeyboardOperator.
+     *
      * @throws java.awt.AWTException
      */
     @Test
@@ -103,29 +97,62 @@ public class KeyboardOperatorTest {
         KeyboardOperator instance = new KeyboardOperator();
         instance.pressEnter(isHuman);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
      * Test of typeChar method, of class KeyboardOperator.
+     *
      * @throws java.awt.AWTException
      */
     @Test
     public void testTypeChar() throws AWTException {
         System.out.println("typeChar");
         char charToType = ' ';
+        char typedChar;
         boolean isHuman = false;
         boolean onlyDown = false;
         boolean onlyUp = false;
-        boolean shiftNeeded = false;
         KeyboardOperator instance = new KeyboardOperator();
-        instance.typeChar(charToType, isHuman, onlyDown, onlyUp, shiftNeeded);
+        Component a = new Component() {};
+        
+        KeyListener keyChecker = new KeyListener() {
+            public char typedChar;
+            @Override
+            public void keyPressed(KeyEvent ke) {
+                typedChar = ke.getKeyChar();
+                    System.out.println("yessss");
+            }
+
+            @Override
+            public void keyReleased(KeyEvent ke) {
+                if (typedChar == ke.getKeyChar()) {
+                    
+                }
+            }
+
+            @Override
+            public void keyTyped(KeyEvent ke) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+            
+            public char getTypedChar() {
+                return typedChar;
+            }
+        };
+        a.addKeyListener(keyChecker);
+        a.requestFocus();
+        instance.typeChar(charToType, isHuman, onlyDown, onlyUp);
+        
+            
+        
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
      * Test of doRndSleep method, of class KeyboardOperator.
+     *
      * @throws java.awt.AWTException
      */
     @Test
@@ -134,7 +161,6 @@ public class KeyboardOperatorTest {
         KeyboardOperator instance = new KeyboardOperator();
         instance.doRndSleep();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
-    
 }
