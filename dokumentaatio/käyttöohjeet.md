@@ -71,7 +71,8 @@ vko3:<br>
  -moveMouseHuman (liikuttaa hiiren kursoria mutkittelevaa reittiä annettuihin koordinaatteihin)<br>
   Esim. moveMouseHuman 1 1<br>
  <br>
- vko4:
+ vko4:<br>
+ <br>
   -if lauseiden alkeellinen käsittely. Pitäisi toimia muodossa if (int muuttuja)=(integer arvo) (komento).<br>
    Esim. if i=3 setMousePos 1 1<br>
   -findColor, findColorFromPalette, findColorStartingFromPoint, findColorFromPaletteStartingFromPoint metodeja ei ole vielä kytketty toimintaan, koska nämä ovat jokseenkin turhia, ellei niitä saa kytkettyä parametriksi esim. setMousePos komennolle.
