@@ -120,7 +120,7 @@ public class ColorOperatorTest {
         System.out.println("hexToRGB");
         String colorAsHex = "#ffffff";
         ColorOperator instance = new ColorOperator();
-        Color expResult = Color.BLACK;
+        Color expResult = Color.WHITE;
         Color result = instance.hexToRGB(colorAsHex);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
