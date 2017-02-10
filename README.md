@@ -1,1 +1,6 @@
-Skriptattava ohjelma, joka liikuttelee hirt‰ ja painelee nappeja k‰ytt‰j‰n antamilla spekseill‰
+Skriptattava ohjelma, joka liikuttelee hirt√§ ja painelee nappeja k√§ytt√§j√§n antamilla spekseill√§
+[aiheen kuvaus](dokumentaatio/aiheenKuvausJaRakenne.md)
+[pit-raportti](dokumentaatio/pit-raportti/index.html)
+[checkstyle-raportti](dokumentaatio/checkstyle-raportti/checkstyle.html)
+[k√§ytt√∂ohjeet](dokumentaatio/k√§ytt√∂ohjeet.md)
+[tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)
