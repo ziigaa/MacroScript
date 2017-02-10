@@ -54,3 +54,5 @@ Virheiden käsittelyä jokaiselle komennolle
 Jos näissä ei ole tarpeeksi tekemistä tms., niin toiminnallisuuksiin saattaisi voida lisätä mahdollisuuden
 nauhoittaa skriptejä (tosin ainoastaan hiiren liikkeet ja mahdollisesti kirjoittaminen ovat ainoat mitä tähän tulisi)
 Lisäksi jos tosiaan aikaa on liikaa, niin voisin yrittää perehtyä suoritettavan rivin "highlightaamiseen".
+
+![Alt text](luokkakaavio.png "Luokkakaavio")
