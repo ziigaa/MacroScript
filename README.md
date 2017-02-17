@@ -3,5 +3,5 @@ Skriptattava ohjelma, joka liikuttelee hiirtä ja painelee näppäimistön nappe
 [pit-raportti](dokumentaatio/pit-raportti/index.html)<br>
 [checkstyle-raportti](dokumentaatio/checkstyle-raportti/checkstyle.html)<br>
 [käyttöohjeet](dokumentaatio/käyttöohjeet.md)<br>
-[tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)
+[tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)<br>
 [sekvenssikaavio](dokumentaatio/sekvenssikaavio.png)
