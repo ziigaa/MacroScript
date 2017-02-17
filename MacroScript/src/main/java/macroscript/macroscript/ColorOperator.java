@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Joonas <>
+ * @author Joonas
  */
 public class ColorOperator {
 

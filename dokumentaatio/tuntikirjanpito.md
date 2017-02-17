@@ -1,4 +1,4 @@
-### Tuntikirjanpito
+﻿### Tuntikirjanpito
 Päivä | Tunnit | Kuvaus
 --------------- | ----- | ------
 19.01.2017 | 12h | -GUI<br>-Save<br>-Load<br>-Hiiren position seuraaminen timerin avulla (yhden näytön sisältävissä järjestelmissä)<br>-Värin tunnistaminen kursorin alta kun toiminto on aktivoitu, lopetus kun jFrame menettää fokuksensa<br>-Värin esittäminen jLabelissa<br>-Värin esittäminen hex-muodossa tekstikentässä (mahdollisesti skriptissä toteutettavia värin etsimiskomentoja varten)
@@ -9,3 +9,5 @@ Päivä | Tunnit | Kuvaus
 07.02.2017 | 6h | -Luokkakaavio<br>-Selvittely pit- ja checkstyle-raporttien oikein käytöstä<br>-Tuntikirjanpidon fiksaus luettavampaan muotoon<br>-ColorOperator.java (sisältäen metodit: findColorStartingFromPoint, findColorFromPaletteStartingFromPoint, findColor, findColorFromPalette, getColorPaletteAsRGB, hexToRGB<br>-KeyboardOperator uusiksi, kompaktimpaan muotoon, kaikki oleellinen toiminnallisuus säilytetty.<br>
 08.02.2017 | 6h | -if-komennon alkeellinen versio lisätty, moveMouseSmooth kokonaan toimintakunnossa, samoin moveMouseHuman.<br>-MouseOperator.java on myös saatettu vaadittuun pituuteen (max. 200 riviä).<br>-pit-raporttien asettaminen oikeaan kansioon githubissa.<br>-checkstyle-raporttien asettaminen oikeaan kansioon githubissa.
 10.02.2017 | 1h | -githubiin oikeita tiedostoja ym. säätäessä
+15.02.2017 | 3h | -Testien parantelua ja päivittelyä
+16.02.2017 | 3h | -IfHandler muutettu SpecialCaseHandleriksi selkeämmän kuvauksen vuoksi. Luokkaan lisätty myös metodit handleVariableSettingAndVariableCalculations(), createVariable().

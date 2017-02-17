@@ -18,7 +18,7 @@ import org.junit.Test;
 
 /**
  *
- * @author Joonas <>
+ * @author Joonas
  */
 public class KeyboardOperatorTest {
 

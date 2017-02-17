@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package macroscript.macroscript;
 
 import java.awt.AWTException;
@@ -10,28 +5,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-/**
- *
- * @author Joonas <>
- */
+//@author Joonas
 public class ScriptMotor {
 
-    //private String currentCommand;
     private String theScript;
     private String lines[];
     private String command[];
     private int currentLine;
     private int lineCount;
-    private HashMap<String, Integer> variablesAndValues;
+    HashMap<String, Integer> variablesAndValues;
     private ArrayList<String> colorPalette;
     private HashMap<String, Integer> theGoTos;
-    //private ArrayList scriptVariableType;
-    //private boolean stopPressed;
     private final MouseOperator mouseOperation;
     private final KeyboardOperator keyboardOperation;
-    private ColorOperator colorOperation;
-    private IfHandler ifHandler;
+    private final ColorOperator colorOperation;
+    private final SpecialCaseHandler specialCaseHandler;
 
     public ScriptMotor(String inputScript) throws AWTException {
         this.theScript = inputScript;
@@ -46,7 +34,7 @@ public class ScriptMotor {
         this.mouseOperation = new MouseOperator();
         this.keyboardOperation = new KeyboardOperator();
         this.colorOperation = new ColorOperator();
-        this.ifHandler = new IfHandler(variablesAndValues);
+        this.specialCaseHandler = new SpecialCaseHandler(variablesAndValues);
         runScript();
     }
 
@@ -61,8 +49,8 @@ public class ScriptMotor {
         this.colorPalette.clear();
 
         splitIntoLines(this.theScript);
-
         this.lineCount = 0;
+        
         for (int i = 0; i < this.lines.length; i++) {
             if (this.lines[i] != null) {
                 lineCount++;
@@ -88,7 +76,7 @@ public class ScriptMotor {
 
         switch (inExecution) {
             case "if"://todo: if findcolor bla bla bla keyup, keydown, type, humantype, keypress, setmousepos, movemousesmooth, movemousehuman
-                executeCommand(ifHandler.handleIf(commandLine));
+                executeCommand(specialCaseHandler.handleIf(commandLine));
                 break;
             case "goto":
                 this.currentLine = this.theGoTos.get(this.command[1]);
@@ -114,19 +102,11 @@ public class ScriptMotor {
                 }
                 break;
             case "int":
-                if (variablesAndValues.containsKey(this.command[1])) {
-                    //Anna errööör, koska muuttuja on jo olemassa
-                } else {
-                    String splByEq[] = this.command[1].split("=");
-                    variablesAndValues.put(splByEq[0], Integer.parseInt(splByEq[1]));
-                }
+                specialCaseHandler.createVariable(this.command[1]);
                 break;
             case "mouseLeftDown":
                 mouseOperation.leftDown();
                 break;
-            case "mm":
-
-            //mouseOperation.moveMouseCurvy(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]), 5, 20, 5, 15);
             case "mouseLeftUp":
                 mouseOperation.leftUp();
                 break;
@@ -138,15 +118,33 @@ public class ScriptMotor {
                 break;
             case "setMousePos":
                 //todo: mahdollisuus välittää coords findcolorien avulla
-                mouseOperation.setMousePosition(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]));
+                try {
+                    mouseOperation.setMousePosition(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]));
+                } catch (NumberFormatException e) {
+                    //ei oo numero
+                } catch (NullPointerException e) {
+                    //ei ollu parametrii
+                }
                 break;
             case "moveMouseSmooth":
                 //todo: mahdollisuus välittää coords findcolorien avulla
-                mouseOperation.moveMouseSmooth(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]), 3);
+                try {
+                    mouseOperation.moveMouseSmooth(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]), 3);
+                } catch (NumberFormatException e) {
+                    //ei oo numero
+                } catch (NullPointerException e) {
+                    //ei ollu parametrii
+                }
                 break;
             case "moveMouseHuman":
                 //todo: mahdollisuus välittää coords findcolorien avulla
-                mouseOperation.moveMouseHuman(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]), 50, 50);
+                try {
+                    mouseOperation.moveMouseHuman(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]), 50, 50);
+                } catch (NumberFormatException e) {
+                    //ei oo numero
+                } catch (NullPointerException e) {
+                    //ei ollu parametrii
+                }
                 break;
             case "mouseLeftClick":
                 mouseOperation.leftClick();
@@ -172,37 +170,8 @@ public class ScriptMotor {
             case "typeHuman":
                 keyboardOperation.type(commandLine.substring(10), true);
                 break;
-//            case "findColor":
-//                break;
-//            case "findColorStartingFrom":
-//                break;
             default:
-                try {
-                    String splittedByEqual[];
-                    splittedByEqual = commandLine.split("=");
-                    if (this.variablesAndValues.containsKey(splittedByEqual[0])) {
-                        //laskutoimitusten varalta laita if splittedByEqual[1] ei ole int jne...
-//                        int varIndex = scriptVariables.indexOf(splittedByEqual[0]);
-//                        scriptVariables.set(varIndex, splittedByEqual[1]);
-                        try {
-                            variablesAndValues.put(splittedByEqual[0], Integer.parseInt(splittedByEqual[1]));
-                        } catch (NumberFormatException e) {
-                            //ei oo numero
-                            if (variablesAndValues.containsKey(splittedByEqual[1])) {
-
-                            }
-                        } catch (NullPointerException e) {
-                            //ei ollu mitää O.O
-                        }
-
-                    } else {
-
-                        //erröööööör, ei oo tehty muuttujaa
-                    }
-                } catch (Exception e) {
-                    //errööööör, ei voi splitata, joten tuntematon komento.
-                }
-
+                specialCaseHandler.handleVariableSettingAndVariableCalculations(commandLine);
                 break;
         }
     }

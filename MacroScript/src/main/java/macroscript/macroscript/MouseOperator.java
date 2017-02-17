@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Joonas <>
+ * @author Joonas
  */
 public class MouseOperator {
 
@@ -28,7 +28,7 @@ public class MouseOperator {
     public MouseOperator() throws AWTException {
         this.bot = new Robot();
     }
-
+    
     public void leftDown() {
         bot.mousePress(InputEvent.BUTTON1_MASK);
     }
@@ -43,11 +43,11 @@ public class MouseOperator {
     }
 
     public void rightDown() {
-        bot.mousePress(InputEvent.BUTTON2_MASK);
+        bot.mousePress(InputEvent.BUTTON3_MASK);
     }
 
     public void rightUp() {
-        bot.mouseRelease(InputEvent.BUTTON2_MASK);
+        bot.mouseRelease(InputEvent.BUTTON3_MASK);
     }
 
     private void sleepDelay(int delay) {

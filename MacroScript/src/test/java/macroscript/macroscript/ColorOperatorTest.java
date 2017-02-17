@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Joonas <>
+ * @author Joonas
  */
 public class ColorOperatorTest {
 

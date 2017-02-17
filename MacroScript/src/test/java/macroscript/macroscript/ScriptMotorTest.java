@@ -6,18 +6,22 @@
 package macroscript.macroscript;
 
 import java.awt.AWTException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
- * @author Joonas <>
+ * @author Joonas
  */
 public class ScriptMotorTest {
+
+    private TestFunctionLibrary tfl = new TestFunctionLibrary();
 
     public ScriptMotorTest() {
     }
@@ -45,10 +49,16 @@ public class ScriptMotorTest {
     public void testSplitIntoLines() throws AWTException {
         System.out.println("splitIntoLines");
         String splittable = "omg\nlines!";
-        ScriptMotor instance = new ScriptMotor("this\nis\nmy\nscript");
-        instance.splitIntoLines(splittable);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+
+        try {
+
+            ScriptMotor instance = new ScriptMotor("this\nis\nmy\nscript");
+            instance.splitIntoLines(splittable);
+
+            System.out.println("hula hula: " + tfl.getFieldValue(instance,"lines"));
+        } catch (AWTException ex) {
+            Logger.getLogger(ScriptMotorTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -57,23 +67,60 @@ public class ScriptMotorTest {
     @Test
     public void testRunScript() throws AWTException {
         System.out.println("runScript");
-        ScriptMotor instance = new ScriptMotor("this\nis\nmy\nscript");
+        ScriptMotor instance = new ScriptMotor("this\nis\nmy\nscript\n\n\n");
         instance.runScript();
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        // kun loggeri lisätty, laita tähän skriptiks
+        // pari oikeeta komentoo ja loput bogus
     }
 
     /**
      * Test of executeCommand method, of class ScriptMotor.
      */
     @Test
-    public void testExecuteCommand() throws AWTException {
+    public void testExecuteCommand() {
+
+        String variableName = tfl.createRandomString(0, true);
+
+        int variableValue = tfl.getRndInt(Integer.MAX_VALUE);
+
         System.out.println("executeCommand");
-        String commandLine = "int i=1";
-        ScriptMotor instance = new ScriptMotor("this\nis\nmy\nscript");
-        instance.executeCommand(commandLine);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        String commandLine = "int " + variableName + "=" + variableValue;
+        ScriptMotor instance;
+
+        try {
+            //getFieldValue(instance.getClass(), "variablesAndValues")
+            instance = new ScriptMotor("this\nis\nmy\nscript");
+            instance.executeCommand(commandLine);
+
+            //if (tfl.getFieldValue(instance.getClass(), "variablesAndValues").equals("{" + variableName + "=" + variableValue + "}")) {
+            //System.out.println(tfl.getFieldValue(instance, "variablesAndValues"));
+                assertEquals("{" + variableName + "=" + variableValue + "}", tfl.getFieldValue(instance, "variablesAndValues"));
+            //} else {
+            //    fail("Command execution failed.");
+            //}
+
+//            Class<?> ScriptMtr = instance.getClass();
+//
+//            Field fields[] = ScriptMtr.getDeclaredFields();
+//
+//            for (Field field : fields) {
+//
+//                field.setAccessible(true);
+//
+//                try {
+//                    String fieldToString = field.get(instance).toString();
+//                    if (field.getName().equals("variablesAndValues") && fieldToString.equals("{" + variableName + "=" + variableValue + "}")) {
+//                        assertTrue(true);
+//                    } else if (field.getName().equals("variablesAndValues")) {
+//                        fail("Command execution failed.");
+//                    }
+//                } catch (IllegalAccessException ex) {
+//                    Logger.getLogger(ScriptMotorTest.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+        } catch (AWTException ex) {
+            Logger.getLogger(ScriptMotorTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

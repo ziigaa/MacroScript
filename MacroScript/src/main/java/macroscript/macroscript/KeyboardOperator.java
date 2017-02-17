@@ -7,7 +7,7 @@ package macroscript.macroscript;
 
 /**
  *
- * @author Joonas <>
+ * @author Joonas
  */
 import java.awt.AWTException;
 import java.awt.Robot;
