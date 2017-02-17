@@ -16,15 +16,15 @@ Toiminnallisuus:
 -Värin esittäminen hex-muodossa tekstikentässä (mahdollisesti skriptissä toteutettavia värin etsimiskomentoja varten)
 -Skriptin rivinumeroiden ilmaiseminen (joko pelkästään rivi, jolla ollaan tai mahdollisesti (toivottavasti) sarake, josta näkyy kaikki näytöllä näkyvien rivien numerot)
 
-Täydellistä listaa komennoista en voi vielä tarjota, mutta tässä vaiheessa seuraavat todennäköisesti kuuluvat
-toteutettavien komentojen joukkoon (nimet tms. lienevät jossakin määrin eksplisiittisiä):
+Komennot:
+(nimet tms. lienevät jossakin määrin eksplisiittisiä):
 
-if (toimivuus rajallinen)
+if (toimivuus rajoittuu if muuttuja=toinen_muuttuja komento tai if muuttuja=int_arvo komento esim. if i=3 setMousePos 1 1 tai if i=j setMousePos 1 1)
 goto (ainoastaan esim. @-merkillä spesifioituihin kohtiin)
 sleep (odotustoiminto millisekunneissa)
 colorPalette (kirjoitusasultaan muunneltu arraylist muuttuja)
 int (muuttuja)
-int muuttujien peruslaskutoimitukset
+int muuttujien peruslaskutoimitukset, eli +, -, *, /.
 
 mouseLeftDown (hiiren vasen nappi alas)
 mouseLeftUp (hiiren vasen nappi ylös)
@@ -32,18 +32,18 @@ mouseRightDown (hiiren oikea nappi alas)
 mouseRighUp (hiiren oikea nappi ylös)
 setMousePos (aseta kursorin sijainti)
 moveMouseSmooth (liikuttaa hiirtä taloudellisinta laskettua rataa pitkin kohdepisteeseen, voi sisältää nopeuteen vaikuttavan tekijän)
-moveMouseHuman (liikuttaa hiirtä "ihmismäisesti", eli epäsuoraa reittiä, joskus menee ohi kohteesta ja yleensä ei osu täsmälleen määritettyihin koordinaatteihin)
+moveMouseHuman (liikuttaa hiirtä "ihmismäisesti", eli epäsuoraa reittiä, määritettyihin koordinaatteihin ja yleensä ei osu täsmälleen syötettyihin koordinaatteihin)
 mouseLeftClick (hiiren vasen nappi alas ja ylös tehokkaimmalla tavalla)
 mouseRightClick (hiiren oikea nappi alas ja ylös tehokkaimmalla tavalla)
-mouseHumanLeftClick (ero tavalliseen on napin pohjassaoloaikaan vaikuttava satunnainen muuttuja)
-mouseHumanRightClick (ero tavalliseen on napin pohjassaoloaikaan vaikuttava satunnainen muuttuja)
+mouseHumanLeftClick (ero tavalliseen on napin pohjassaoloaikaan vaikuttava satunnainen muuttuja ja painallusta edeltävä pieni pysähdys)
+mouseHumanRightClick (ero tavalliseen on napin pohjassaoloaikaan vaikuttava satunnainen muuttuja ja painallusta edeltävä pieni pysähdys)
 
 keyDown (näppäin alas)
 keyUp (näppäin ylös)
 type (kirjoittaa nopeimmalla tavalla syötteessä annetun tekstin)
-typeHuman (kirjoittaa syötteessä annetun tekstin tavalla, jossa kunkin painalluksen pohjassaoloaikaan vaikuttaa satunnainen viiveluku, saattaa mahdollisesti sisältää typoja ja niiden korjaamista)
+typeHuman (kirjoittaa syötteessä annetun tekstin tavalla, jossa kunkin painalluksen pohjassaoloaikaan vaikuttaa satunnainen viiveluku. Sama vaikuttaa intervalliin napin painalluksien välillä)
 
-findColorOnScreen (etsii näytöltä pisteen, joka on annetun syötteen värinen ja palauttaa sen koordinaatit)
+findColor (etsii näytöltä pisteen, joka on annetun syötteen värinen ja palauttaa sen koordinaatit)
 
 esim. @-merkin rivin alussa sisältävät kohdat goto-komentoa varten
 
