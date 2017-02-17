@@ -43,25 +43,6 @@ public class ScriptMotorTest {
     }
 
     /**
-     * Test of splitIntoLines method, of class ScriptMotor.
-     */
-    @Test
-    public void testSplitIntoLines() throws AWTException {
-        System.out.println("splitIntoLines");
-        String splittable = "omg\nlines!";
-
-        try {
-
-            ScriptMotor instance = new ScriptMotor("this\nis\nmy\nscript");
-            instance.splitIntoLines(splittable);
-
-            System.out.println("hula hula: " + tfl.getFieldValue(instance,"lines"));
-        } catch (AWTException ex) {
-            Logger.getLogger(ScriptMotorTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
      * Test of runScript method, of class ScriptMotor.
      */
     @Test
@@ -92,32 +73,8 @@ public class ScriptMotorTest {
             instance = new ScriptMotor("this\nis\nmy\nscript");
             instance.executeCommand(commandLine);
 
-            //if (tfl.getFieldValue(instance.getClass(), "variablesAndValues").equals("{" + variableName + "=" + variableValue + "}")) {
-            //System.out.println(tfl.getFieldValue(instance, "variablesAndValues"));
-                assertEquals("{" + variableName + "=" + variableValue + "}", tfl.getFieldValue(instance, "variablesAndValues"));
-            //} else {
-            //    fail("Command execution failed.");
-            //}
+            assertEquals("{" + variableName + "=" + variableValue + "}", tfl.getFieldValue(instance, "variablesAndValues"));
 
-//            Class<?> ScriptMtr = instance.getClass();
-//
-//            Field fields[] = ScriptMtr.getDeclaredFields();
-//
-//            for (Field field : fields) {
-//
-//                field.setAccessible(true);
-//
-//                try {
-//                    String fieldToString = field.get(instance).toString();
-//                    if (field.getName().equals("variablesAndValues") && fieldToString.equals("{" + variableName + "=" + variableValue + "}")) {
-//                        assertTrue(true);
-//                    } else if (field.getName().equals("variablesAndValues")) {
-//                        fail("Command execution failed.");
-//                    }
-//                } catch (IllegalAccessException ex) {
-//                    Logger.getLogger(ScriptMotorTest.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
         } catch (AWTException ex) {
             Logger.getLogger(ScriptMotorTest.class.getName()).log(Level.SEVERE, null, ex);
         }

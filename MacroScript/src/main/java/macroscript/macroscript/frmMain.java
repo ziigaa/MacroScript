@@ -330,16 +330,37 @@ public class frmMain extends javax.swing.JFrame {
         loadFile();
     }
 
+    /**
+     * Tells the boolean value of variable colorPickerActive and thus determines
+     * if the color picking sequence is active.
+     *
+     * @return true or false
+     */
     public boolean getColorPickerActive() {
         return this.colorPickerActive;
     }
 
+    /**
+     * Captures the color from current mouse coordinates (retrieved from lblXpos
+     * and lblYpos.
+     *
+     * @return The color capture as a Color object
+     * @throws AWTException If unable to create a new Java Robot
+     */
     public Color getColorUnderCursor() throws AWTException {
         Robot robot = new Robot();
         Color color = robot.getPixelColor(Integer.parseInt(lblXpos.getText()), Integer.parseInt(lblYpos.getText()));
         return color;
     }
 
+    /**
+     * Captures the color from current mouse coordinates (retrieved from lblXpos
+     * and lblYpos. Then converts the retrieved Color object to String while
+     * changing the format to hex code.
+     *
+     * @return The hex string of the captured color t. ex. #000000 or #FFFFFF
+     * @throws AWTException If unable to create a new Java Robot
+     */
     public String getColorHexUnderCursor() throws AWTException {
         Robot robot = new Robot();
         Color color = robot.getPixelColor(Integer.parseInt(lblXpos.getText()), Integer.parseInt(lblYpos.getText()));
@@ -347,11 +368,23 @@ public class frmMain extends javax.swing.JFrame {
         return hexValue.toUpperCase();
     }
 
+    /**
+     * Sets be background color of lblColor to which ever color the mouse is
+     * currently on. Also updates the hex value of the color in txtColor.
+     *
+     * @throws AWTException If called method getColorUnderCursor and/or
+     * getColorHexUnderCursor fail(s) to create a Java Robot
+     */
     public void setColors() throws AWTException {
         lblColor.setBackground(getColorUnderCursor());
         txtColor.setText(getColorHexUnderCursor());
     }
 
+    /**
+     * Interpret form deactivation as a color picking event.
+     *
+     * @param evt
+     */
     private void formWindowDeactivated(java.awt.event.WindowEvent evt) {
         // TODO add your handling code here:
         if (this.colorPickerActive == true) {
@@ -387,6 +420,13 @@ public class frmMain extends javax.swing.JFrame {
         return out;
     }
 
+    /**
+     * Opens a file from the prompted location and displays its contents in
+     * txtScript after asking the user if he wants to save the current script.
+     *
+     * To increase efficiency this method uses a BufferedReader for buffering a
+     * line of script at a time instead of one character.
+     */
     public void loadFile() {
 
         String txtData = txtScript.getText().trim();
@@ -434,6 +474,10 @@ public class frmMain extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Saves the text from txtScript into a file according to the users input.
+     * Uses a BufferedWriter, because its efficiency in repetitive file saving.
+     */
     public void saveAs() {
         FileNameExtensionFilter extensionFilter = new FileNameExtensionFilter("Great MacroScript file", "gms");
         final JFileChooser saveAsFileChooser = new JFileChooser();

@@ -21,7 +21,10 @@ import java.util.logging.Logger;
 public class MacroScript {
 
     /**
-     * @param args the command line arguments
+     * Creates the main window and starts the Timer responsible for updating the
+     * mouse coordinates and the color picking feature on the main form.
+     *
+     * @param args The command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
@@ -30,10 +33,8 @@ public class MacroScript {
 
         Timer tmrCursorPosition = new Timer();
 
-        tmrCursorPosition.scheduleAtFixedRate(
-                new TimerTask() {
+        tmrCursorPosition.scheduleAtFixedRate(new TimerTask() {
             public void run() {
-                //while (true) {
                 PointerInfo pointInfo = MouseInfo.getPointerInfo();
                 Point pntNow = pointInfo.getLocation();
                 int x = (int) pntNow.getX();
@@ -50,9 +51,7 @@ public class MacroScript {
                     }
                 }
             }
-        },
-                0, // run first occurrence immediately
-                100);  // run every 100ms
+        }, /*run first occurrence immediately at 0ms*/ 0, 100); //rerun after every 100ms
     }
 
 }

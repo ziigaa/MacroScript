@@ -20,6 +20,14 @@ public class SpecialCaseHandler {
         this.variablesAndValues = variablesAndValues;
     }
 
+    /**
+     * Interprets an if-sentence input from the script by splitting it and
+     * processing the remaining data.
+     *
+     * @param ifSentence The sentence to interpret
+     * @return If the requirements of the if/sentence are met, then the command
+     * after the condition is returned. Otherwise an empty string is returned.
+     */
     public String handleIf(String ifSentence) {
 
         String toReturn = "";
@@ -49,21 +57,28 @@ public class SpecialCaseHandler {
         return toReturn;
     }
 
+    /**
+     * Handles cases where a variable is given a value, either by assining a
+     * simple integer value to it or by a calculation. t. ex. i=3 or i=i*5
+     *
+     * @param commandLine The line of script-code that does not start with a
+     * command
+     */
     public void handleVariableSettingAndVariableCalculations(String commandLine) {
         try {//joko muuttujalle ollaan asettamassa arvoa, tai sitten komento on tuntematon
-            
+
             String splitByEqual[];
             splitByEqual = commandLine.split("=");
-            
+
             if (this.variablesAndValues.containsKey(splitByEqual[0])) {
                 //laskutoimitusten varalta laita if splittedByEqual[1] ei ole int jne...
                 try {
                     variablesAndValues.put(splitByEqual[0], Integer.parseInt(splitByEqual[1]));
                 } catch (NumberFormatException e) {
-                    
+
                     String splitByOperation[];
                     int operationType = 0;
-                    
+
                     if (splitByEqual[1].contains("+")) {
                         splitByOperation = splitByEqual[1].split("\\+");
                         operationType = 1;
@@ -81,7 +96,7 @@ public class SpecialCaseHandler {
                         splitByOperation = "010".split("1");
                         return;
                     }
-                    
+
                     int value1 = 0, value2 = 0;
 
                     try {
@@ -103,9 +118,9 @@ public class SpecialCaseHandler {
                             //syntax error
                         }
                     }
-                    
+
                     int result = 0;
-                    
+
                     switch (operationType) {
                         case 0:
                             //error
@@ -123,9 +138,9 @@ public class SpecialCaseHandler {
                             result = value1 * value2;
                             break;
                     }
-                    
+
                     variablesAndValues.put(splitByEqual[0], result);
-                    
+
                 } catch (NullPointerException e) {
                     //ei ollu mitää O.O
                 }
@@ -138,6 +153,14 @@ public class SpecialCaseHandler {
         }
     }
 
+    /**
+     * Adds a variable in the HashMap that holds all script variables and their
+     * values.
+     *
+     * @param rawData Either a name for the variable in which case it will be
+     * assigned the default value of 0, or a variable name and a value for it.
+     * t. ex. i=3.
+     */
     public void createVariable(String rawData) {
         try {
             String splitByEqual[] = rawData.split("=");

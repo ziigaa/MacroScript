@@ -28,24 +28,39 @@ public class MouseOperator {
     public MouseOperator() throws AWTException {
         this.bot = new Robot();
     }
-    
+
+    /**
+     * Simulates a mouse left button down event.
+     */
     public void leftDown() {
         bot.mousePress(InputEvent.BUTTON1_MASK);
     }
 
+    /**
+     * Simulates a mouse left button up event.
+     */
     public void leftUp() {
         bot.mouseRelease(InputEvent.BUTTON1_MASK);
     }
 
+    /**
+     * Simulates a mouse left click.
+     */
     public void leftClick() {
         leftDown();
         leftUp();
     }
 
+    /**
+     * Simulates a mouse right button down event.
+     */
     public void rightDown() {
         bot.mousePress(InputEvent.BUTTON3_MASK);
     }
 
+    /**
+     * Simulates a mouse right button up event.
+     */
     public void rightUp() {
         bot.mouseRelease(InputEvent.BUTTON3_MASK);
     }
@@ -60,7 +75,7 @@ public class MouseOperator {
         }
     }
 
-    public void sleepRnd() {
+    private void sleepRnd() {
         long sInterval = 10;
         Random rnd = new Random();
 
@@ -73,6 +88,11 @@ public class MouseOperator {
         }
     }
 
+    /**
+     * Simulates a mouse left click with random Thread.sleep() intervals before
+     * left down event, in between of left down and left up events and after
+     * left down event.
+     */
     public void leftHumanClick() {
         sleepRnd();
         leftDown();
@@ -83,11 +103,19 @@ public class MouseOperator {
         sleepRnd();
     }
 
+    /**
+     * Simulates a mouse right click.
+     */
     public void rightClick() {
         rightDown();
         rightUp();
     }
 
+    /**
+     * Simulates a mouse right click with random Thread.sleep() intervals before
+     * left down event, in between of left down and left up events and after
+     * left down event.
+     */
     public void rightHumanClick() {
         sleepRnd();
         rightDown();
@@ -98,10 +126,25 @@ public class MouseOperator {
         sleepRnd();
     }
 
+    /**
+     * Sets the cursor position immediately to gives coordinates.
+     *
+     * @param x The horizontal target coordinate
+     * @param y The vertical target coordinate
+     */
     public void setMousePosition(int x, int y) {
         bot.mouseMove(x, y);
     }
 
+    /**
+     * Moves the cursor pixel by pixel to the given coordinates using the
+     * shortest path availible. Can only move either horizontally, vertically or
+     * diagonally, where delta x and delta y both equal one pixel.
+     *
+     * @param x The horizontal target coordinate
+     * @param y The vertical target coordinate
+     * @param delay The delay in ms between each move
+     */
     public void moveMouseSmooth(int x, int y, int delay) {
         PointerInfo pointInfo = MouseInfo.getPointerInfo();
         Point pntNow = pointInfo.getLocation();
@@ -132,6 +175,17 @@ public class MouseOperator {
         return r.nextInt(high - low) + low;
     }
 
+    /**
+     * Moves the cursor using a curvy route to get to the given coordinates.
+     * Also skips pixels inbetween moves, simulating normal cursor behaviour.
+     *
+     * @param x The horizontal target coordinate
+     * @param y The vertical target coordinate
+     * @param steps The amount of steps that will be used to reach the target
+     * coordinates
+     * @param arch Determines the boldness of the curves that will become the
+     * route to reach the target coordinates
+     */
     public void moveMouseHuman(int x, int y, int steps, int arch) {
         int targetX, targetY, tmpX, tmpY, negateX, negateY, delay;
         double rnd1, rnd2, arch1, arch2, stepProcess;

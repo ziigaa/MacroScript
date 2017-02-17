@@ -8,7 +8,6 @@ package macroscript.macroscript;
 import java.awt.AWTException;
 import java.awt.Component;
 import java.awt.event.KeyEvent;
-import static java.awt.event.KeyEvent.VK_SPACE;
 import java.awt.event.KeyListener;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -43,6 +42,7 @@ public class KeyboardOperatorTest {
 
     /**
      * Test of keyDown method, of class KeyboardOperator.
+     *
      * @throws java.awt.AWTException
      */
     @Test
@@ -72,6 +72,7 @@ public class KeyboardOperatorTest {
 
     /**
      * Test of type method, of class KeyboardOperator.
+     *
      * @throws java.awt.AWTException
      */
     @Test
@@ -109,57 +110,45 @@ public class KeyboardOperatorTest {
     public void testTypeChar() throws AWTException {
         System.out.println("typeChar");
         char charToType = ' ';
-        char typedChar;
         boolean isHuman = false;
-        boolean onlyDown = false;
-        boolean onlyUp = false;
+
         KeyboardOperator instance = new KeyboardOperator();
-        Component a = new Component() {};
-        
+        Component a = new Component() {
+        };
+
         KeyListener keyChecker = new KeyListener() {
             public char typedChar;
+
             @Override
             public void keyPressed(KeyEvent ke) {
                 typedChar = ke.getKeyChar();
-                    System.out.println("yessss");
+                System.out.println("yessss press: " + typedChar);
             }
 
             @Override
             public void keyReleased(KeyEvent ke) {
+                typedChar = ke.getKeyChar();
+                System.out.println("yessss release: " + typedChar);
                 if (typedChar == ke.getKeyChar()) {
-                    
+
                 }
             }
 
             @Override
             public void keyTyped(KeyEvent ke) {
+                typedChar = ke.getKeyChar();
+                System.out.println("yessss typed: " + typedChar);
                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
-            
+
             public char getTypedChar() {
                 return typedChar;
             }
         };
         a.addKeyListener(keyChecker);
         a.requestFocus();
-        instance.typeChar(charToType, isHuman, onlyDown, onlyUp);
-        
-            
-        
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
+        instance.type((CharSequence) String.valueOf(charToType), isHuman);
 
-    /**
-     * Test of doRndSleep method, of class KeyboardOperator.
-     *
-     * @throws java.awt.AWTException
-     */
-    @Test
-    public void testDoRndSleep() throws AWTException {
-        System.out.println("doRndSleep");
-        KeyboardOperator instance = new KeyboardOperator();
-        instance.doRndSleep();
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }

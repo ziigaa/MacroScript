@@ -28,20 +28,37 @@ public class KeyboardOperator {
         this.isHuman = false;
     }
 
+    /**
+     * Sends a key down message that corresponds a key from the keyboard.
+     *
+     * @param theKey The key to press
+     */
     public void keyDown(char theKey) {
         this.keyFunctionDown = true;
         typeChar(theKey, this.isHuman, this.keyFunctionDown, this.keyFunctionUp);
     }
 
+    /**
+     * Sends a key up message that corresponds a key from the keyboard.
+     *
+     * @param theKey The key to press
+     */
     public void keyUp(char theKey) {
         keyFunctionUp = true;
         typeChar(theKey, this.isHuman, this.keyFunctionDown, this.keyFunctionUp);
     }
 
+    /**
+     * Sends an enter key press.
+     *
+     * @param isHuman If true, adds a random Thread.Sleep() before and after the
+     * key down event.
+     */
     public void pressEnter(boolean isHuman) {
         if (isHuman == true) {
             doRndSleep();
         }
+
         bot.keyPress(VK_ENTER);
         if (isHuman == true) {
             doRndSleep();
@@ -49,6 +66,15 @@ public class KeyboardOperator {
         bot.keyRelease(VK_ENTER);
     }
 
+    /**
+     * Sends messages that replicate the function of the keyboard and uses this
+     * to type the input.
+     *
+     * @param characters The input to type
+     * @param isHuman If true, adds a random Thread.Sleep() before and after
+     * every key down event, including shift if a special character needs it or
+     * if the character in question is upper case.
+     */
     public void type(CharSequence characters, boolean isHuman) {
         int length = characters.length();
         this.isHuman = isHuman;
@@ -58,7 +84,7 @@ public class KeyboardOperator {
         }
     }
 
-    public void typeChar(char charToType, boolean isHuman, boolean onlyDown, boolean onlyUp) {
+    private void typeChar(char charToType, boolean isHuman, boolean onlyDown, boolean onlyUp) {
         String alphas = "abcdefghijklmnopqrstuvwxyz";
         String numbers = "0123456789";
         String specialCharSet1 = "!\"#¤%&/()=";
@@ -128,7 +154,7 @@ public class KeyboardOperator {
         }
     }
 
-    public void doRndSleep() {
+    private void doRndSleep() {
         Random rnd = new Random();
         long sInterval = (long) rnd.nextInt(300);
 

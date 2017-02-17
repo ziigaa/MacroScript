@@ -24,6 +24,16 @@ public class ColorOperator {
         this.colorPaletteAsColor = new ArrayList<>();
     }
 
+    /**
+     * The method searches for a color in a spiraling manner starting from a
+     * specified point within a specified rectangle
+     *
+     * @param color The color to search for
+     * @param startingPoint The point where to start from
+     * @param field The rectangle which limits the search area
+     * @return The first point where the color was found. If the color cannot be
+     * found in the specified area return will be Point(-1, -1)
+     */
     public Point findColorStartingFromPoint(Color color, Point startingPoint, Rectangle field) {
         try {
             Robot bot = new Robot();
@@ -66,6 +76,18 @@ public class ColorOperator {
         }
     }
 
+    /**
+     * The method searches for multiple colors in a spiraling manner starting
+     * from a specified point within a specified rectangle
+     *
+     * @param colorPalette A list of colors in hex code. t. ex. #000000 or
+     * #ffffff
+     * @param startingPoint The point where to start from
+     * @param field The rectangle which limits the search area
+     * @return The first point that has a matching color in the colorPalette. If
+     * the color cannot be found in the specified area return will be
+     * Point(-1, -1)
+     */
     public Point findColorFromPaletteStartingFromPoint(ArrayList<String> colorPalette, Point startingPoint, Rectangle field) {
         try {
 
@@ -113,6 +135,15 @@ public class ColorOperator {
         }
     }
 
+    /**
+     * Searches for a color within a rectangle. Iterates from left to right one
+     * pixel line at a time
+     *
+     * @param color The color to search for
+     * @param field The area where to search from
+     * @return The first point where the color was found. If the color cannot be
+     * found in the specified area return will be Point(-1, -1)
+     */
     public Point findColor(Color color, Rectangle field) {
         try {
             Robot bot = new Robot();
@@ -131,6 +162,17 @@ public class ColorOperator {
         return new Point(-1, -1);
     }
 
+    /**
+     * Searches for multiple colors within a rectangle. Iterates from left to
+     * right one pixel line at a time
+     *
+     * @param colorPalette A list of colors in hex code. t. ex. #000000 or
+     * #ffffff
+     * @param field The area where to search from
+     * @return The first point that has a matching color in the colorPalette. If
+     * the color cannot be found in the specified area return will be
+     * Point(-1, -1)
+     */
     public Point findColorFromPalette(ArrayList<String> colorPalette, Rectangle field) {
         try {
             Robot bot = new Robot();
@@ -159,6 +201,12 @@ public class ColorOperator {
         return colors;
     }
 
+    
+    /**
+     * Converts hex color string into a Color object
+     * @param colorAsHex The color as hex code. t. ex. #000000 or #ffffff
+     * @return The same color as a Color object
+     */
     public Color hexToRGB(String colorAsHex) {
         return new Color(
                 Integer.valueOf(colorAsHex.substring(1, 3), 16),

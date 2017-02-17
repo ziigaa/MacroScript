@@ -15,7 +15,7 @@ import static org.junit.Assert.fail;
 
 /**
  *
- * @author Joonas <>
+ * @author Joonas
  */
 public class TestFunctionLibrary {
 

@@ -9,7 +9,7 @@ import javax.swing.text.Highlighter;
 
 /**
  *
- * @author Joonas <>
+ * @author Joonas
  */
 public class frmLogger extends javax.swing.JFrame {
 

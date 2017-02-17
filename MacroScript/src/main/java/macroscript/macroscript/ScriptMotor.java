@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 //@author Joonas
+
 public class ScriptMotor {
 
     private String theScript;
@@ -38,10 +39,14 @@ public class ScriptMotor {
         runScript();
     }
 
-    public void splitIntoLines(String splittable) {
+    private void splitIntoLines(String splittable) {
         this.lines = splittable.split("\\r?\\n");
     }
 
+    /**
+     * Clears all relevant variables of data and forwards each line of the
+     * script to the method executeCommand.
+     */
     public void runScript() {
 
         this.variablesAndValues.clear();
@@ -50,7 +55,7 @@ public class ScriptMotor {
 
         splitIntoLines(this.theScript);
         this.lineCount = 0;
-        
+
         for (int i = 0; i < this.lines.length; i++) {
             if (this.lines[i] != null) {
                 lineCount++;
@@ -63,6 +68,11 @@ public class ScriptMotor {
         }
     }
 
+    /**
+     * Executes a line of code. All code is processed forward from here.
+     *
+     * @param commandLine The line of code to process
+     */
     public void executeCommand(String commandLine) {
         this.command = commandLine.split(" ");
         String inExecution = this.command[0];
