@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package macroscript.macroscript;
+package gui;
 
+import gui.frmMain;
 import java.awt.Color;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -79,53 +80,4 @@ public class frmMainTest {
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of setColors method, of class frmMain.
-     */
-    @Test
-    public void testSetColors() throws Exception {
-        System.out.println("setColors");
-        frmMain instance = new frmMain();
-        instance.setColors();
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of loadFile method, of class frmMain.
-     */
-    @Test
-    public void testLoadFile() {
-        System.out.println("loadFile");
-        frmMain instance = new frmMain();
-        instance.loadFile();
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of saveAs method, of class frmMain.
-     */
-    @Test
-    public void testSaveAs() {
-        System.out.println("saveAs");
-        frmMain instance = new frmMain();
-        instance.saveAs();
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of main method, of class frmMain.
-     */
-    @Test
-    public void testMain() {
-        System.out.println("main");
-        String[] args = null;
-        frmMain.main(args);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
 }

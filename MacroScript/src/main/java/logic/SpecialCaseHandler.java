@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package macroscript.macroscript;
+package logic;
 
 import java.util.HashMap;
 
@@ -35,9 +35,19 @@ public class SpecialCaseHandler {
         try {
             String ifSplittedBySpaces[] = ifSentence.split(" ");
             String splitByEqual[] = ifSplittedBySpaces[1].split("=");
-
+            
+            int givenValue = 0;
+            
+            try {
+                givenValue = Integer.parseInt(splitByEqual[1]);
+            } catch (NumberFormatException e) {
+                if (variablesAndValues.containsKey(splitByEqual[1])) {
+                    givenValue = variablesAndValues.get(splitByEqual[1]);
+                }
+            }
+            
             if (variablesAndValues.containsKey(splitByEqual[0])) {
-                if (variablesAndValues.get(splitByEqual[0]) == Integer.parseInt(splitByEqual[1])) {
+                if (variablesAndValues.get(splitByEqual[0]) == givenValue) {
                     for (int i = 2; i < ifSplittedBySpaces.length; i++) {
                         toReturn = toReturn + ifSplittedBySpaces[i] + " ";
                     }
@@ -48,8 +58,6 @@ public class SpecialCaseHandler {
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             //ei "="-merkkiä
-        } catch (NumberFormatException e) {
-            //ei oo numero
         } catch (NullPointerException e) {
             //ei ollu parametrii
         }

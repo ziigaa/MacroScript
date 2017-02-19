@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package macroscript.macroscript;
+package logic;
 
+import logic.ScriptMotorTest;
 import java.awt.AWTException;
 import java.lang.reflect.Field;
 import java.util.Random;

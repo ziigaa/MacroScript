@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package macroscript.macroscript;
+package gui;
 
 import java.awt.AWTException;
 import java.awt.Color;
@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import logic.ScriptMotor;
 
 /**
  *
@@ -41,14 +42,12 @@ public class frmMain extends javax.swing.JFrame {
     public javax.swing.JLabel lblXpos;
     private javax.swing.JLabel lblY;
     public javax.swing.JLabel lblYpos;
-    private javax.swing.JMenuItem mnuErrCheck;
     private javax.swing.JMenuItem mnuExit;
     private javax.swing.JMenu mnuFile;
     private javax.swing.JMenuItem mnuLoad;
     private javax.swing.JMenuBar mnuMenuBar;
     private javax.swing.JMenuItem mnuNew;
     private javax.swing.JMenuItem mnuRun;
-    private javax.swing.JMenuItem mnuRunToMemory;
     private javax.swing.JMenuItem mnuSave;
     private javax.swing.JMenu mnuScript;
     private javax.swing.JScrollPane scrpAsd;
@@ -129,8 +128,6 @@ public class frmMain extends javax.swing.JFrame {
         mnuLoad = new javax.swing.JMenuItem();
         mnuExit = new javax.swing.JMenuItem();
         mnuScript = new javax.swing.JMenu();
-        mnuErrCheck = new javax.swing.JMenuItem();
-        mnuRunToMemory = new javax.swing.JMenuItem();
         mnuRun = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout frmMainLayout = new javax.swing.GroupLayout(frmMain.getContentPane());
@@ -151,7 +148,9 @@ public class frmMain extends javax.swing.JFrame {
                 formWindowDeactivated(evt);
             }
         });
-
+        
+        setResizable(false);
+        
         txtScript.setColumns(20);
         txtScript.setRows(5);
         scrpAsd.setViewportView(txtScript);
@@ -216,12 +215,6 @@ public class frmMain extends javax.swing.JFrame {
         mnuMenuBar.add(mnuFile);
 
         mnuScript.setText("Script");
-
-        mnuErrCheck.setText("Check For Errors");
-        mnuScript.add(mnuErrCheck);
-
-        mnuRunToMemory.setText("(Run To Memory)");
-        mnuScript.add(mnuRunToMemory);
 
         mnuRun.setText("Run Script");
         mnuRun.addActionListener(new java.awt.event.ActionListener() {

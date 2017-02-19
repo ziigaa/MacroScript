@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package macroscript.macroscript;
+package logic;
 
+import logic.ScriptMotor;
 import java.awt.AWTException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

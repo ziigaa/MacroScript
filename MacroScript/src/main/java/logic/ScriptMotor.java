@@ -1,5 +1,8 @@
-package macroscript.macroscript;
+package logic;
 
+import operators.MouseOperator;
+import operators.KeyboardOperator;
+import operators.ColorOperator;
 import java.awt.AWTException;
 import java.util.ArrayList;
 import java.util.HashMap;

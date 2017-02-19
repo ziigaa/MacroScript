@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package macroscript.macroscript;
+package operators;
 
+import operators.MouseOperator;
 import java.awt.AWTException;
 import java.awt.MouseInfo;
 import java.awt.Point;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package macroscript.macroscript;
+package operators;
 
 import java.awt.AWTException;
 import java.awt.Dimension;
@@ -148,6 +148,7 @@ public class MouseOperator {
     public void moveMouseSmooth(int x, int y, int delay) {
         PointerInfo pointInfo = MouseInfo.getPointerInfo();
         Point pntNow = pointInfo.getLocation();
+        
         int xNow = (int) pntNow.x;
         int yNow = (int) pntNow.y;
 
