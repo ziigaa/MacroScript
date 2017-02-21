@@ -144,12 +144,25 @@ Hiiren komentoja (MouseOperator):<br>
 -esim. mouseRightDown<br>
 **mouseRighUp** (Hiiren oikea nappi ylös, missä ikinä hiiri onkaan)<br>
 -esim. mouseRightUp<br>
-**setMousePos** (Asettaa kursorin sijainnin. Syntaksi: setMousePos x y)<br>
+**setMousePos** (Asettaa kursorin sijainnin).<br>
+Syntaksi: setMousePos x y<br>
 -esim. setMousePos 1 1<br>
+TAI koordinaattiparametrien tilalla voidaan käyttää myös värinetsintä toimintoa, jolloin kirjoitus asu on seuraavanlainen:<br>
+setMousePos VärinEtsintäFunktio Parametrit<br>
+-esim. setMousePos findColor #000000 20 20 80 80<br>
+Tällöin setMousePos suoritetaan koordinaatteihin, joista väri #000000 on löytynyt jos se löytyy määritellyltä alueelta.<br>
 **moveMouseSmooth** (Liikuttaa hiirtä taloudellisinta laskettua rataa pitkin (ottaen huomioon, että liikutus tapahtuu 1 pikseli kerrallaan joko viistottain, vertikaalisesti tai horisontaalisesti) kohdepisteeseen, itse metodi sisältää nopeuteen vaikuttavan tekijän, mutta tätä ei pääse ohjelmassa hallitsemaan. Vakionopeus on 1 pikseli 3:ssa millisekunnissa) Syntaksi: moveMouseSmooth x y<br>
 -esim. moveMouseSmooth 100 100<br>
+TAI koordinaattiparametrien tilalla voidaan käyttää myös värinetsintä toimintoa, jolloin kirjoitus asu on seuraavanlainen:<br>
+moveMouseSmooth VärinEtsintäFunktio Parametrit<br>
+-esim. moveMouseSmooth findColor #000000 20 20 80 80<br>
+Tällöin moveMouseSmooth suoritetaan koordinaatteihin, joista väri #000000 on löytynyt jos se löytyy määritellyltä alueelta.<br>
 **moveMouseHuman** (Liikuttaa hiirtä "ihmismäisesti", eli epäsuoraa reittiä, määritettyihin koordinaatteihin ja yleensä ei osu täsmälleen syötettyihin koordinaatteihin). Syntaksi moveMouseHuman x y<br>
 -esim. moveMouseHuman 50 70<br>
+TAI koordinaattiparametrien tilalla voidaan käyttää myös värinetsintä toimintoa, jolloin kirjoitus asu on seuraavanlainen:<br>
+moveMouseHuman VärinEtsintäFunktio Parametrit<br>
+-esim. moveMouseHuman findColor #000000 20 20 80 80<br>
+Tällöin moveMouseHuman suoritetaan koordinaatteihin, joista väri #000000 on löytynyt jos se löytyy määritellyltä alueelta.<br>
 **mouseLeftClick** (Hiiren vasen nappi alas ja ylös tehokkaimmalla tavalla, missä ikinä hiiri onkaan)<br>
 -esim. mouseLeftClick<br>
 **mouseRightClick** (Hiiren oikea nappi alas ja ylös tehokkaimmalla tavalla, missä ikinä hiiri onkaan)<br>
@@ -184,7 +197,7 @@ Parametreinä tai if-lauseen ehtoina (ColorOperator):<br>
 -esim. findColorFromPaletteStartingFromPoint 60 60 200 200 130 130<br><br>
 
 Erikoistapaus:<br>
-**@**-merkin rivin alussa sisältävät kohdat. Näiden tulkitaan olevan goto-komentoa varten ja täten niiden jälkeen tuleva teksti tallennetaan rivinumeron kera, minkä jälkeen skriptin voi goto komennolla kutsua jatkuvaksi tästä kohdasta.<br>
+**@-merkin** rivin alussa sisältävät kohdat. Näiden tulkitaan olevan goto-komentoa varten ja täten niiden jälkeen tuleva teksti tallennetaan rivinumeron kera, minkä jälkeen skriptin voi goto komennolla kutsua jatkuvaksi tästä kohdasta.<br>
 -Esimerkki kohdan määrittämisestä:<br>
 @kohta<br>
 Kohdan kutsuminen goto-komennolla: kts. goto-komento.<br><br>
