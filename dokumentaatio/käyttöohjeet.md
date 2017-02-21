@@ -88,7 +88,7 @@ vko3:<br>
   
   Käyttöohjeet:<br><br>
   
-Käyttöliittymän Ominaisuudet:<br>
+Käyttöliittymän ominaisuudet:<br>
 -Luo uusi skripti (ensin herjaa, että haluatko tallentaa)<br>
 -Tallenna skripti (Buffered)<br>
 -Avaa skripti (Buffered)<br>
