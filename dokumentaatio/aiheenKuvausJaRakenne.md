@@ -3,21 +3,31 @@ Dokumentaatio<br><br>
 Toteutetaan käyttöliittymällinen, käyttäjän ohjelmoitavissa oleva macro-ohjelma, joka suorittaa tekstikenttään syötettyjä
 komentoja, kuten kursorin position vaihtaminen, hiiren klikkailu, tekstin kirjoitus, ym.<br><br>
 
-Toiminnallisuus:<br>
+Käyttöliittymän toiminnallisuus:<br>
 -Luo uusi skripti (ensin herjaa, että haluatko tallentaa)<br>
 -Tallenna skripti (Buffered)<br>
 -Avaa skripti (Buffered)<br>
--Suorita skripti<br><br>
+-Suorita skripti<br>
+-Virheilmoitusikkuna<br><br>
 
 -Hiiren position seuraaminen timerin avulla (yhden näytön sisältävissä järjestelmissä)<br>
 -Värin tunnistaminen kursorin alta kun toiminto on aktivoitu, lopetus kun jFrame menettää fokuksensa<br>
 -Värin esittäminen jLabelissa<br>
 -Värin esittäminen hex-muodossa tekstikentässä (skriptissä käytettyjen värinetsimiskomentojen vuoksi)<br><br>
 
-Komennot:<br>
+Itse skriptien toiminta:<br>
 (nimet tms. lienevät jossakin määrin eksplisiittisiä):<br><br>
 
-if (toimivuus rajoittuu if muuttuja=toinen_muuttuja komento tai if muuttuja=int_arvo komento esim. if i=3 setMousePos 1 1 tai if i=j setMousePos 1 1)<br>
+if<br>
+-Käyttötapaukset:<br>
+--if muuttuja=toinen_muuttuja komento<br>
+--tai<br>
+--if muuttuja=int_arvo komento<br>
+--esim. if i=3 setMousePos 1 1 tai if i=j setMousePos 1 1)<br>
+--if värinetsintäfunktio komento<br>
+--esim. if findColor #000000 0 0 40 40 setMousePos 1 1<br>
+--tai<br>
+--if findColorFromPaletteStartingFromPoint #000000 20 20 100 100 60 60 setMousePos findColorFromPaletteStartingFromPoint #000000 20 20 100 100 60 60<br>
 goto (ainoastaan esim. @-merkillä spesifioituihin kohtiin)<br>
 sleep (odotustoiminto millisekunneissa)<br>
 colorPalette (kirjoitusasultaan muunneltu arraylist muuttuja johon syötetään värit hex-muodossa. esim. colorPalette #000000 #FFFFFF)<br>
