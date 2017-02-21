@@ -142,7 +142,7 @@ Hiiren komentoja (MouseOperator):<br>
 -esim. mouseLeftUp<br>
 **mouseRightDown** (Hiiren oikea nappi alas, missä ikinä hiiri onkaan)<br>
 -esim. mouseRightDown<br>
-**mouseRighUp** (Hiiren oikea nappi ylös, missä ikinä hiiri onkaan)<br>
+**mouseRightUp** (Hiiren oikea nappi ylös, missä ikinä hiiri onkaan)<br>
 -esim. mouseRightUp<br>
 **setMousePos** (Asettaa kursorin sijainnin).<br>
 Syntaksi: setMousePos x y<br>
