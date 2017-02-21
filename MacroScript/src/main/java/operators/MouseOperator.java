@@ -65,6 +65,11 @@ public class MouseOperator {
         bot.mouseRelease(InputEvent.BUTTON3_MASK);
     }
 
+    /**
+     * Adds a Thread.sleep() of a fixed value specified with a parameter.
+     *
+     * @param delay The time to sleep as milliseconds.
+     */
     private void sleepDelay(int delay) {
         long sInterval = (long) delay;
 
@@ -75,6 +80,9 @@ public class MouseOperator {
         }
     }
 
+    /**
+     * Adds a Thread.sleep() with a randomized time between 0 and 30 ms.
+     */
     private void sleepRnd() {
         long sInterval = 10;
         Random rnd = new Random();
@@ -148,7 +156,7 @@ public class MouseOperator {
     public void moveMouseSmooth(int x, int y, int delay) {
         PointerInfo pointInfo = MouseInfo.getPointerInfo();
         Point pntNow = pointInfo.getLocation();
-        
+
         int xNow = (int) pntNow.x;
         int yNow = (int) pntNow.y;
 
@@ -171,6 +179,14 @@ public class MouseOperator {
 
     }
 
+    /**
+     * Randomises an integer number between the parameter low and the parameter
+     * high.
+     *
+     * @param low The smallest number to return.
+     * @param high The highest number to return.
+     * @return A random integer within the specified parameters.
+     */
     private Integer randBetween(int low, int high) {
         Random r = new Random();
         return r.nextInt(high - low) + low;

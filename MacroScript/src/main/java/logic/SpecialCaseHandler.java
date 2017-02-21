@@ -5,7 +5,14 @@
  */
 package logic;
 
+import gui.frmLogger;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.util.ArrayList;
 import java.util.HashMap;
+import operators.ColorOperator;
 
 /**
  *
@@ -14,10 +21,17 @@ import java.util.HashMap;
 public class SpecialCaseHandler {
 
     HashMap<String, Integer> variablesAndValues;
+    ArrayList<String> colorPalette;
+    private final ColorOperator colorOperation;
+    private frmLogger myLogger;
 
-    public SpecialCaseHandler(HashMap<String, Integer> variablesAndValues) {
+    public SpecialCaseHandler(HashMap<String, Integer> variablesAndValues, ArrayList<String> colorPalette, frmLogger myLogger) {
         this.variablesAndValues = new HashMap<>();
         this.variablesAndValues = variablesAndValues;
+        this.colorOperation = new ColorOperator();
+        this.colorPalette = new ArrayList<>();
+        this.colorPalette = colorPalette;
+        this.myLogger = myLogger;
     }
 
     /**
@@ -35,9 +49,9 @@ public class SpecialCaseHandler {
         try {
             String ifSplittedBySpaces[] = ifSentence.split(" ");
             String splitByEqual[] = ifSplittedBySpaces[1].split("=");
-            
+
             int givenValue = 0;
-            
+
             try {
                 givenValue = Integer.parseInt(splitByEqual[1]);
             } catch (NumberFormatException e) {
@@ -45,7 +59,7 @@ public class SpecialCaseHandler {
                     givenValue = variablesAndValues.get(splitByEqual[1]);
                 }
             }
-            
+
             if (variablesAndValues.containsKey(splitByEqual[0])) {
                 if (variablesAndValues.get(splitByEqual[0]) == givenValue) {
                     for (int i = 2; i < ifSplittedBySpaces.length; i++) {
@@ -54,12 +68,45 @@ public class SpecialCaseHandler {
                     toReturn = toReturn.substring(0, toReturn.length() - 1);
                 }
             } else {
+                myLogger.insert("Variable not found in: " + ifSentence);
+                toReturn = "3rror";
                 //variable not found
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             //ei "="-merkkiä
+            if (ifSentence.contains("findColor")) {
+                System.out.println("löyty findColor");
+                String colorPoint = handleFindColorAsParameter(ifSentence);
+                if (!colorPoint.contains("-1")) {
+                    try {
+                        System.out.println("ifS: " + ifSentence);
+                        String ifSplittedBySpaces[] = ifSentence.split(" ");
+                        int beginCommand = 7;
+
+                        if (ifSentence.contains("StartingFromPoint")) {
+                            beginCommand = 9;
+                        }
+
+                        for (int i = beginCommand; i < ifSplittedBySpaces.length; i++) {
+                            toReturn = toReturn + ifSplittedBySpaces[i] + " ";
+                        }
+                        toReturn = toReturn.substring(0, toReturn.length() - 1);
+                    } catch (Exception ex) {
+                        myLogger.insert("Invalid format in: " + ifSentence + "\nIf-sentence needs to have a condition");
+                        //if-lauseella ei ollut ehtoa
+                    }
+                } else {
+                    myLogger.insert("Color not found: " + ifSentence);
+                    //väriä ei löytynyt
+                    toReturn = "3rror";
+                }
+            } else {
+                myLogger.insert("Invalid format in: " + ifSentence);
+            }
         } catch (NullPointerException e) {
             //ei ollu parametrii
+            myLogger.insert("Invalid parameter format in: " + ifSentence);
+            toReturn = "3rror";
         }
 
         return toReturn;
@@ -101,6 +148,7 @@ public class SpecialCaseHandler {
                         operationType = 4;
                     } else {
                         //syntax error
+                        myLogger.insert("Syntax error: " + commandLine);
                         splitByOperation = "010".split("1");
                         return;
                     }
@@ -113,6 +161,7 @@ public class SpecialCaseHandler {
                         if (variablesAndValues.containsKey(splitByOperation[0])) {
                             value1 = variablesAndValues.get(splitByOperation[0]);
                         } else {
+                            myLogger.insert("Syntax error: " + commandLine);
                             //syntax error
                         }
                     }
@@ -123,6 +172,7 @@ public class SpecialCaseHandler {
                         if (variablesAndValues.containsKey(splitByOperation[1])) {
                             value2 = variablesAndValues.get(splitByOperation[1]);
                         } else {
+                            myLogger.insert("Syntax error: " + commandLine);
                             //syntax error
                         }
                     }
@@ -131,6 +181,7 @@ public class SpecialCaseHandler {
 
                     switch (operationType) {
                         case 0:
+                            myLogger.insert("Syntax error, unknown operation: " + commandLine);
                             //error
                             break;
                         case 1:
@@ -150,13 +201,16 @@ public class SpecialCaseHandler {
                     variablesAndValues.put(splitByEqual[0], result);
 
                 } catch (NullPointerException e) {
+                    myLogger.insert("Syntax error, parameters seem to be missing: " + commandLine);
                     //ei ollu mitää O.O
                 }
 
             } else {
+                myLogger.insert("Variable does not exist: " + commandLine);
                 //erröööööör, ei oo tehty muuttujaa
             }
         } catch (Exception e) {
+            myLogger.insert("Syntax error, unknown command: " + commandLine);
             //errööööör, ei voi splitata, joten tuntematon komento.
         }
     }
@@ -178,13 +232,164 @@ public class SpecialCaseHandler {
                 try {
                     variablesAndValues.put(splitByEqual[0], Integer.parseInt(splitByEqual[1]));
                 } catch (ArrayIndexOutOfBoundsException e) {//ei arvoa
+                    myLogger.insert("No value was set for " + splitByEqual[0] + ", so default (=0) will be used. ");
                     variablesAndValues.put(splitByEqual[0], 0);//asetetaan oletus 0.
                 }
             }
         } catch (NumberFormatException e) {
+            String splitByEqual[] = rawData.split("=");
+            if (variablesAndValues.containsKey(splitByEqual[1])) {
+                variablesAndValues.put(splitByEqual[0], variablesAndValues.get(splitByEqual[1]));
+            } else {
+                myLogger.insert("Syntax error: " + splitByEqual[0] + " needs to get its value as a number or from another variable.");
+            }
             //ei oo numero
         } catch (NullPointerException e) {
+            myLogger.insert("Syntax error: No name was set for the variable");
             //ei ollu parametrii
         }
+    }
+
+    /**
+     * When any color finding operation is used from the class ColorOperator it
+     * needs to be processed here.
+     *
+     * @param commandLine The command line containing the color finding
+     * operation
+     * @return The coordinates as String. Format "x y" t. ex. "50 100"
+     */
+    public String handleFindColorAsParameter(String commandLine) {
+        String splitBySpaces[] = commandLine.split(" ");
+        int method = 0;
+        boolean rightColorFormat = false;
+
+        if (splitBySpaces[1].equals("findColor")) {
+            method = 1;
+        } else if (splitBySpaces[1].equals("findColorStartingFromPoint")) {
+            method = 2;
+        } else if (splitBySpaces[1].equals("findColorFromPalette")) {
+            method = 3;
+        } else if (splitBySpaces[1].equals("findColorFromPaletteStartingFromPoint")) {
+            method = 4;
+        } else {
+            myLogger.insert("Syntax error: " + commandLine);
+            //tuntematon findColor
+            return "3rror";
+        }
+
+        if (method == 1 || method == 2) {
+            if (splitBySpaces[2].length() == 7 && splitBySpaces[2].charAt(0) == '#' && isValidHex(splitBySpaces[2]) == true) {
+                rightColorFormat = true;
+            }
+        } else if (method == 3 || method == 4) {
+            if (!colorPalette.isEmpty()) {
+                rightColorFormat = true;
+            }
+        }
+
+        if (rightColorFormat == false) {
+            if (method == 1 || method == 2) {
+                myLogger.insert("The color input is in a faulty format: " + commandLine);
+            } else if (method == 3 || method == 4) {
+                myLogger.insert("ColorPalette is empty: " + commandLine);
+            }
+            return "3rror"; //joko väri ei ollut hex-muodossa tai jos käytössä on colorPalette, niin se oli tyhjä
+        }
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenWidth = (int) screenSize.getWidth();
+        int screenHeight = (int) screenSize.getHeight();
+        Point startPoint = new Point(-1, -1);
+        int x1 = 0, x2 = 0, y1 = 0, y2 = 0, startX = 0, startY = 0;
+
+        try {
+            x1 = Integer.parseInt(splitBySpaces[3]);
+            y1 = Integer.parseInt(splitBySpaces[4]);
+            x2 = Integer.parseInt(splitBySpaces[5]);
+            y2 = Integer.parseInt(splitBySpaces[6]);
+
+            if (method == 2 || method == 4) {
+                startX = Integer.parseInt(splitBySpaces[7]);
+                startY = Integer.parseInt(splitBySpaces[8]);
+                if (isBetween(startX, x1, x2) == false || isBetween(startY, y1, y2) == false) {
+                    myLogger.insert("The start point needs to be in the area: " + commandLine);
+                    return "3rror";//aloituspiste ei alueella
+                }
+                startPoint.x = startX;
+                startPoint.y = startY;
+            }
+        } catch (Exception e) {
+            myLogger.insert("Syntax error: " + commandLine);
+            return "3rror"; //epäkelpoja numeroita tai parametrejä puuttuu
+        }
+
+        if (isBetween(x1, 0, screenWidth) == false
+                || isBetween(y1, 0, screenHeight) == false
+                || isBetween(x2, x1, screenWidth) == false
+                || isBetween(y2, y1, screenHeight) == false) {
+            myLogger.insert("The points need to be placed within the correct pixel range: " + commandLine + "\nThe correct range for x is from 0 to " + screenWidth + " and for y from 0 to " + screenHeight);
+            return "3rror"; //pisteet eivät ole näytön alueella
+        }
+        
+        if (x1==x2 || y1==y2) {
+            
+            myLogger.insert("Rectangle width and height must be > 0: " + commandLine);
+            return "3rror";
+        }
+
+        Rectangle area = new Rectangle();
+        area.setRect(x1, y1, x2 - x1, y2 - y1);
+        Point colorCoodrinates = new Point(-1, -1);
+
+        switch (method) {
+            case 1:
+                colorCoodrinates = colorOperation.findColor(colorOperation.hexToRGB(splitBySpaces[2]), area);
+                break;
+            case 2:
+                colorCoodrinates = colorOperation.findColorStartingFromPoint(colorOperation.hexToRGB(splitBySpaces[2]), startPoint, area);
+                break;
+            case 3:
+                colorCoodrinates = colorOperation.findColorFromPalette(colorPalette, area);
+                break;
+            case 4:
+                colorCoodrinates = colorOperation.findColorFromPaletteStartingFromPoint(colorPalette, startPoint, area);
+                break;
+        }
+
+        return colorCoodrinates.x + " " + colorCoodrinates.y;
+    }
+
+    /**
+     * This is used to check if a given integer value is inbetween the given
+     * parameters.
+     *
+     * @param value The value which is compared to the parameters
+     * @param low Parameter for the lowest possible number (inclusive)
+     * @param high Parameter for the highest possible number (inclusive)
+     * @return true if the value is between the given parameters. False if the
+     * number is not between the given parameters.
+     */
+    private boolean isBetween(int value, int low, int high) {
+        if (value <= high && value >= low) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if the given parameter is a valid number in hex format. For
+     * example #FFFFFF and #000000 are valid.
+     *
+     * @param hex The String to check
+     * @return True if String is a hex number, false if not.
+     */
+    public boolean isValidHex(String hex) {
+        for (int i = 1; i < hex.length(); i++) {
+            if (Character.digit(hex.charAt(i), 16) == -1) {
+                return false;
+            }
+        }
+        return true;
     }
 }

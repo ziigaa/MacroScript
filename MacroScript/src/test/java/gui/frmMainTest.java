@@ -5,7 +5,6 @@
  */
 package gui;
 
-import gui.frmMain;
 import java.awt.Color;
 import org.junit.After;
 import org.junit.AfterClass;

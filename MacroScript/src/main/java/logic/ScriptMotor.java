@@ -1,8 +1,8 @@
 package logic;
 
+import gui.frmLogger;
 import operators.MouseOperator;
 import operators.KeyboardOperator;
-import operators.ColorOperator;
 import java.awt.AWTException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,12 +22,11 @@ public class ScriptMotor {
     private HashMap<String, Integer> theGoTos;
     private final MouseOperator mouseOperation;
     private final KeyboardOperator keyboardOperation;
-    private final ColorOperator colorOperation;
     private final SpecialCaseHandler specialCaseHandler;
+    private frmLogger myLogger;
 
-    public ScriptMotor(String inputScript) throws AWTException {
+    public ScriptMotor(String inputScript, frmLogger myLogger) throws AWTException {
         this.theScript = inputScript;
-        //this.currentCommand = "";
         this.currentLine = 0;
         this.lineCount = 0;
         this.theGoTos = new HashMap<>();
@@ -35,13 +34,20 @@ public class ScriptMotor {
         this.variablesAndValues = new HashMap<>();
         this.colorPalette = new ArrayList<>();
         this.theGoTos = new HashMap<>();
+        this.myLogger = myLogger;
         this.mouseOperation = new MouseOperator();
         this.keyboardOperation = new KeyboardOperator();
-        this.colorOperation = new ColorOperator();
-        this.specialCaseHandler = new SpecialCaseHandler(variablesAndValues);
+        this.specialCaseHandler = new SpecialCaseHandler(variablesAndValues, colorPalette, myLogger);
+
         runScript();
     }
 
+    /**
+     * Splits the given String into a string array and stores the array in a
+     * private variable
+     *
+     * @param splittable The String to split
+     */
     private void splitIntoLines(String splittable) {
         this.lines = splittable.split("\\r?\\n");
     }
@@ -80,25 +86,39 @@ public class ScriptMotor {
         this.command = commandLine.split(" ");
         String inExecution = this.command[0];
 
-        char firstChar = inExecution.charAt(0);
-
-        if (firstChar == '@') {
-            this.theGoTos.put(inExecution.substring(1, inExecution.length()), this.currentLine);
+        if (commandLine.contains("3rror")) {
             return;
+        }
+        
+        try {
+            char firstChar = inExecution.charAt(0);
+            if (firstChar == '@') {
+                this.theGoTos.put(inExecution.substring(1, inExecution.length()), this.currentLine);
+                return;
+            }
+        } catch (Exception e) {
+            myLogger.insert("Syntax error: " + lines[currentLine]);
         }
 
         switch (inExecution) {
-            case "if"://todo: if findcolor bla bla bla keyup, keydown, type, humantype, keypress, setmousepos, movemousesmooth, movemousehuman
+            case "if":
+                System.out.println(specialCaseHandler.handleIf(commandLine));
                 executeCommand(specialCaseHandler.handleIf(commandLine));
                 break;
             case "goto":
-                this.currentLine = this.theGoTos.get(this.command[1]);
+                if (theGoTos.containsKey(this.command[1])) {
+                    this.currentLine = this.theGoTos.get(this.command[1]);
+                } else {
+                    myLogger.insert("Label not found: " + commandLine);
+                }
                 break;
             case "sleep": {
                 try {
                     Thread.sleep(Long.parseLong(this.command[1]));
                 } catch (InterruptedException ex) {
                     Logger.getLogger(ScriptMotor.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception e) {
+                    myLogger.insert("Syntax error: " + commandLine);
                 }
             }
             break;
@@ -106,9 +126,10 @@ public class ScriptMotor {
                 this.colorPalette.clear();
                 for (String tmp : this.command) {
                     if (!"colorPalette".equals(tmp)) {
-                        if (tmp.length() == 7 && tmp.charAt(0) == '#') {
+                        if (tmp.length() == 7 && tmp.charAt(0) == '#' && specialCaseHandler.isValidHex(tmp) == true) {
                             this.colorPalette.add(tmp);
                         } else {
+                            myLogger.insert("Syntax error: " + commandLine + "\nInvalid color format. Use hex, t. ex. #000000\ncolorPalette has been emptied.");
                             //error, koska ei väri tai ei hex muodossa
                         }
                     }
@@ -130,32 +151,59 @@ public class ScriptMotor {
                 mouseOperation.rightUp();
                 break;
             case "setMousePos":
-                //todo: mahdollisuus välittää coords findcolorien avulla
                 try {
                     mouseOperation.setMousePosition(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]));
                 } catch (NumberFormatException e) {
+                    if (this.command[1].contains("findColor")) {
+                        String colorPoint = specialCaseHandler.handleFindColorAsParameter(commandLine);
+                        if (!colorPoint.contains("-1")) {
+                            executeCommand(this.command[0] + " " + colorPoint);
+                            return;
+                        }
+                    } else {
+                        myLogger.insert("Syntax error: " + commandLine + "\nThe parameters need to be in numeric format or passed by a color finding method.");
+                    }
                     //ei oo numero
                 } catch (NullPointerException e) {
+                    myLogger.insert("Syntax error: " + commandLine + "\nA parameter seems to be missing");
                     //ei ollu parametrii
                 }
                 break;
             case "moveMouseSmooth":
-                //todo: mahdollisuus välittää coords findcolorien avulla
                 try {
                     mouseOperation.moveMouseSmooth(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]), 3);
                 } catch (NumberFormatException e) {
+                    if (this.command[1].contains("findColor")) {
+                        String colorPoint = specialCaseHandler.handleFindColorAsParameter(commandLine);
+                        if (!colorPoint.contains("-1")) {
+                            executeCommand(this.command[0] + " " + colorPoint);
+                            return;
+                        }
+                    } else {
+                        myLogger.insert("Syntax error: " + commandLine + "\nThe parameters need to be in numeric format or passed by a color finding method.");
+                    }
                     //ei oo numero
                 } catch (NullPointerException e) {
                     //ei ollu parametrii
+                    myLogger.insert("Syntax error: " + commandLine + "\nA parameter seems to be missing");
                 }
                 break;
             case "moveMouseHuman":
-                //todo: mahdollisuus välittää coords findcolorien avulla
                 try {
                     mouseOperation.moveMouseHuman(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]), 50, 50);
                 } catch (NumberFormatException e) {
+                    if (this.command[1].contains("findColor")) {
+                        String colorPoint = specialCaseHandler.handleFindColorAsParameter(commandLine);
+                        if (!colorPoint.contains("-1")) {
+                            executeCommand(this.command[0] + " " + colorPoint);
+                            return;
+                        }
+                    } else {
+                        myLogger.insert("Syntax error: " + commandLine + "\nThe parameters need to be in numeric format or passed by a color finding method.");
+                    }
                     //ei oo numero
                 } catch (NullPointerException e) {
+                    myLogger.insert("Syntax error: " + commandLine + "\nA parameter seems to be missing");
                     //ei ollu parametrii
                 }
                 break;

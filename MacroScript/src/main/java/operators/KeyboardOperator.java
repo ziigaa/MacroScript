@@ -84,6 +84,18 @@ public class KeyboardOperator {
         }
     }
 
+    /**
+     * Finds the correct keycode for the specified character and either presses,
+     * presses and releases or releases the key adding random Thread.sleep()
+     * commands on the flow according to given parameters.
+     *
+     * @param charToType The character to solve the keycode for. Also the
+     * character to undergo the specified action as mentioned above.
+     * @param isHuman True if random Thread.sleep() times are wanted, false if
+     * not.
+     * @param onlyDown If the only action wanted is a keyDown function.
+     * @param onlyUp If  the only action wanted is a keyUp function.
+     */
     private void typeChar(char charToType, boolean isHuman, boolean onlyDown, boolean onlyUp) {
         String alphas = "abcdefghijklmnopqrstuvwxyz";
         String numbers = "0123456789";
@@ -153,7 +165,9 @@ public class KeyboardOperator {
             shiftNeeded = false;
         }
     }
-
+/**
+ * Adds a Thread.sleep() with a randomized time between 0 and 300 ms.
+ */
     private void doRndSleep() {
         Random rnd = new Random();
         long sInterval = (long) rnd.nextInt(300);

@@ -5,7 +5,6 @@
  */
 package operators;
 
-import operators.MouseOperator;
 import java.awt.AWTException;
 import java.awt.MouseInfo;
 import java.awt.Point;

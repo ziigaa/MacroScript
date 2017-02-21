@@ -49,6 +49,7 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuNew;
     private javax.swing.JMenuItem mnuRun;
     private javax.swing.JMenuItem mnuSave;
+    private javax.swing.JMenuItem mnuLogger;
     private javax.swing.JMenu mnuScript;
     private javax.swing.JScrollPane scrpAsd;
     private javax.swing.JTextField txtColor;
@@ -56,11 +57,13 @@ public class frmMain extends javax.swing.JFrame {
 
     private boolean colorPickerActive = false;
     private ScriptMotor motor;
+    private frmLogger myLogger;
 
     // End of variables declaration
     public frmMain() {
         initComponents();
         this.colorPickerActive = false;
+        myLogger = new frmLogger();
     }
 
     /**
@@ -129,6 +132,7 @@ public class frmMain extends javax.swing.JFrame {
         mnuExit = new javax.swing.JMenuItem();
         mnuScript = new javax.swing.JMenu();
         mnuRun = new javax.swing.JMenuItem();
+        mnuLogger = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout frmMainLayout = new javax.swing.GroupLayout(frmMain.getContentPane());
         frmMain.getContentPane().setLayout(frmMainLayout);
@@ -148,9 +152,9 @@ public class frmMain extends javax.swing.JFrame {
                 formWindowDeactivated(evt);
             }
         });
-        
+
         setResizable(false);
-        
+
         txtScript.setColumns(20);
         txtScript.setRows(5);
         scrpAsd.setViewportView(txtScript);
@@ -224,6 +228,14 @@ public class frmMain extends javax.swing.JFrame {
         });
         mnuScript.add(mnuRun);
 
+        mnuLogger.setText("Error Log");
+        mnuLogger.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuLoggerActionPerformed(evt);
+            }
+        });
+        mnuScript.add(mnuLogger);
+
         mnuMenuBar.add(mnuScript);
 
         setJMenuBar(mnuMenuBar);
@@ -296,10 +308,19 @@ public class frmMain extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
+    /**
+     * New Script. Asks if the user wants to save the current script before
+     * clearing txtScript.
+     *
+     * @param evt
+     */
     private void mnuNewActionPerformed(java.awt.event.ActionEvent evt) {
         askForSave();
     }
 
+    /**
+     * Opens a dialog that asks the user if the current script should be saved.
+     */
     private void askForSave() {
         int dialogButton = JOptionPane.YES_NO_OPTION;
         int dialogResult = JOptionPane.showConfirmDialog(null, "Would you like to save your current script first?", "Save first?", dialogButton);
@@ -310,15 +331,30 @@ public class frmMain extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Exit program. Asks if the user wants to save the current script first.
+     *
+     * @param evt
+     */
     private void mnuExitActionPerformed(java.awt.event.ActionEvent evt) {
         askForSave();
         System.exit(0);
     }
 
+    /**
+     * User wants to save, let's make it happen.
+     *
+     * @param evt
+     */
     private void mnuSaveActionPerformed(java.awt.event.ActionEvent evt) {
         saveAs();
     }
 
+    /**
+     * User wants to open an existing script. Let's make it happen.
+     *
+     * @param evt
+     */
     private void mnuLoadActionPerformed(java.awt.event.ActionEvent evt) {
         loadFile();
     }
@@ -390,21 +426,46 @@ public class frmMain extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * User has selected to pick a color. Let's give colorPickerActive the value
+     * true, so the timer in MacroScript.java can pick it up from the method
+     * getColorPickerActive().
+     *
+     * @param evt
+     */
     private void lblPickColorMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
         this.colorPickerActive = true;
         lblColor.setOpaque(true);
     }
 
+    /**
+     * User wants to run the script. Let's make it happen.
+     *
+     * @param evt
+     */
     private void mnuRunActionPerformed(java.awt.event.ActionEvent evt) {
         try {
-            // TODO add your handling code here:
-            this.motor = new ScriptMotor(this.txtScript.getText());
+            this.motor = new ScriptMotor(this.txtScript.getText(), myLogger);
         } catch (AWTException ex) {
             Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    /**
+     * Shows the logger
+     * @param evt
+     */
+    private void mnuLoggerActionPerformed(java.awt.event.ActionEvent evt) {
+        myLogger.setVisible(true);
+    }
+
+    /**
+     * Converts an integer value into a hex value.
+     *
+     * @param input the integer to convert into hex.
+     * @return The value as hex in the form of a String.
+     */
     private String toHexString(final int input) {
         String out = Integer.toHexString(input);
         if (out.length() == 1) {

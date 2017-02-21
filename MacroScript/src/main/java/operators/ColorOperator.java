@@ -85,8 +85,8 @@ public class ColorOperator {
      * @param startingPoint The point where to start from
      * @param field The rectangle which limits the search area
      * @return The first point that has a matching color in the colorPalette. If
-     * the color cannot be found in the specified area return will be
-     * Point(-1, -1)
+     * the color cannot be found in the specified area return will be Point(-1,
+     * -1)
      */
     public Point findColorFromPaletteStartingFromPoint(ArrayList<String> colorPalette, Point startingPoint, Rectangle field) {
         try {
@@ -170,8 +170,8 @@ public class ColorOperator {
      * #ffffff
      * @param field The area where to search from
      * @return The first point that has a matching color in the colorPalette. If
-     * the color cannot be found in the specified area return will be
-     * Point(-1, -1)
+     * the color cannot be found in the specified area return will be Point(-1,
+     * -1)
      */
     public Point findColorFromPalette(ArrayList<String> colorPalette, Rectangle field) {
         try {
@@ -193,6 +193,13 @@ public class ColorOperator {
         return new Point(-1, -1);
     }
 
+    /**
+     * Converts a list of colors in hex format into a list of colors as Color
+     * variables.
+     *
+     * @param colorsAsHex The list containing the hex colors
+     * @return An ArrayList containing the converted Color variables
+     */
     private ArrayList<Color> getColorPaletteAsRGB(ArrayList<String> colorsAsHex) {
         ArrayList<Color> colors = new ArrayList<>();
         for (String i : colorsAsHex) {
@@ -201,9 +208,9 @@ public class ColorOperator {
         return colors;
     }
 
-    
     /**
-     * Converts hex color string into a Color object
+     * Converts hex color string into a Color object.
+     *
      * @param colorAsHex The color as hex code. t. ex. #000000 or #ffffff
      * @return The same color as a Color object
      */

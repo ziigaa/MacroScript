@@ -5,14 +5,10 @@
  */
 package logic;
 
-import logic.ScriptMotorTest;
-import java.awt.AWTException;
 import java.lang.reflect.Field;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 /**
  *
@@ -71,5 +67,22 @@ public class TestFunctionLibrary {
             Logger.getLogger(ScriptMotorTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "3rror"; //3rror siksi, ettei se voi olla mikään generoitu arvo..
+    }
+    
+    public String toHexString(int input) {
+        String out = Integer.toHexString(input);
+        if (out.length() == 1) {
+            out = "0" + out;
+        }
+        return out;
+    }
+    
+    public String nextHexColor() {
+        return "#" + toHexString(rnd.nextInt(256)) + toHexString(rnd.nextInt(256)) + toHexString(rnd.nextInt(256));
+    }
+    
+    public char getRndChar() {
+        String chars = "abcdefghijklmnopqrstuvwxyz0123456789,.-  ";
+        return chars.charAt(rnd.nextInt(chars.length()));
     }
 }

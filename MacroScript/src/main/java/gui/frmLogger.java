@@ -5,7 +5,7 @@
  */
 package gui;
 
-import javax.swing.text.Highlighter;
+import javax.swing.text.DefaultCaret;
 
 /**
  *
@@ -15,12 +15,16 @@ public class frmLogger extends javax.swing.JFrame {
 
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JTextArea txtLog;
-
+    private DefaultCaret caret;
     /**
      * Creates new form frmLogger
      */
     public frmLogger() {
         initComponents();
+
+        this.caret = (DefaultCaret) txtLog.getCaret();
+        
+
     }
 
     /**
@@ -39,7 +43,9 @@ public class frmLogger extends javax.swing.JFrame {
         txtLog.setColumns(20);
         txtLog.setRows(5);
         scrollPane.setViewportView(txtLog);
-
+        
+         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,5 +93,11 @@ public class frmLogger extends javax.swing.JFrame {
                 new frmLogger().setVisible(true);
             }
         });
+
+    }
+
+    public void insert(String errorString) {
+        txtLog.append(errorString + "\n\n");
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
     }
 }

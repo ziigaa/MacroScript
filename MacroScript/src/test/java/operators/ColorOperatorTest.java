@@ -5,7 +5,6 @@
  */
 package operators;
 
-import operators.ColorOperator;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -52,11 +51,10 @@ public class ColorOperatorTest {
         Point startingPoint = new Point(30, 30);
         Rectangle field = new Rectangle(0, 0, 60, 60);
         ColorOperator instance = new ColorOperator();
-        Point unexpResult = null;
+        Point unexpResult = new Point(-1, -1);
         Point result = instance.findColorStartingFromPoint(color, startingPoint, field);
+        System.out.println(result);
         assertNotSame(unexpResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
 
     /**
@@ -72,11 +70,9 @@ public class ColorOperatorTest {
         Point startingPoint = new Point(30, 30);
         Rectangle field = new Rectangle(0, 0, 60, 60);
         ColorOperator instance = new ColorOperator();
-        Point unexpResult = null;
+        Point unexpResult = new Point(-1, -1);
         Point result = instance.findColorFromPaletteStartingFromPoint(colorPalette, startingPoint, field);
         assertNotSame(unexpResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
 
     /**
@@ -88,11 +84,9 @@ public class ColorOperatorTest {
         Color color = Color.BLACK;
         Rectangle field = new Rectangle(0, 0, 30, 30);
         ColorOperator instance = new ColorOperator();
-        Point unexpResult = null;
+        Point unexpResult = new Point(-1, -1);
         Point result = instance.findColor(color, field);
         assertNotSame(unexpResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
 
     /**
@@ -106,11 +100,9 @@ public class ColorOperatorTest {
         colorPalette.add("#ffffff");
         Rectangle field = new Rectangle(0, 0, 30, 30);
         ColorOperator instance = new ColorOperator();
-        Point unexpResult = null;
+        Point unexpResult = new Point(-1, -1);
         Point result = instance.findColorFromPalette(colorPalette, field);
         assertNotSame(unexpResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
 
     /**
@@ -124,8 +116,6 @@ public class ColorOperatorTest {
         Color expResult = Color.WHITE;
         Color result = instance.hexToRGB(colorAsHex);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
     }
 
 }

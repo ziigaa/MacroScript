@@ -5,11 +5,7 @@
  */
 package operators;
 
-import operators.KeyboardOperator;
 import java.awt.AWTException;
-import java.awt.Component;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -24,7 +20,7 @@ public class KeyboardOperatorTest {
 
     public KeyboardOperatorTest() {
     }
-
+    
     @BeforeClass
     public static void setUpClass() {
     }
@@ -110,44 +106,11 @@ public class KeyboardOperatorTest {
     @Test
     public void testTypeChar() throws AWTException {
         System.out.println("typeChar");
-        char charToType = ' ';
+        char charToType = 'a';
         boolean isHuman = false;
 
         KeyboardOperator instance = new KeyboardOperator();
-        Component a = new Component() {
-        };
 
-        KeyListener keyChecker = new KeyListener() {
-            public char typedChar;
-
-            @Override
-            public void keyPressed(KeyEvent ke) {
-                typedChar = ke.getKeyChar();
-                System.out.println("yessss press: " + typedChar);
-            }
-
-            @Override
-            public void keyReleased(KeyEvent ke) {
-                typedChar = ke.getKeyChar();
-                System.out.println("yessss release: " + typedChar);
-                if (typedChar == ke.getKeyChar()) {
-
-                }
-            }
-
-            @Override
-            public void keyTyped(KeyEvent ke) {
-                typedChar = ke.getKeyChar();
-                System.out.println("yessss typed: " + typedChar);
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            public char getTypedChar() {
-                return typedChar;
-            }
-        };
-        a.addKeyListener(keyChecker);
-        a.requestFocus();
         instance.type((CharSequence) String.valueOf(charToType), isHuman);
 
         // TODO review the generated test code and remove the default call to fail.

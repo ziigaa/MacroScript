@@ -5,7 +5,7 @@
  */
 package logic;
 
-import logic.ScriptMotor;
+import gui.frmLogger;
 import java.awt.AWTException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +23,8 @@ import org.junit.Test;
 public class ScriptMotorTest {
 
     private TestFunctionLibrary tfl = new TestFunctionLibrary();
-
+    private frmLogger log = new frmLogger();
+    
     public ScriptMotorTest() {
     }
 
@@ -49,7 +50,7 @@ public class ScriptMotorTest {
     @Test
     public void testRunScript() throws AWTException {
         System.out.println("runScript");
-        ScriptMotor instance = new ScriptMotor("this\nis\nmy\nscript\n\n\n");
+        ScriptMotor instance = new ScriptMotor("this\nis\nmy\nscript\n\n\n", log);
         instance.runScript();
         // kun loggeri lisätty, laita tähän skriptiks
         // pari oikeeta komentoo ja loput bogus
@@ -71,7 +72,7 @@ public class ScriptMotorTest {
 
         try {
             //getFieldValue(instance.getClass(), "variablesAndValues")
-            instance = new ScriptMotor("this\nis\nmy\nscript");
+            instance = new ScriptMotor("this\nis\nmy\nscript", log);
             instance.executeCommand(commandLine);
 
             assertEquals("{" + variableName + "=" + variableValue + "}", tfl.getFieldValue(instance, "variablesAndValues"));
