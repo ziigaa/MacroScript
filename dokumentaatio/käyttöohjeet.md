@@ -95,10 +95,12 @@ Käyttöliittymän ominaisuudet:<br>
 -Suorita skripti<br>
 -Virheilmoitusikkuna<br><br>
 
--Hiiren position seuraaminen timerin avulla (yhden näytön sisältävissä järjestelmissä)<br>
+-Hiiren position seuraaminen timerin avulla (yhden näytön sisältävissä järjestelmissä)<br><br>
+
+Värin valitseminen aloitetaan painamalla framella olevaa sinistä mikropipetin kuvaa.
 -Värin tunnistaminen kursorin alta kun toiminto on aktivoitu, lopetus kun jFrame menettää fokuksensa<br>
--Värin esittäminen jLabelissa<br>
--Värin esittäminen hex-muodossa tekstikentässä (skriptissä käytettyjen värinetsimiskomentojen vuoksi)<br><br>
+-Värin esitetään jLabelissa silloin, kun toiminto on aktiivisena.<br>
+-Värin esitetään hex-muodossa tekstikentässä (skriptissä käytettyjen värinetsimiskomentojen vuoksi)<br><br>
   
 if-lauseet:<br>
 -(Huom! if-lauseen toiminta rajoittuu näihin!):<br>
