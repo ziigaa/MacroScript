@@ -165,17 +165,24 @@ keyUp (Näppäin ylös, fokus määrittää mihin napin pohjasta päästäminen 
 -esim. keyUp a<br>
 pressEnter (Painaa enter-näppäintä, fokus määrittää mihin napin painallus menee ja skripti ei ota tähän millään tavalla itsestään kantaa).<br>
 -esim. pressEnter<br>
-type (Kirjoittaa nopeimmalla tavalla syötteessä annetun tekstin, fokus määrittää mihin teksti menee ja skripti ei ota tähän millään tavalla itsestään kantaa). Syntaksi type tekti<br>
+type (Kirjoittaa nopeimmalla tavalla syötteessä annetun tekstin, fokus määrittää mihin teksti menee ja skripti ei ota tähän millään tavalla itsestään kantaa). Syntaksi: type tekti<br>
 -esim. type tralalaa olen onnellineeeeen<br>
-typeHuman (Kirjoittaa syötteessä annetun tekstin tavalla, jossa kunkin painalluksen pohjassaoloaikaan vaikuttaa satunnainen viiveluku. Sama vaikuttaa intervalliin napin painalluksien välillä. Fokus määrittää mihin napin painallus menee ja skripti ei ota tähän millään tavalla itsestään kantaa)<br><br>
+typeHuman (Kirjoittaa syötteessä annetun tekstin tavalla, jossa kunkin painalluksen pohjassaoloaikaan vaikuttaa satunnainen viiveluku. Sama vaikuttaa intervalliin napin painalluksien välillä. Fokus määrittää mihin napin painallus menee ja skripti ei ota tähän millään tavalla itsestään kantaa). Syntaksi: typeHuman teksti<br>
+-esim. typeHuman hihihihihii hahahahahaahaaa hohohohohohohooo<br><br>
 
 Parametreinä tai if-lauseen ehtoina (ColorOperator):<br>
-findColor (etsii näytöltä pisteen, joka on annetun syötteen värinen syötetyn Rectangle-olion koordinaattien sisältä ja palauttaa sen koordinaatit)<br>
-findColorFromPalette (etsii näytöltä pisteen, joka on colorPalette-muuttujan sisältämän syötteen värinen, syötetyn Rectangle-olion koordinaattien sisältä ja palauttaa sen koordinaatit)<br>
-findColorStartingFromPoint (etsii näytöltä spiraalimaisesti syötteellä määritetyn värin sisältämän pisteen annetuista koordinaateista lähtien, syötetyn Rectangle-olion koordinaattien sisältä ja palauttaa sen koordinaatit)<br>
-findColorFromPaletteStartingFromPoint (etsii näytöltä spiraalimaisesti colorPalette-muuttujassa määritetyn värin sisältämän pisteen annetuista koordinaateista lähtien, syötetyn Rectangle-olion koordinaattien sisältä ja palauttaa sen koordinaatit)<br><br>
+findColor (etsii näytöltä pisteen, joka on annetun syötteen (hex) värinen syötettyjen nelikulmion koordinaattien sisältä ja palauttaa sen koordinaatit). Syntaksi #väri vasenX ylempiY oikeaX alempiY<br>
+-esim. findColor #000000 0 0 40 40<br>
+findColorFromPalette (etsii näytöltä pisteen, joka on colorPalette-muuttujan sisältämän syötteen värinen, syötetyn nelikulmion koordinaattien sisältä ja palauttaa sen koordinaatit). Syntaksi: findColorFromPalette vasenX ylempiY oikeaX alempiY<br>
+-esim. findColorFromPalette 20 20 80 80<br>
+findColorStartingFromPoint (etsii näytöltä spiraalimaisesti syötteellä määritetyn värin sisältämän pisteen annetuista koordinaateista lähtien ulospäin, syötettyjen nelikulmion muodostavien koordinaattien sisältä ja palauttaa sen koordinaatit). Syntaksi: findColorStartingFromPoint #väri vasenX ylempiY oikeaX alempiY alkuX alkuY<br>
+-esim. findColorStartingFromPoint #000000 30 30 100 100 65 65<br>
+findColorFromPaletteStartingFromPoint (etsii näytöltä spiraalimaisesti colorPalette-muuttujassa määritetyn värin sisältämän pisteen annetuista koordinaateista lähtien, syötettyjen nelikulmion muodostavien koordinaattien sisältä ja palauttaa sen koordinaatit). Syntaksi: findColorFromPaletteStartingFromPoint vasenX ylempiY oikeaX alempiY alkuX alkuY<br>
+-esim. findColorFromPaletteStartingFromPoint 60 60 200 200 130 130<br><br>
 
 Erikoistapaus:<br>
-@-merkin rivin alussa sisältävät kohdat goto-komentoa varten<br>
-
+@-merkin rivin alussa sisältävät kohdat. Näiden tulkitaan olevan goto-komentoa varten ja täten niiden jälkeen tuleva teksti tallennetaan rivinumeron kera, minkä jälkeen skriptin voi goto komennolla kutsua jatkuvaksi tästä kohdasta.<br>
+-Esimerkki kohdan määrittämisestä:<br>
+@kohta<br>
+Kohdan kutsuminen goto-komennolla: kts. goto-komento.<br><br>
 Ohjelma sisältää virheiden käsittelyä jokaiselle komennolle, joista saa vapaavalintaisesti käytössä olevaan loggeriin ystävällisiä huomautuksia. Jos oikein pahasti tyrii, niin saa useamman samasta asiasta :)<br>
