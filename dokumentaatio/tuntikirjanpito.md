@@ -11,3 +11,5 @@ Päivä | Tunnit | Kuvaus
 10.02.2017 | 1h | -githubiin oikeita tiedostoja ym. säätäessä
 15.02.2017 | 3h | -Testien parantelua ja päivittelyä
 16.02.2017 | 3h | -IfHandler muutettu SpecialCaseHandleriksi selkeämmän kuvauksen vuoksi. Luokkaan lisätty myös metodit handleVariableSettingAndVariableCalculations(), createVariable().
+19.02.2017 | 6h | -Infoa sekvenssikaavioista ja yhden luonti.<br>-Infoa javadocista ja suurimman osan kirjoittelu.
+20.02.2017 | 10h | -Loggerin sisällyttäminen projektiin.<br>--Eri virheiden tunnistusten kytkeminen loggeriin<br>-Kaikkien värien etsimiseen liittyvien metodien implementaatio if-, setMousePos-, moveMouseSmooth- ja moveMouseHuman-kutsujen yhteyteen.<br>-Paranteluja muuttujien käsittelyyn.<br>-Testien päivitystä ja satunnaistamista.<br>-Yleistä projektin testaamista epäideaalisilla skripteillä.
