@@ -303,21 +303,26 @@ public class SpecialCaseHandler {
         int x1 = 0, x2 = 0, y1 = 0, y2 = 0, startX = 0, startY = 0;
 
         try {
-            x1 = Integer.parseInt(splitBySpaces[3]);
-            y1 = Integer.parseInt(splitBySpaces[4]);
-            x2 = Integer.parseInt(splitBySpaces[5]);
-            y2 = Integer.parseInt(splitBySpaces[6]);
+
+            int parameterPlaceFix = 1;
 
             if (method == 2 || method == 4) {
-                startX = Integer.parseInt(splitBySpaces[7]);
-                startY = Integer.parseInt(splitBySpaces[8]);
+                startX = Integer.parseInt(splitBySpaces[6]);
+                startY = Integer.parseInt(splitBySpaces[7]);
                 if (isBetween(startX, x1, x2) == false || isBetween(startY, y1, y2) == false) {
                     myLogger.insert("The start point needs to be in the area: " + commandLine);
                     return "3rror";//aloituspiste ei alueella
                 }
                 startPoint.x = startX;
                 startPoint.y = startY;
+                parameterPlaceFix = 0;
             }
+
+            x1 = Integer.parseInt(splitBySpaces[2 + parameterPlaceFix]);
+            y1 = Integer.parseInt(splitBySpaces[3 + parameterPlaceFix]);
+            x2 = Integer.parseInt(splitBySpaces[4 + parameterPlaceFix]);
+            y2 = Integer.parseInt(splitBySpaces[5 + parameterPlaceFix]);
+
         } catch (Exception e) {
             myLogger.insert("Syntax error: " + commandLine);
             return "3rror"; //epäkelpoja numeroita tai parametrejä puuttuu
@@ -330,9 +335,9 @@ public class SpecialCaseHandler {
             myLogger.insert("The points need to be placed within the correct pixel range: " + commandLine + "\nThe correct range for x is from 0 to " + screenWidth + " and for y from 0 to " + screenHeight);
             return "3rror"; //pisteet eivät ole näytön alueella
         }
-        
-        if (x1==x2 || y1==y2) {
-            
+
+        if (x1 == x2 || y1 == y2) {
+
             myLogger.insert("Rectangle width and height must be > 0: " + commandLine);
             return "3rror";
         }

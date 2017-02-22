@@ -6,6 +6,8 @@
 package logic;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +19,51 @@ import java.util.logging.Logger;
 public class TestFunctionLibrary {
 
     private Random rnd = new Random();
+    private ArrayList<String> ScriptCommands;
+
+    public TestFunctionLibrary() {
+        this.ScriptCommands = new ArrayList<>();
+        ScriptCommands.clear();
+        String[] commands = {"if", "goto", "sleep", "colorPalette", "int", "mouseLeftDown",
+            "mouseLeftUp", "mouseRightDown", "mouseRightUp", "setMousePos", "moveMouseSmooth",
+            "moveMouseHuman", "mouseLeftClick", "mouseRightClick", "mouseHumanLeftClick",
+            "mouseHumanRightClick", "keyDown", "keyUp", "pressEnter", "type", "typeHuman",
+            "findColor", "findColorFromPalette", "findColorStartingFromPoint",
+            "findColorFromPaletteStartingFromPoint", "@"};
+        ScriptCommands.addAll(Arrays.asList(commands));
+    }
+
+    public String getRandomCommand() {
+        int rndNumber = rnd.nextInt(ScriptCommands.size());
+        return ScriptCommands.get(rndNumber);
+    }
+
+    public ArrayList<String> getScriptCommands() {
+        return ScriptCommands;
+    }
+
+    public Integer getParamCountFor(String command) {
+        if (command.contains("Right") || command.contains("Left") || command.contains("key")
+                || command.contains("Enter")) {
+            return 0;
+        } else if (command.contains("Pos") || command.contains("moveMouse")) {
+            return 2;
+        } else if (command.contains("goto") || command.contains("sleep")
+                || command.contains("int")) {
+            return 1;
+        } else if (command.contains("type")) {
+            return 15;
+        } else if (command.equals("findColor")) {
+            return 5;
+        } else if (command.equals("findColorFromPalette")) {
+            return 4;
+        } else if (command.equals("findColorStartingFromPoint")) {
+            return 7;
+        } else if (command.equals("findColorFromPaletteStartingFromPoint")) {
+            return 6;
+        }
+        return 99;
+    }
 
     public String createRandomString(int length, boolean rndLength) {
 
@@ -36,7 +83,7 @@ public class TestFunctionLibrary {
     }
 
     public Integer getRndInt(int maxValue) {
-        return rnd.nextInt(maxValue);
+        return rnd.nextInt(maxValue + 1);
     }
 
     //getFieldValue(instance.getClass(), "variablesAndValues");
@@ -68,7 +115,7 @@ public class TestFunctionLibrary {
         }
         return "3rror"; //3rror siksi, ettei se voi olla mikään generoitu arvo..
     }
-    
+
     public String toHexString(int input) {
         String out = Integer.toHexString(input);
         if (out.length() == 1) {
@@ -76,11 +123,11 @@ public class TestFunctionLibrary {
         }
         return out;
     }
-    
+
     public String nextHexColor() {
         return "#" + toHexString(rnd.nextInt(256)) + toHexString(rnd.nextInt(256)) + toHexString(rnd.nextInt(256));
     }
-    
+
     public char getRndChar() {
         String chars = "abcdefghijklmnopqrstuvwxyz0123456789,.-  ";
         return chars.charAt(rnd.nextInt(chars.length()));

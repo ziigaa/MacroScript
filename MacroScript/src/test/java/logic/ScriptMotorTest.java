@@ -55,6 +55,8 @@ public class ScriptMotorTest {
         // kun loggeri lisätty, laita tähän skriptiks
         // pari oikeeta komentoo ja loput bogus
     }
+    
+    
 
     /**
      * Test of executeCommand method, of class ScriptMotor.
