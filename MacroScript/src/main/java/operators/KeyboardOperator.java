@@ -5,10 +5,6 @@
  */
 package operators;
 
-/**
- *
- * @author Joonas
- */
 import java.awt.AWTException;
 import java.awt.Robot;
 import static java.awt.event.KeyEvent.*;
@@ -16,6 +12,11 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * The keyboard functions are executed here.
+ *
+ * @author Joonas
+ */
 public class KeyboardOperator {
 
     private Robot bot;
@@ -23,6 +24,11 @@ public class KeyboardOperator {
     private boolean keyFunctionDown = false;
     private boolean keyFunctionUp = false;
 
+    /**
+     * The constructor.
+     *
+     * @throws AWTException If the Robot fails.
+     */
     public KeyboardOperator() throws AWTException {
         this.bot = new Robot();
         this.isHuman = false;
@@ -94,7 +100,7 @@ public class KeyboardOperator {
      * @param isHuman True if random Thread.sleep() times are wanted, false if
      * not.
      * @param onlyDown If the only action wanted is a keyDown function.
-     * @param onlyUp If  the only action wanted is a keyUp function.
+     * @param onlyUp If the only action wanted is a keyUp function.
      */
     private void typeChar(char charToType, boolean isHuman, boolean onlyDown, boolean onlyUp) {
         String alphas = "abcdefghijklmnopqrstuvwxyz";
@@ -165,9 +171,10 @@ public class KeyboardOperator {
             shiftNeeded = false;
         }
     }
-/**
- * Adds a Thread.sleep() with a randomized time between 0 and 300 ms.
- */
+
+    /**
+     * Adds a Thread.sleep() with a randomized time between 0 and 300 ms.
+     */
     private void doRndSleep() {
         Random rnd = new Random();
         long sInterval = (long) rnd.nextInt(300);

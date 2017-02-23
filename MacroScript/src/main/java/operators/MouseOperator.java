@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * The mouse functions are executed here.
  *
  * @author Joonas
  */
@@ -25,6 +26,11 @@ public class MouseOperator {
 
     private Robot bot;
 
+    /**
+     * The constructor.
+     *
+     * @throws AWTException If the Robot fails.
+     */
     public MouseOperator() throws AWTException {
         this.bot = new Robot();
     }

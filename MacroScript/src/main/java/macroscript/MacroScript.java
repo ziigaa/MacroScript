@@ -16,7 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * The main file. Everything starts from here.
  * @author Joonas
  */
 public class MacroScript {
@@ -28,7 +28,7 @@ public class MacroScript {
      * @param args The command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+
         frmMain mainWindow = new frmMain();
         mainWindow.setVisible(true);
 
@@ -52,7 +52,7 @@ public class MacroScript {
                     }
                 }
             }
-        }, /*run first occurrence immediately at 0ms*/ 0, 100); //rerun after every 100ms
+        }, /*run first occurrence immediately at 0ms*/ 0, 10); //rerun after every 10ms
     }
 
 }

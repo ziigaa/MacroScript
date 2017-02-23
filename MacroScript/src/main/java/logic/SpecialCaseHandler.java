@@ -15,6 +15,8 @@ import java.util.HashMap;
 import operators.ColorOperator;
 
 /**
+ * For handling if-sentences, color finding operations and variables within the
+ * script.
  *
  * @author Joonas
  */
@@ -25,6 +27,15 @@ public class SpecialCaseHandler {
     private final ColorOperator colorOperation;
     private frmLogger myLogger;
 
+    /**
+     * The constructor.
+     *
+     * @param variablesAndValues A HashMap containing all the variables and
+     * their values.
+     * @param colorPalette The ArrayList for colorPalette variable within the
+     * script.
+     * @param myLogger The error logger.
+     */
     public SpecialCaseHandler(HashMap<String, Integer> variablesAndValues, ArrayList<String> colorPalette, frmLogger myLogger) {
         this.variablesAndValues = new HashMap<>();
         this.variablesAndValues = variablesAndValues;
@@ -74,17 +85,22 @@ public class SpecialCaseHandler {
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             //ei "="-merkkiä
-            if (ifSentence.contains("findColor")) {
-                System.out.println("löyty findColor");
+            String ifSplittedBySpaces[] = ifSentence.split(" ");
+            if (ifSplittedBySpaces[1].contains("findColor")) {
+                //System.out.println("löyty findColor");
                 String colorPoint = handleFindColorAsParameter(ifSentence);
                 if (!colorPoint.contains("-1")) {
                     try {
-                        System.out.println("ifS: " + ifSentence);
-                        String ifSplittedBySpaces[] = ifSentence.split(" ");
+                        //System.out.println("ifS: " + ifSentence);
+
                         int beginCommand = 7;
 
+                        if (ifSplittedBySpaces[1].contains("FromPalette")) {
+                            beginCommand--;
+                        }
+
                         if (ifSentence.contains("StartingFromPoint")) {
-                            beginCommand = 9;
+                            beginCommand += 2;
                         }
 
                         for (int i = beginCommand; i < ifSplittedBySpaces.length; i++) {
@@ -108,7 +124,6 @@ public class SpecialCaseHandler {
             myLogger.insert("Invalid parameter format in: " + ifSentence);
             toReturn = "3rror";
         }
-
         return toReturn;
     }
 
@@ -120,16 +135,22 @@ public class SpecialCaseHandler {
      * command
      */
     public void handleVariableSettingAndVariableCalculations(String commandLine) {
-        try {//joko muuttujalle ollaan asettamassa arvoa, tai sitten komento on tuntematon
+
+        try { //joko muuttujalle ollaan asettamassa arvoa, tai sitten komento on tuntematon
 
             String splitByEqual[];
             splitByEqual = commandLine.split("=");
 
-            if (this.variablesAndValues.containsKey(splitByEqual[0])) {
-                //laskutoimitusten varalta laita if splittedByEqual[1] ei ole int jne...
+            //System.out.println("splByEQ0=" + splitByEqual[0]);
+            if (variablesAndValues.containsKey(splitByEqual[0])) {
                 try {
                     variablesAndValues.put(splitByEqual[0], Integer.parseInt(splitByEqual[1]));
                 } catch (NumberFormatException e) {
+
+                    if (variablesAndValues.containsKey(splitByEqual[1])) {
+                        variablesAndValues.put(splitByEqual[0], variablesAndValues.get(splitByEqual[1]));
+                        return;
+                    }
 
                     String splitByOperation[];
                     int operationType = 0;
@@ -148,7 +169,7 @@ public class SpecialCaseHandler {
                         operationType = 4;
                     } else {
                         //syntax error
-                        myLogger.insert("Syntax error: " + commandLine);
+                        myLogger.insert("Syntax error1: " + commandLine);
                         splitByOperation = "010".split("1");
                         return;
                     }
@@ -161,7 +182,7 @@ public class SpecialCaseHandler {
                         if (variablesAndValues.containsKey(splitByOperation[0])) {
                             value1 = variablesAndValues.get(splitByOperation[0]);
                         } else {
-                            myLogger.insert("Syntax error: " + commandLine);
+                            myLogger.insert("Syntax error2: " + commandLine);
                             //syntax error
                         }
                     }
@@ -172,7 +193,7 @@ public class SpecialCaseHandler {
                         if (variablesAndValues.containsKey(splitByOperation[1])) {
                             value2 = variablesAndValues.get(splitByOperation[1]);
                         } else {
-                            myLogger.insert("Syntax error: " + commandLine);
+                            myLogger.insert("Syntax error3: " + commandLine);
                             //syntax error
                         }
                     }
@@ -206,7 +227,7 @@ public class SpecialCaseHandler {
                 }
 
             } else {
-                myLogger.insert("Variable does not exist: " + commandLine);
+                myLogger.insert("Unknown command or variable does not exist: " + commandLine);
                 //erröööööör, ei oo tehty muuttujaa
             }
         } catch (Exception e) {
@@ -224,16 +245,23 @@ public class SpecialCaseHandler {
      * t. ex. i=3.
      */
     public void createVariable(String rawData) {
+
+        if (!rawData.contains("=") && !rawData.contains(" ")) {
+            myLogger.insert("No value was set for " + rawData + ", so default (=0) will be used.");
+            variablesAndValues.put(rawData, 0); //asetetaan oletus 0.
+            return;
+        }
+
         try {
             String splitByEqual[] = rawData.split("=");
             if (variablesAndValues.containsKey(splitByEqual[0])) {
                 //parametri on jo olemassa
+                myLogger.insert("A variable called " + splitByEqual[0] + " already exists. Specifications: " + rawData + " were not set.");
             } else {
                 try {
                     variablesAndValues.put(splitByEqual[0], Integer.parseInt(splitByEqual[1]));
-                } catch (ArrayIndexOutOfBoundsException e) {//ei arvoa
-                    myLogger.insert("No value was set for " + splitByEqual[0] + ", so default (=0) will be used. ");
-                    variablesAndValues.put(splitByEqual[0], 0);//asetetaan oletus 0.
+                } catch (ArrayIndexOutOfBoundsException e) { //ei arvoa
+                    myLogger.insert("No value was set for " + splitByEqual[0] + ". Skipping line.");
                 }
             }
         } catch (NumberFormatException e) {
@@ -245,7 +273,7 @@ public class SpecialCaseHandler {
             }
             //ei oo numero
         } catch (NullPointerException e) {
-            myLogger.insert("Syntax error: No name was set for the variable");
+            myLogger.insert("Syntax error: No value was set for the variable");
             //ei ollu parametrii
         }
     }
@@ -272,17 +300,21 @@ public class SpecialCaseHandler {
         } else if (splitBySpaces[1].equals("findColorFromPaletteStartingFromPoint")) {
             method = 4;
         } else {
-            myLogger.insert("Syntax error: " + commandLine);
+            myLogger.insert("Syntax error5: " + commandLine);
             //tuntematon findColor
             return "3rror";
         }
 
+        int parameterPlaceFix = 1;
+
         if (method == 1 || method == 2) {
             if (splitBySpaces[2].length() == 7 && splitBySpaces[2].charAt(0) == '#' && isValidHex(splitBySpaces[2]) == true) {
+                parameterPlaceFix = 1;
                 rightColorFormat = true;
             }
         } else if (method == 3 || method == 4) {
             if (!colorPalette.isEmpty()) {
+                parameterPlaceFix = 0;
                 rightColorFormat = true;
             }
         }
@@ -304,27 +336,24 @@ public class SpecialCaseHandler {
 
         try {
 
-            int parameterPlaceFix = 1;
-
-            if (method == 2 || method == 4) {
-                startX = Integer.parseInt(splitBySpaces[6]);
-                startY = Integer.parseInt(splitBySpaces[7]);
-                if (isBetween(startX, x1, x2) == false || isBetween(startY, y1, y2) == false) {
-                    myLogger.insert("The start point needs to be in the area: " + commandLine);
-                    return "3rror";//aloituspiste ei alueella
-                }
-                startPoint.x = startX;
-                startPoint.y = startY;
-                parameterPlaceFix = 0;
-            }
-
             x1 = Integer.parseInt(splitBySpaces[2 + parameterPlaceFix]);
             y1 = Integer.parseInt(splitBySpaces[3 + parameterPlaceFix]);
             x2 = Integer.parseInt(splitBySpaces[4 + parameterPlaceFix]);
             y2 = Integer.parseInt(splitBySpaces[5 + parameterPlaceFix]);
 
+            if (method == 2 || method == 4) {
+                startX = Integer.parseInt(splitBySpaces[6 + parameterPlaceFix]);
+                startY = Integer.parseInt(splitBySpaces[7 + parameterPlaceFix]);
+                if (isBetween(startX, x1, x2) == false || isBetween(startY, y1, y2) == false) {
+                    myLogger.insert("The start point needs to be in the area: " + commandLine);
+                    return "3rror"; //aloituspiste ei alueella
+                }
+                startPoint.x = startX;
+                startPoint.y = startY;
+            }
+
         } catch (Exception e) {
-            myLogger.insert("Syntax error: " + commandLine);
+            myLogger.insert("Syntax error6: " + commandLine);
             return "3rror"; //epäkelpoja numeroita tai parametrejä puuttuu
         }
 

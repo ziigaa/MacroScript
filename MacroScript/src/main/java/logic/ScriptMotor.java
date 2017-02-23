@@ -8,8 +8,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-//@author Joonas
 
+/**
+ * All commands are processed here.
+ *
+ * @author Joonas
+ */
 public class ScriptMotor {
 
     private String theScript;
@@ -25,6 +29,14 @@ public class ScriptMotor {
     private final SpecialCaseHandler specialCaseHandler;
     private frmLogger myLogger;
 
+    /**
+     * The constructor.
+     *
+     * @param inputScript The script to process
+     * @param myLogger The parameter for the logger
+     * @throws AWTException If the robots fail in any of the needed parts of the
+     * program.
+     */
     public ScriptMotor(String inputScript, frmLogger myLogger) throws AWTException {
         this.theScript = inputScript;
         this.currentLine = 0;
@@ -86,10 +98,17 @@ public class ScriptMotor {
         this.command = commandLine.split(" ");
         String inExecution = this.command[0];
 
-        if (commandLine.contains("3rror")) {
+        if (commandLine.isEmpty()) {
             return;
         }
-        
+
+        if (commandLine.contains("3rror") && !commandLine.contains("type")) {
+            if (this.command[0].equals("int")) {
+                myLogger.insert("3rror is not allowed as a name for a variable");
+            }
+            return;
+        }
+
         try {
             char firstChar = inExecution.charAt(0);
             if (firstChar == '@') {
@@ -102,7 +121,7 @@ public class ScriptMotor {
 
         switch (inExecution) {
             case "if":
-                System.out.println(specialCaseHandler.handleIf(commandLine));
+                //System.out.println(specialCaseHandler.handleIf(commandLine));
                 executeCommand(specialCaseHandler.handleIf(commandLine));
                 break;
             case "goto":
@@ -111,8 +130,9 @@ public class ScriptMotor {
                 } else {
                     myLogger.insert("Label not found: " + commandLine);
                 }
+
                 break;
-            case "sleep": {
+            case "sleep":
                 try {
                     Thread.sleep(Long.parseLong(this.command[1]));
                 } catch (InterruptedException ex) {
@@ -120,8 +140,8 @@ public class ScriptMotor {
                 } catch (Exception e) {
                     myLogger.insert("Syntax error: " + commandLine);
                 }
-            }
-            break;
+
+                break;
             case "colorPalette":
                 this.colorPalette.clear();
                 for (String tmp : this.command) {
@@ -167,6 +187,8 @@ public class ScriptMotor {
                 } catch (NullPointerException e) {
                     myLogger.insert("Syntax error: " + commandLine + "\nA parameter seems to be missing");
                     //ei ollu parametrii
+                } catch (Exception e) {
+                    myLogger.insert("Syntax error: " + commandLine);
                 }
                 break;
             case "moveMouseSmooth":
@@ -186,6 +208,8 @@ public class ScriptMotor {
                 } catch (NullPointerException e) {
                     //ei ollu parametrii
                     myLogger.insert("Syntax error: " + commandLine + "\nA parameter seems to be missing");
+                } catch (Exception e) {
+                    myLogger.insert("Syntax error: " + commandLine);
                 }
                 break;
             case "moveMouseHuman":
@@ -205,6 +229,8 @@ public class ScriptMotor {
                 } catch (NullPointerException e) {
                     myLogger.insert("Syntax error: " + commandLine + "\nA parameter seems to be missing");
                     //ei ollu parametrii
+                } catch (Exception e) {
+                    myLogger.insert("Syntax error: " + commandLine);
                 }
                 break;
             case "mouseLeftClick":

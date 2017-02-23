@@ -83,7 +83,7 @@ public class TestFunctionLibrary {
     }
 
     public Integer getRndInt(int maxValue) {
-        return rnd.nextInt(maxValue + 1);
+        return rnd.nextInt(maxValue);
     }
 
     //getFieldValue(instance.getClass(), "variablesAndValues");

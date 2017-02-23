@@ -13,6 +13,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
+ * For finding colors on the screen.
  *
  * @author Joonas
  */
@@ -20,13 +21,16 @@ public class ColorOperator {
 
     private ArrayList<Color> colorPaletteAsColor;
 
+    /**
+     * The constructor.
+     */
     public ColorOperator() {
         this.colorPaletteAsColor = new ArrayList<>();
     }
 
     /**
      * The method searches for a color in a spiraling manner starting from a
-     * specified point within a specified rectangle
+     * specified point within a specified rectangle.
      *
      * @param color The color to search for
      * @param startingPoint The point where to start from
@@ -78,7 +82,7 @@ public class ColorOperator {
 
     /**
      * The method searches for multiple colors in a spiraling manner starting
-     * from a specified point within a specified rectangle
+     * from a specified point within a specified rectangle.
      *
      * @param colorPalette A list of colors in hex code. t. ex. #000000 or
      * #ffffff
@@ -137,7 +141,7 @@ public class ColorOperator {
 
     /**
      * Searches for a color within a rectangle. Iterates from left to right one
-     * pixel line at a time
+     * pixel line at a time.
      *
      * @param color The color to search for
      * @param field The area where to search from
@@ -164,7 +168,7 @@ public class ColorOperator {
 
     /**
      * Searches for multiple colors within a rectangle. Iterates from left to
-     * right one pixel line at a time
+     * right one pixel line at a time.
      *
      * @param colorPalette A list of colors in hex code. t. ex. #000000 or
      * #ffffff
