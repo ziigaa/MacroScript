@@ -257,6 +257,9 @@ public class ScriptMotor {
             case "typeHuman":
                 keyboardOperation.type(commandLine.substring(10), true);
                 break;
+            case "pressEnter":
+                keyboardOperation.pressEnter(true);
+                break;
             default:
                 specialCaseHandler.handleVariableSettingAndVariableCalculations(commandLine);
                 break;
