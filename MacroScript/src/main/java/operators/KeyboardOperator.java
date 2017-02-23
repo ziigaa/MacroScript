@@ -87,6 +87,7 @@ public class KeyboardOperator {
         for (int i = 0; i < length; i++) {
             char character = characters.charAt(i);
             typeChar(character, isHuman, keyFunctionDown, keyFunctionUp);
+            Thread.yield();
         }
     }
 
