@@ -26,7 +26,7 @@ under the License.
     <copyright>&#169;2017</copyright>
     <item>
       <title>File: 8,
-             Errors: 26,
+             Errors: 6,
              Warnings: 0,
              Infos: 0
       </title>
@@ -46,7 +46,7 @@ under the License.
           <tbody>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#macroscript.macroscript.SpecialCaseHandler.java">macroscript/macroscript/SpecialCaseHandler.java</a>
+                  <a href="${project.url}/checkstyle.html#gui.frmLogger.java">gui/frmLogger.java</a>
                 </td>
                 <td>
                   0
@@ -55,12 +55,26 @@ under the License.
                   0
                 </td>
                 <td>
-                  12
+                  0
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#macroscript.macroscript.MacroScript.java">macroscript/macroscript/MacroScript.java</a>
+                  <a href="${project.url}/checkstyle.html#macroscript.MacroScript.java">macroscript/MacroScript.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#operators.MouseOperator.java">operators/MouseOperator.java</a>
                 </td>
                 <td>
                   0
@@ -74,7 +88,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#macroscript.macroscript.ColorOperator.java">macroscript/macroscript/ColorOperator.java</a>
+                  <a href="${project.url}/checkstyle.html#logic.SpecialCaseHandler.java">logic/SpecialCaseHandler.java</a>
                 </td>
                 <td>
                   0
@@ -83,12 +97,12 @@ under the License.
                   0
                 </td>
                 <td>
-                  6
+                  3
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#macroscript.macroscript.frmMain.java">macroscript/macroscript/frmMain.java</a>
+                  <a href="${project.url}/checkstyle.html#operators.KeyboardOperator.java">operators/KeyboardOperator.java</a>
                 </td>
                 <td>
                   0
@@ -102,7 +116,21 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#macroscript.macroscript.KeyboardOperator.java">macroscript/macroscript/KeyboardOperator.java</a>
+                  <a href="${project.url}/checkstyle.html#gui.frmMain.java">gui/frmMain.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#operators.ColorOperator.java">operators/ColorOperator.java</a>
                 </td>
                 <td>
                   0
@@ -116,7 +144,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#macroscript.macroscript.ScriptMotor.java">macroscript/macroscript/ScriptMotor.java</a>
+                  <a href="${project.url}/checkstyle.html#logic.ScriptMotor.java">logic/ScriptMotor.java</a>
                 </td>
                 <td>
                   0
@@ -125,35 +153,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  3
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#macroscript.macroscript.MouseOperator.java">macroscript/macroscript/MouseOperator.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  3
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#macroscript.macroscript.frmLogger.java">macroscript/macroscript/frmLogger.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
+                  1
                 </td>
               </tr>
                       </tbody>
