@@ -6,13 +6,7 @@
 package macroscript.logic;
 
 import macroscript.gui.frmLogger;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
-import java.util.ArrayList;
 import java.util.HashMap;
-import macroscript.actions.ColorOperator;
 
 /**
  * For handling if-sentences within the script.

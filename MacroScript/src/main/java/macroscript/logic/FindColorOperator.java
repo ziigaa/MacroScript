@@ -13,7 +13,6 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import macroscript.actions.ColorOperator;
-import macroscript.actions.ColorOperator;
 
 /**
  * For handling color finding operations within the script.
