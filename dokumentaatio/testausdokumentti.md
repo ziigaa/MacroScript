@@ -26,37 +26,22 @@ Surefire report directory: C:\Users\ZiiGaa\MacroScript\MacroScript\target\surefi
 -------------------------------------------------------
  T E S T S
 -------------------------------------------------------
-Running macroscript.macroscript.ColorOperatorTest
+Running macroscript.actions.ColorOperatorTest
 findColorFromPalette
 findColorStartingFromPoint
+java.awt.Point[x=33,y=29]
 findColorFromPaletteStartingFromPoint
 hexToRGB
 findColor
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.35 sec
-Running macroscript.macroscript.frmMainTest
-getColorHexUnderCursor
-loadFile
-main
-getColorUnderCursor
-getColorPickerActive
-setColors
-saveAs
-Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.54 sec
-Running macroscript.macroscript.IfHandlerTest
-handleIf
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec
-Running macroscript.macroscript.KeyboardOperatorTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.351 sec
+Running macroscript.actions.KeyboardOperatorTest
 keyDown
 keyUp
 type
 typeChar
-doRndSleep
 pressEnter
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.265 sec
-Running macroscript.macroscript.MacroScriptTest
-main
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec
-Running macroscript.macroscript.MouseOperatorTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec
+Running macroscript.actions.MouseOperatorTest
 rightClick
 leftClick
 leftDown
@@ -68,21 +53,56 @@ rightUp
 moveMouseHuman
 leftUp
 setMousePosition
-Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.39 sec
-Running macroscript.macroscript.ScriptMotorTest
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.106 sec
+Running macroscript.gui.frmMainTest
+getColorHexUnderCursor
+getColorUnderCursor
+getColorPickerActive
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.293 sec
+Running macroscript.logic.FindColorOperatorTest
+handleFindColorAsParameter
+23 7
+isValidHex
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 sec
+Running macroscript.logic.IfHandlerTest
+handleIf
+handleIf
+handleIf
+handleIf
+handleIf
+handleIf
+handleIf
+handleIf
+handleIf
+handleIf
+handleIf
+handleIf
+handleIf
+handleIf
+handleIf
+handleIf
+handleIf
+handleIf
+handleIf
+handleIf
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec
+Running macroscript.logic.ScriptMotorTest
 executeCommand
 runScript
-splitIntoLines
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec
+Running macroscript.logic.VariableOperatorTest
+createVariable
+testCreateVariableAndHandleVariableSettingAndVariableCalculations
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 sec
 
 Results :
 
-Tests run: 35, Failures: 0, Errors: 0, Skipped: 0
+Tests run: 31, Failures: 0, Errors: 0, Skipped: 0
 
 ------------------------------------------------------------------------
 BUILD SUCCESS
 ------------------------------------------------------------------------
-Total time: 10.418s
-Finished at: Fri Feb 10 22:46:45 EET 2017
+Total time: 5.334s
+Finished at: Fri Feb 24 21:54:36 EET 2017
 Final Memory: 12M/223M
 ------------------------------------------------------------------------

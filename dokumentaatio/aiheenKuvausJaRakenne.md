@@ -1,4 +1,4 @@
-Dokumentaatio<br><br>
+﻿Dokumentaatio<br><br>
 
 Toteutetaan käyttöliittymällinen, käyttäjän ohjelmoitavissa oleva macro-ohjelma, joka suorittaa tekstikenttään syötettyjä
 komentoja, kuten kursorin position vaihtaminen, hiiren klikkailu, tekstin kirjoitus, ym.<br><br>
@@ -66,7 +66,46 @@ Erikoistapaus:<br>
 @-merkin rivin alussa sisältävät kohdat goto-komentoa varten<br>
 
 Skriptin suoritusmoottori (käy skriptin rivi riviltä läpi ja suorittaa validit komennot, ohittaen virheelliset syötteet)<br>
-Sisältää virheiden käsittelyä jokaiselle komennolle, josta saattaa poikiintua ohjelmalle oma loggeri<br>
+Sisältää virheiden käsittelyä jokaiselle komennolle, josta saattaa poikiintua ohjelmalle oma loggeri<br><br><br>
+
+
+---VKO 6 Deadlinea varten uusi kuvaus---<br><br>
+
+MacroScript on tapahtumien automatisointiin luotu ohjelma. Sen avulla voi luoda skriptejä, joita ohjelma sitten suorittaa.
+Ohjelman voi laittaa tekemään toisteista työtä, esimerkiksi joidenkin taulukoiden täyttämistä. Ohjelmaa voi tietysti
+käyttää myös pelien pelaamiseen. Liikkeelle ohjelma lähtee tiedostosta MacroScipt.java.<br><br>
+
+Toiminnallisuuksien kirjoon kuuluu esimerkiksi hiiren liikuttaminen sekä vasemman että oikean napin painallukset näitä
+toiminnallisuuksia hoitaa MouseOperator.java luokka.<br><br>
+
+Näppäimistön toiminta on pääosin saatavilla ja tähän kuuluu enganninkielen aakkoset (a-z), isot ja pienet kirjaimet,
+numerot, sekä suomalaisen näppäimistön mukaiset erikoismerkit (shift+numero) myös ",.-" ovat käytettävissä kuten ovat
+enter ja välilyöntikin. Näitä puolestaan toteutetaan KeyboardOperator.java luokassa.<br><br>
+
+Ohjelmaan on rakennettu toiminnallisuus, joka osaa eri tavoin etsiä värejä näytöltä. Tätä ominaisuutta voi käyttää
+esimerkiksi tekstin tunnistamiseen ja peleissä vihollisten ym. tunnistamiseen. Värien etsiminen oli tehokkainta
+toteuttaa niin, että piste, josta väri löytyy voidaan asettaa parametriksi jollekin komennolle (myös koko
+värin löytyminen voidaan ehdollistaa, eli suoritetaan joku komento, jos väri löytyy jostain.
+Värien etsinnän hoitaa luokka ColorOperator.java.<br><br>
+
+Värinetsinnän käsitteleminen skriptissä sai suhteellisen laajuutensa vuoksi oman luokan FindColorOperator.java.<br><br>
+
+Ohjelman ollessa skriptattava, muodostui pakollinen tarve saada skripteihin ehdollistaminen mahdolliseksi, eli toisin
+sanoen if-lauseille oli pakko kehittää toiminnallisuus. Tämä sai oman luokan, IfHandler.java<br><br>
+
+Tuntui myös oleelliselta, että ohjelman voisi saada tekemään loopia, joten goto komennolle muodostui tarve.<br><br>
+Jotta looppeja voitaisiin hallita jotenkin, muodostui tarve int muuttujille
+ja näistä muodostui oma luokka, jossa käsitellään siis if-lauseita ja skriptin sisäisiä int-muuttujia. Muuttujille on
+käytettävissä laskutoimituksia, jotka ovat summa-, erotus-, jako- ja kertolaskut. Taas syntyy uusi luokka, VariableOperator.java.<br><br>
+
+Käyttöliittymä sisältää kaksi luokkaa. Itse pääikkunan, jossa näytetään hiiren koordinaatit
+(yhden näytös sisältävissä järjestelmissä) 10ms päivitysvälein. Ikkuna sisältää teksti kentän skriptiä varten, ikonin,
+joka aktivoi värinpoimimisominaisuuden, labelin, johon väri asetellaan tarkastelua varten ja tekstikentän jossa väri
+ilmoitetaan hex-muodossa. Nämä toiminnallisuudet on havaittaivissa luokassa frmMain.Java.<br><br>
+
+Toinen käyttöliittymällinen luokka on loki-ikkuna. Siihen tulee ystävälliset ilmoitukset käyttäjälle jos hän on
+kirjoittanut virheellistä skriptiä tai skriptissä on automaattisesti oikaistuja epäkohtia.<br><br><br>
+
 
 
 ![Alt text](luokkakaavio.png "Luokkakaavio")
