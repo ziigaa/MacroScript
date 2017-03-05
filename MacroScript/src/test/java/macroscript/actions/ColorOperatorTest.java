@@ -5,11 +5,15 @@
  */
 package macroscript.actions;
 
-import macroscript.actions.ColorOperator;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -23,15 +27,35 @@ import static org.junit.Assert.*;
  */
 public class ColorOperatorTest {
 
+    private static JFrame window;
+    
     public ColorOperatorTest() {
     }
 
     @BeforeClass
     public static void setUpClass() {
-    }
+        JFrame window = new JFrame("Black box");
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setBounds(0, 0, 100, 100);
+        window.getContentPane().setBackground(Color.black);
+        window.setAlwaysOnTop(true);
+        JPanel contentPane = new JPanel();
+        contentPane.setBackground(Color.black);
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
+        window.setUndecorated(true);
+        window.setVisible(true);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ColorOperatorTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ColorOperatorTest.window = window;
+    }
+    
     @AfterClass
     public static void tearDownClass() {
+        ColorOperatorTest.window.dispose();
     }
 
     @Before
@@ -54,7 +78,6 @@ public class ColorOperatorTest {
         ColorOperator instance = new ColorOperator();
         Point unexpResult = new Point(-1, -1);
         Point result = instance.findColorStartingFromPoint(color, startingPoint, field);
-        System.out.println(result);
         assertNotSame(unexpResult, result);
     }
 

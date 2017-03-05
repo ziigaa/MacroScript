@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class KeyboardOperator {
 
-    private Robot bot;
+    private final Robot bot;
     private boolean isHuman = false;
     private boolean keyFunctionDown = false;
     private boolean keyFunctionUp = false;

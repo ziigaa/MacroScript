@@ -16,3 +16,4 @@ Päivä | Tunnit | Kuvaus
 22.02.2017 | 3h | Lisää taistelua testien kanssa...
 23.02.2017 | 5h | - SpecialCaseHandleriksi muutettu IfHandler jouduttiin pilkkomaan osiin sen huomattavaksi paisuneen koon vuoksi ja kaikki palaset ovat nyt saaneet omat luokkansa: IfHandler, FindColorHandler ja VariableOperator.
 24.02.2017 | 5h | -Koodin parantelua ja debuggailua. Raportit kuntoon. Sekvenssikaaviot kuntoon. Uusi luokkakaavio.
+05.03.2017 | 5h | -Koodin ja testien hiomista ja parantelua.

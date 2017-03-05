@@ -54,8 +54,7 @@ public class ScriptMotor {
         this.findColorOperation = new FindColorOperator(variablesAndValues, colorPalette, myLogger);
         this.ifHandler = new IfHandler(variablesAndValues, findColorOperation, myLogger);
         this.variableOperation = new VariableOperator(variablesAndValues, myLogger);
-        
-        
+
         runScript();
     }
 
@@ -109,7 +108,7 @@ public class ScriptMotor {
 
         if (commandLine.contains("3rror") && !commandLine.contains("type")) {
             if (this.command[0].equals("int")) {
-                myLogger.insert("3rror is not allowed as a name for a variable");
+                myLogger.insert("3rror is not allowed as a name for a variable, skipping line.");
             }
             return;
         }
@@ -121,12 +120,11 @@ public class ScriptMotor {
                 return;
             }
         } catch (Exception e) {
-            myLogger.insert("Syntax error: " + lines[currentLine]);
+            myLogger.insert("Syntax error: ScriptMotor@executeCommand: " + lines[currentLine]);
         }
 
         switch (inExecution) {
             case "if":
-                //System.out.println(specialCaseHandler.handleIf(commandLine));
                 executeCommand(ifHandler.handleIf(commandLine));
                 break;
             case "goto":
@@ -143,7 +141,7 @@ public class ScriptMotor {
                 } catch (InterruptedException ex) {
                     Logger.getLogger(ScriptMotor.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (Exception e) {
-                    myLogger.insert("Syntax error: " + commandLine);
+                    myLogger.insert("Syntax error: ScriptMotor@executeCommand: " + commandLine);
                 }
 
                 break;
@@ -154,8 +152,7 @@ public class ScriptMotor {
                         if (tmp.length() == 7 && tmp.charAt(0) == '#' && findColorOperation.isValidHex(tmp) == true) {
                             this.colorPalette.add(tmp);
                         } else {
-                            myLogger.insert("Syntax error: " + commandLine + "\nInvalid color format. Use hex, t. ex. #000000\ncolorPalette has been emptied.");
-                            //error, koska ei väri tai ei hex muodossa
+                            myLogger.insert("Syntax error: ScriptMotor@executeCommand: " + commandLine + "\nInvalid color format. Use hex, t. ex. #000000\ncolorPalette has been emptied.");
                         }
                     }
                 }
@@ -176,67 +173,13 @@ public class ScriptMotor {
                 mouseOperation.rightUp();
                 break;
             case "setMousePos":
-                try {
-                    mouseOperation.setMousePosition(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]));
-                } catch (NumberFormatException e) {
-                    if (this.command[1].contains("findColor")) {
-                        String colorPoint = findColorOperation.handleFindColorAsParameter(commandLine);
-                        if (!colorPoint.contains("-1")) {
-                            executeCommand(this.command[0] + " " + colorPoint);
-                            return;
-                        }
-                    } else {
-                        myLogger.insert("Syntax error: " + commandLine + "\nThe parameters need to be in numeric format or passed by a color finding method.");
-                    }
-                    //ei oo numero
-                } catch (NullPointerException e) {
-                    myLogger.insert("Syntax error: " + commandLine + "\nA parameter seems to be missing");
-                    //ei ollu parametrii
-                } catch (Exception e) {
-                    myLogger.insert("Syntax error: " + commandLine);
-                }
+                prepareAndExecute("setMousePos", commandLine);
                 break;
             case "moveMouseSmooth":
-                try {
-                    mouseOperation.moveMouseSmooth(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]), 3);
-                } catch (NumberFormatException e) {
-                    if (this.command[1].contains("findColor")) {
-                        String colorPoint = findColorOperation.handleFindColorAsParameter(commandLine);
-                        if (!colorPoint.contains("-1")) {
-                            executeCommand(this.command[0] + " " + colorPoint);
-                            return;
-                        }
-                    } else {
-                        myLogger.insert("Syntax error: " + commandLine + "\nThe parameters need to be in numeric format or passed by a color finding method.");
-                    }
-                    //ei oo numero
-                } catch (NullPointerException e) {
-                    //ei ollu parametrii
-                    myLogger.insert("Syntax error: " + commandLine + "\nA parameter seems to be missing");
-                } catch (Exception e) {
-                    myLogger.insert("Syntax error: " + commandLine);
-                }
+                prepareAndExecute("moveMouseSmooth", commandLine);
                 break;
             case "moveMouseHuman":
-                try {
-                    mouseOperation.moveMouseHuman(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]), 50, 50);
-                } catch (NumberFormatException e) {
-                    if (this.command[1].contains("findColor")) {
-                        String colorPoint = findColorOperation.handleFindColorAsParameter(commandLine);
-                        if (!colorPoint.contains("-1")) {
-                            executeCommand(this.command[0] + " " + colorPoint);
-                            return;
-                        }
-                    } else {
-                        myLogger.insert("Syntax error: " + commandLine + "\nThe parameters need to be in numeric format or passed by a color finding method.");
-                    }
-                    //ei oo numero
-                } catch (NullPointerException e) {
-                    myLogger.insert("Syntax error: " + commandLine + "\nA parameter seems to be missing");
-                    //ei ollu parametrii
-                } catch (Exception e) {
-                    myLogger.insert("Syntax error: " + commandLine);
-                }
+                prepareAndExecute("moveMouseHuman", commandLine);
                 break;
             case "mouseLeftClick":
                 mouseOperation.leftClick();
@@ -268,6 +211,48 @@ public class ScriptMotor {
             default:
                 variableOperation.handleVariableSettingAndVariableCalculations(commandLine);
                 break;
+        }
+    }
+
+    /**
+     * A method to avoid repetitive code. Checks a script function and its
+     * parameters for errors and executes the command if none are found.
+     *
+     * @param commandWithParameters To differentiate the command, one must be
+     * supplied.
+     * @param commandLine The whole commandLine for further inspection of
+     * syntax.
+     */
+    public void prepareAndExecute(String commandWithParameters, String commandLine) {
+        try {
+            switch (commandWithParameters) {
+                case "moveMouseSmooth":
+                    mouseOperation.moveMouseSmooth(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]), 3);
+                    break;
+                case "moveMouseHuman":
+                    mouseOperation.moveMouseHuman(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]), 50, 50);
+                    break;
+                case "setMousePos":
+                    mouseOperation.setMousePosition(Integer.parseInt(this.command[1]), Integer.parseInt(this.command[2]));
+                    break;
+            }
+
+        } catch (NumberFormatException e) {
+            if (this.command[1].contains("findColor")) {
+                String colorPoint = findColorOperation.handleFindColorAsParameter(commandLine);
+                if (!colorPoint.contains("-1")) {
+                    executeCommand(this.command[0] + " " + colorPoint);
+                    return;
+                }
+            } else {
+                myLogger.insert("Syntax error: ScriptMotor@executeCommand: " + commandLine + "\nThe parameters need to be in numeric format or passed by a color finding method.");
+            }
+            //ei oo numero
+        } catch (NullPointerException e) {
+            //ei ollu parametrii
+            myLogger.insert("Syntax error: ScriptMotor@executeCommand: " + commandLine + "\nA parameter seems to be missing");
+        } catch (Exception e) {
+            myLogger.insert("Syntax error: ScriptMotor@executeCommand: " + commandLine);
         }
     }
 }

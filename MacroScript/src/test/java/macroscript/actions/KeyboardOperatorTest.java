@@ -5,10 +5,16 @@
  */
 package macroscript.actions;
 
-import macroscript.actions.KeyboardOperator;
 import java.awt.AWTException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import macroscript.gui.TextBoxTest;
+import macroscript.logic.TestFunctionLibrary;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -19,11 +25,16 @@ import org.junit.Test;
  */
 public class KeyboardOperatorTest {
 
+    private TextBoxTest testFrame;
+    private final TestFunctionLibrary tfl = new TestFunctionLibrary();
+    
+    
     public KeyboardOperatorTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
+
     }
 
     @AfterClass
@@ -45,12 +56,33 @@ public class KeyboardOperatorTest {
      */
     @Test
     public void testKeyDown() throws AWTException {
-        System.out.println("keyDown");
-        char theKey = ' ';
-        KeyboardOperator instance = new KeyboardOperator();
-        instance.keyDown(theKey);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        try {
+            System.out.println("keyDown");
+            char theKey = tfl.getRndChar();
+            KeyboardOperator instance = new KeyboardOperator();
+            
+            testFrame = new TextBoxTest();
+            testFrame.requestFocusForTextArea();
+            
+            Thread.sleep(1000);
+            
+            instance.keyDown(theKey);
+            
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(KeyboardOperatorTest.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            //char snatchedChar = testFrame.getTestText().charAt(0);
+            testFrame.dispose();
+            assertEquals(theKey, testFrame.returnKeyEventAsChar());
+            
+            Thread.sleep(1000);
+            
+        } catch (InterruptedException ex) {
+            Logger.getLogger(KeyboardOperatorTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -61,11 +93,35 @@ public class KeyboardOperatorTest {
     @Test
     public void testKeyUp() throws AWTException {
         System.out.println("keyUp");
-        char theKey = ' ';
+        char theKey = tfl.getRndChar();
         KeyboardOperator instance = new KeyboardOperator();
+
+        testFrame = new TextBoxTest();
+        testFrame.requestFocusForTextArea();
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(KeyboardOperatorTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         instance.keyUp(theKey);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(KeyboardOperatorTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        char snatchedChar = testFrame.returnKeyEventAsChar();
+        testFrame.dispose();
+        assertEquals(theKey, snatchedChar);
+        
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(KeyboardOperatorTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -76,12 +132,32 @@ public class KeyboardOperatorTest {
     @Test
     public void testType() throws AWTException {
         System.out.println("type");
-        CharSequence characters = "a";
+        CharSequence characters = tfl.createRandomString(0, true)
+                + " " + tfl.createRandomString(0, true)
+                + " " + tfl.createRandomString(0, true);
+
         boolean isHuman = false;
         KeyboardOperator instance = new KeyboardOperator();
+
+        testFrame = new TextBoxTest();
+        testFrame.requestFocusForTextArea();
+        
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(KeyboardOperatorTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         instance.type(characters, isHuman);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(KeyboardOperatorTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        assertEquals(characters.toString(), testFrame.getTestText());
+        testFrame.dispose();
     }
 
     /**
@@ -94,9 +170,26 @@ public class KeyboardOperatorTest {
         System.out.println("pressEnter");
         boolean isHuman = false;
         KeyboardOperator instance = new KeyboardOperator();
+
+        testFrame = new TextBoxTest();
+        testFrame.requestFocusForTextArea();
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(KeyboardOperatorTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         instance.pressEnter(isHuman);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(KeyboardOperatorTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        assertEquals("\n", testFrame.getTestText());
+        testFrame.dispose();
     }
 
     /**
@@ -105,16 +198,36 @@ public class KeyboardOperatorTest {
      * @throws java.awt.AWTException
      */
     @Test
-    public void testTypeChar() throws AWTException {
+    public void testTypeChar() throws AWTException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         System.out.println("typeChar");
-        char charToType = 'a';
+        char charToType = tfl.getRndChar();
         boolean isHuman = false;
 
         KeyboardOperator instance = new KeyboardOperator();
 
-        instance.type((CharSequence) String.valueOf(charToType), isHuman);
+        testFrame = new TextBoxTest();
+        testFrame.requestFocusForTextArea();
 
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(KeyboardOperatorTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Class<?>[] paramTypes = {char.class, boolean.class, boolean.class, boolean.class};
+
+        Method typeChar = instance.getClass().getDeclaredMethod("typeChar", paramTypes);
+        typeChar.setAccessible(true);
+        typeChar.invoke(instance, charToType, false, false, false);
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(KeyboardOperatorTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        char snatchedChar = testFrame.returnKeyEventAsChar();
+        assertEquals(charToType, snatchedChar);
+        testFrame.dispose();
     }
 }

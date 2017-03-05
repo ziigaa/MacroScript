@@ -24,7 +24,7 @@ import java.util.logging.Logger;
  */
 public class MouseOperator {
 
-    private Robot bot;
+    private final Robot bot;
 
     /**
      * The constructor.

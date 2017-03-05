@@ -66,7 +66,7 @@ public class FindColorOperator {
         } else if (splitBySpaces[1].equals("findColorFromPaletteStartingFromPoint")) {
             method = 4;
         } else {
-            myLogger.insert("Syntax error5: " + commandLine);
+            myLogger.insert("Syntax error (FindColorOperator.java@handleColorAsParameter: " + commandLine);
             //tuntematon findColor
             return "3rror";
         }
@@ -119,7 +119,7 @@ public class FindColorOperator {
             }
 
         } catch (Exception e) {
-            myLogger.insert("Syntax error6: " + commandLine);
+            myLogger.insert("Syntax error: FindColorOperator@handleFindColorAsParameter unusable values or parameters missing: " + commandLine);
             return "3rror"; //epäkelpoja numeroita tai parametrejä puuttuu
         }
 

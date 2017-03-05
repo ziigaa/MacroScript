@@ -5,7 +5,6 @@
  */
 package macroscript.logic;
 
-import macroscript.logic.ScriptMotor;
 import macroscript.gui.frmLogger;
 import java.awt.AWTException;
 import java.util.logging.Level;

@@ -5,7 +5,6 @@
  */
 package macroscript.actions;
 
-import macroscript.actions.MouseOperator;
 import java.awt.AWTException;
 import java.awt.Dimension;
 import java.awt.MouseInfo;

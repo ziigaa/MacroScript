@@ -15,7 +15,7 @@ public class frmLogger extends javax.swing.JFrame {
 
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JTextArea txtLog;
-    private DefaultCaret caret;
+    private final DefaultCaret caret;
     /**
      * Creates new form frmLogger
      */

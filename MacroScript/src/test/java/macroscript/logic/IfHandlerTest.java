@@ -5,7 +5,6 @@
  */
 package macroscript.logic;
 
-import macroscript.logic.IfHandler;
 import macroscript.gui.frmLogger;
 import java.util.ArrayList;
 import java.util.HashMap;

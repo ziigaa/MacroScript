@@ -69,7 +69,6 @@ public class FindColorOperatorTest {
 
         String expResult = xValue + " " + yValue;
 
-        System.out.println(result);
         assertEquals(expResult, result);
     }
 

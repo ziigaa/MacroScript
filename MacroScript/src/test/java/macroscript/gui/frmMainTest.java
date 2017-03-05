@@ -5,7 +5,6 @@
  */
 package macroscript.gui;
 
-import macroscript.gui.frmMain;
 import java.awt.Color;
 import org.junit.After;
 import org.junit.AfterClass;
