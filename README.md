@@ -4,4 +4,5 @@ Skriptattava ohjelma, joka liikuttelee hiirtä ja painelee näppäimistön nappe
 [checkstyle-raportti](dokumentaatio/checkstyle-raportti/checkstyle.html)<br>
 [käyttöohjeet](dokumentaatio/käyttöohjeet.md)<br>
 [tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)<br>
-[sekvenssikaavio](dokumentaatio/sekvenssikaavio.png)
+[sekvenssikaavio](dokumentaatio/sekvenssikaavio.png)<br>
+[testausdokumentti](dokumentaatio/testausdokumentti.md)
