@@ -83,6 +83,14 @@ public class ScriptMotor {
 
         for (int i = 0; i < this.lines.length; i++) {
             if (this.lines[i] != null) {
+                try {
+                    char firstChar = lines[i].charAt(0);
+                    if (firstChar == '@') {
+                        this.theGoTos.put(lines[i].substring(1, lines[i].length()), lineCount);
+                    }
+                } catch (Exception e) {
+                    myLogger.insert("Syntax error: ScriptMotor@runScript: " + lines[lineCount]);
+                }
                 lineCount++;
             }
         }
@@ -116,7 +124,6 @@ public class ScriptMotor {
         try {
             char firstChar = inExecution.charAt(0);
             if (firstChar == '@') {
-                this.theGoTos.put(inExecution.substring(1, inExecution.length()), this.currentLine);
                 return;
             }
         } catch (Exception e) {
