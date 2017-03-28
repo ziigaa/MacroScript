@@ -69,8 +69,9 @@ public class ScriptMotor {
     }
 
     /**
-     * Clears all relevant variables of data and forwards each line of the
-     * script to the method executeCommand.
+     * Clears all relevant variables of data and declares all @-marked goto
+     * variables, then forwards each line of the script to the method
+     * executeCommand.
      */
     public void runScript() {
 
